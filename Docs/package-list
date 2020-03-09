@@ -1,0 +1,9 @@
+com.p3lj2.koveepetshop
+com.p3lj2.koveepetshop.dao
+com.p3lj2.koveepetshop.database
+com.p3lj2.koveepetshop.endpoint
+com.p3lj2.koveepetshop.model
+com.p3lj2.koveepetshop.repository
+com.p3lj2.koveepetshop.util
+com.p3lj2.koveepetshop.view
+com.p3lj2.koveepetshop.viewmodel
