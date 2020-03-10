@@ -10,7 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "BASE_URL", '"http://10.5.50.57:8000/api/v1/"'
+        buildConfigField "String", "BASE_URL", '"http://10.53.8.255:8000/api/v1/"'
     }
     buildTypes {
         release {
@@ -46,6 +46,7 @@ dependencies {
 
 //    Room
     implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
 
 //    Recyclerview
     implementation "androidx.recyclerview:recyclerview:1.1.0"
