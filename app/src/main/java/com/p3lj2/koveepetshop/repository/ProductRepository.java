@@ -11,6 +11,7 @@ import com.p3lj2.koveepetshop.util.RetrofitInstance;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -22,6 +23,7 @@ import retrofit2.Response;
 public class ProductRepository {
     private ProductEndpoint productEndpoint;
     private static MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+    private static MutableLiveData<List<ProductResponseModel>> productResponseLiveData = new MutableLiveData<>();
 
     public ProductRepository() {
         RetrofitInstance retrofitInstance = RetrofitInstance.getRetrofitInstance();
@@ -47,6 +49,44 @@ public class ProductRepository {
                 if (response.body() != null && response.code() == 200) {
                     System.out.println(response.body().getProductResponseModels().get(0).getProductModel().getProductName());
                 }
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ProductSchema> call, @NotNull Throwable t) {
+                isLoading.postValue(false);
+            }
+        });
+    }
+
+    public LiveData<List<ProductResponseModel>> getAll() {
+        isLoading.setValue(true);
+
+        productEndpoint.getAll().enqueue(new Callback<ProductSchema>() {
+            @Override
+            public void onResponse(@NotNull Call<ProductSchema> call, @NotNull Response<ProductSchema> response) {
+                if (response.body() != null && response.code() == 200) {
+                    productResponseLiveData.postValue(response.body().getProductResponseModels());
+                }
+
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ProductSchema> call, @NotNull Throwable t) {
+                isLoading.postValue(false);
+            }
+        });
+
+        return productResponseLiveData;
+    }
+
+    public void delete(String token, int id, int ownerId) {
+        isLoading.setValue(true);
+
+        productEndpoint.delete("Bearer " + token, id, ownerId).enqueue(new Callback<ProductSchema>() {
+            @Override
+            public void onResponse(@NotNull Call<ProductSchema> call, @NotNull Response<ProductSchema> response) {
                 isLoading.postValue(false);
             }
 
