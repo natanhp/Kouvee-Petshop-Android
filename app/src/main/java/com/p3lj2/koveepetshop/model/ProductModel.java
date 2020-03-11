@@ -7,6 +7,9 @@ import lombok.Data;
 @Data
 public class ProductModel {
     @Expose
+    private int id;
+
+    @Expose
     private String productName;
 
     @Expose
