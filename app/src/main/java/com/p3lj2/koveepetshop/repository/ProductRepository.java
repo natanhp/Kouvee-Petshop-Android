@@ -1,0 +1,63 @@
+package com.p3lj2.koveepetshop.repository;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
+import com.p3lj2.koveepetshop.endpoint.ProductEndpoint;
+import com.p3lj2.koveepetshop.model.ProductResponseModel;
+import com.p3lj2.koveepetshop.model.ProductSchema;
+import com.p3lj2.koveepetshop.util.RetrofitInstance;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.io.File;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class ProductRepository {
+    private ProductEndpoint productEndpoint;
+    private static MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+
+    public ProductRepository() {
+        RetrofitInstance retrofitInstance = RetrofitInstance.getRetrofitInstance();
+        productEndpoint = retrofitInstance.getRetrofit().create(ProductEndpoint.class);
+    }
+
+    public void insert(String token, ProductResponseModel productResponseModel) {
+        isLoading.setValue(true);
+        File imageFile = new File(productResponseModel.getImageUrl());
+        RequestBody requestImage = RequestBody.create(imageFile, MediaType.parse("multipart/form-data"));
+
+        MultipartBody.Part image = MultipartBody.Part.createFormData("image", imageFile.getName(), requestImage);
+        RequestBody productName = RequestBody.create(productResponseModel.getProductModel().getProductName(), MediaType.parse("multipart/form-data"));
+        RequestBody productQuantity = RequestBody.create(String.valueOf(productResponseModel.getProductModel().getProductQuantity()), MediaType.parse("multipart/form-data"));
+        RequestBody productPrice = RequestBody.create(String.valueOf(productResponseModel.getProductModel().getProductPrice()), MediaType.parse("multipart/form-data"));
+        RequestBody measurement = RequestBody.create(productResponseModel.getProductModel().getMeassurement(), MediaType.parse("multipart/form-data"));
+        RequestBody createdBy = RequestBody.create(String.valueOf(productResponseModel.getProductModel().getCreatedBy()), MediaType.parse("multipart/form-data"));
+        RequestBody minimumQty = RequestBody.create(String.valueOf(productResponseModel.getProductModel().getMinimumQty()), MediaType.parse("multipart/form-data"));
+
+        productEndpoint.insert("Bearer " + token, productName, productQuantity, productPrice, measurement, createdBy, image, minimumQty).enqueue(new Callback<ProductSchema>() {
+            @Override
+            public void onResponse(@NotNull Call<ProductSchema> call, @NotNull Response<ProductSchema> response) {
+                if (response.body() != null && response.code() == 200) {
+                    System.out.println(response.body().getProductResponseModels().get(0).getProductModel().getProductName());
+                }
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ProductSchema> call, @NotNull Throwable t) {
+                isLoading.postValue(false);
+            }
+        });
+    }
+
+    public LiveData<Boolean> getIsLoading() {
+        return isLoading;
+    }
+}
