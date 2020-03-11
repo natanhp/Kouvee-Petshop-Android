@@ -16,4 +16,7 @@
     <string name="image_path">Lokasi Gambar</string>
     <string name="file">Berkas</string>
     <string name="insert">Masukan</string>
+    <string name="all_column_must_be_filled">Semua kolom harus terisi.</string>
+    <string name="select_picture">Pilih Gambar</string>
+    <string name="product_created">Produk berhasil dimasukan</string>
 </resources>

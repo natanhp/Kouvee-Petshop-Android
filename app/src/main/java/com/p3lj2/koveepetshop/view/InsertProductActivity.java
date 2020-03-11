@@ -13,31 +13,26 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.p3lj2.koveepetshop.R;
-import com.p3lj2.koveepetshop.model.EmployeeDataModel;
 import com.p3lj2.koveepetshop.model.ProductModel;
 import com.p3lj2.koveepetshop.model.ProductResponseModel;
 import com.p3lj2.koveepetshop.viewmodel.ProductViewModel;
 
-import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 public class InsertProductActivity extends AppCompatActivity {
 
@@ -73,7 +68,7 @@ public class InsertProductActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+        startActivityForResult(Intent.createChooser(intent, getString(R.string.select_picture)), PICK_IMAGE);
     }
 
     @Override
@@ -86,8 +81,8 @@ public class InsertProductActivity extends AppCompatActivity {
                 image = data.getData();
             }
             String imagePath = getUriPath(image);
-           tvImagePath.setText(imagePath);
-           productResponseModel.setImageUrl(imagePath);
+            tvImagePath.setText(imagePath);
+            productResponseModel.setImageUrl(imagePath);
         }
     }
 
@@ -107,13 +102,17 @@ public class InsertProductActivity extends AppCompatActivity {
         });
 
         String productName = productForm.get(0).getText().toString().trim();
-        int productQuantity = Integer.valueOf(productForm.get(1).getText().toString().trim());
-        double productPrice = Double.valueOf(productForm.get(2).getText().toString().trim());
-        int minimumQuantity = Integer.valueOf(productForm.get(3).getText().toString().trim());
+        String strProductQuantity = productForm.get(1).getText().toString().trim();
+        int productQuantity = Integer.valueOf(strProductQuantity);
+        String strProductPrice = productForm.get(2).getText().toString().trim();
+        double productPrice = Double.valueOf(strProductPrice);
+        String strMinimumQuantity = productForm.get(3).getText().toString().trim();
+        int minimumQuantity = Integer.valueOf(strMinimumQuantity);
         String productMeasurement = productForm.get(4).getText().toString().trim();
         final String[] bearerToken = {""};
 
-        if (!productName.isEmpty() && !productMeasurement.isEmpty()) {
+        if (!productName.isEmpty() && !productMeasurement.isEmpty() && !strProductQuantity.isEmpty() && !strProductPrice.isEmpty() &&
+                !strMinimumQuantity.isEmpty()) {
             productModel.setProductName(productName);
             productModel.setProductQuantity(productQuantity);
             productModel.setProductPrice(productPrice);
@@ -126,10 +125,14 @@ public class InsertProductActivity extends AppCompatActivity {
                     bearerToken[0] = employeeDataModel.getToken();
                 }
             });
-        }
 
-        productResponseModel.setProductModel(productModel);
-        productViewModel.insert(bearerToken[0], productResponseModel);
+            productResponseModel.setProductModel(productModel);
+            productViewModel.insert(bearerToken[0], productResponseModel);
+
+            Toast.makeText(this, R.string.product_created, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, R.string.all_column_must_be_filled, Toast.LENGTH_SHORT).show();
+        }
 
         finish();
     }
@@ -139,32 +142,33 @@ public class InsertProductActivity extends AppCompatActivity {
 
         String id = wholeID.split(":")[1];
 
-        String[] column = { MediaStore.Images.Media.DATA };
+        String[] column = {MediaStore.Images.Media.DATA};
 
         String sel = MediaStore.Images.Media._ID + "=?";
 
         Cursor cursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                        column, sel, new String[]{ id }, null);
+                column, sel, new String[]{id}, null);
 
         String filePath = "";
 
-        int columnIndex = 0;
+        int columnIndex;
 
         if (cursor != null) {
             columnIndex = cursor.getColumnIndex(column[0]);
-        }
 
-        if (cursor.moveToFirst()) {
-            filePath = cursor.getString(columnIndex);
+            if (cursor.moveToFirst()) {
+                filePath = cursor.getString(columnIndex);
+            }
+
+            cursor.close();
         }
-        cursor.close();
 
         return filePath;
     }
 
     private void checkReadExternalFilePermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSION_REQUEST_READ_EXTERNAL_STORAGE);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSION_REQUEST_READ_EXTERNAL_STORAGE);
         }
     }
 
@@ -174,7 +178,7 @@ public class InsertProductActivity extends AppCompatActivity {
 
         if (requestCode == MY_PERMISSION_REQUEST_READ_EXTERNAL_STORAGE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_DENIED) {
-                ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSION_REQUEST_READ_EXTERNAL_STORAGE);
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSION_REQUEST_READ_EXTERNAL_STORAGE);
             }
         }
     }
