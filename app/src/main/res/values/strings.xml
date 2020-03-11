@@ -8,7 +8,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="product_name">Nama Produk</string>
-    <string name="product_quantity">Jumlah Product</string>
+    <string name="product_quantity">Jumlah Produk</string>
     <string name="product_price">Harga Produk</string>
     <string name="product_measurement">Satuan Produk</string>
     <string name="minimum_quantity">Jumlah Minmal</string>
@@ -19,4 +19,10 @@
     <string name="all_column_must_be_filled">Semua kolom harus terisi.</string>
     <string name="select_picture">Pilih Gambar</string>
     <string name="product_created">Produk berhasil dimasukan</string>
+    <string name="product">Produk</string>
+    <string name="product_deletion">Penghapusan Produk</string>
+    <string name="product_deletion_confirmation">Apakah anda yakin ingin menghapus produk?</string>
+    <string name="yes">Ya</string>
+    <string name="product_deletion_success">Produk berhasil dihapus</string>
+    <string name="no">Tidak</string>
 </resources>
