@@ -10,6 +10,8 @@ import com.p3lj2.koveepetshop.model.ProductResponseModel;
 import com.p3lj2.koveepetshop.repository.EmployeeRepository;
 import com.p3lj2.koveepetshop.repository.ProductRepository;
 
+import java.util.List;
+
 public class ProductViewModel extends AndroidViewModel {
     private ProductRepository repository;
     private EmployeeRepository employeeRepository;
@@ -34,5 +36,13 @@ public class ProductViewModel extends AndroidViewModel {
 
     public LiveData<Boolean> getIsLoading() {
         return repository.getIsLoading();
+    }
+
+    public LiveData<List<ProductResponseModel>> getAll() {
+        return repository.getAll();
+    }
+
+    public void delete(String token, int id, int ownerId) {
+        repository.delete(token, id, ownerId);
     }
 }
