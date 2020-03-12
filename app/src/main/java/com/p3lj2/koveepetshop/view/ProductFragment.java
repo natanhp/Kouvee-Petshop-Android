@@ -1,5 +1,6 @@
 package com.p3lj2.koveepetshop.view;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.adapter.ProductAdapter;
 import com.p3lj2.koveepetshop.model.EmployeeDataModel;
+import com.p3lj2.koveepetshop.util.EventClickListener;
 import com.p3lj2.koveepetshop.viewmodel.ProductViewModel;
 
 import java.util.Objects;
@@ -39,6 +41,8 @@ public class ProductFragment extends Fragment {
     private OwnerActivity ownerActivity;
     private ProductAdapter productAdapter;
     private EmployeeDataModel employee = new EmployeeDataModel();
+    static final String EXTRA_PRODUCT = "com.p3lj2.koveepetshop.view.EXTRA_PRODUCT";
+    private static final int UPDATE_REQUEST = 3;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -76,12 +80,12 @@ public class ProductFragment extends Fragment {
     private void createProduct() {
 
         if (ownerActivity != null) {
-            ownerActivity.floatingActionButton.setOnClickListener(view -> startActivity(new Intent(getActivity(), InsertProductActivity.class)));
+            ownerActivity.floatingActionButton.setOnClickListener(view -> startActivity(new Intent(ownerActivity, InsertProductActivity.class)));
         }
     }
 
     private void setUpRecyclerView() {
-        productAdapter = new ProductAdapter();
+        productAdapter = new ProductAdapter(itemUpdateListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(ownerActivity.getApplicationContext()));
         recyclerView.hasFixedSize();
         recyclerView.setAdapter(productAdapter);
@@ -132,5 +136,23 @@ public class ProductFragment extends Fragment {
         return new AlertDialog.Builder(ownerActivity)
                 .setTitle(title)
                 .setMessage(message);
+    }
+
+    private EventClickListener itemUpdateListener = new EventClickListener() {
+        @Override
+        public void onEventClick(int position) {
+            Intent intent = new Intent(ownerActivity, UpdateProductActivity.class);
+            intent.putExtra(EXTRA_PRODUCT, productAdapter.getProductResponseModels().get(position));
+            startActivityForResult(intent, UPDATE_REQUEST);
+        }
+    };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == UPDATE_REQUEST && resultCode == Activity.RESULT_OK) {
+            productViewModel.getAll();
+        }
     }
 }
