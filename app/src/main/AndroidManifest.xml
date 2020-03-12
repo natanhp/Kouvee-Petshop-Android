@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.InsertProductActivity"></activity>
+        <activity android:name=".view.InsertProductActivity"/>
+        <activity android:name=".view.UpdateProductActivity"/>
         <activity
             android:name=".view.OwnerActivity"
             android:label="@string/title_activity_owner" />
