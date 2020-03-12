@@ -25,4 +25,6 @@
     <string name="yes">Ya</string>
     <string name="product_deletion_success">Produk berhasil dihapus</string>
     <string name="no">Tidak</string>
+    <string name="update">Ubah</string>
+    <string name="product_updated">Produk berhasil diubah</string>
 </resources>
