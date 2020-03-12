@@ -45,4 +45,8 @@ public class ProductViewModel extends AndroidViewModel {
     public void delete(String token, int id, int ownerId) {
         repository.delete(token, id, ownerId);
     }
+
+    public void update(String token, ProductResponseModel productResponseModel) {
+        repository.update(token, productResponseModel);
+    }
 }
