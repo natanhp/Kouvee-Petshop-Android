@@ -26,4 +26,11 @@ public interface ProductEndpoint {
 
     @DELETE("products/delete/{id}/{ownerId}")
     Call<ProductSchema> delete(@Header("Authorization") String bearerTOken, @Path("id") int id, @Path("ownerId") int ownerId);
+
+    @Multipart
+    @POST("products/update")
+    Call<ProductSchema> update(@Header("Authorization") String bearerToken, @Part("id") RequestBody id, @Part("productName") RequestBody productName,
+                               @Part("productQuantity") RequestBody productQuantity, @Part("productPrice") RequestBody productPrice,
+                               @Part("meassurement") RequestBody measurement, @Part("updatedBy") RequestBody updatedBy,
+                               @Part MultipartBody.Part image, @Part("minimumQty") RequestBody minimumQty);
 }
