@@ -43,7 +43,8 @@ public class ProductRepository {
         RequestBody createdBy = RequestBody.create(String.valueOf(productResponseModel.getProductModel().getCreatedBy()), MediaType.parse("multipart/form-data"));
         RequestBody minimumQty = RequestBody.create(String.valueOf(productResponseModel.getProductModel().getMinimumQty()), MediaType.parse("multipart/form-data"));
 
-        productEndpoint.insert("Bearer " + token, productName, productQuantity, productPrice, measurement, createdBy, image, minimumQty).enqueue(new Callback<ProductSchema>() {
+        productEndpoint.insert("Bearer " + token, productName, productQuantity, productPrice, measurement, createdBy,
+                image, minimumQty).enqueue(new Callback<ProductSchema>() {
             @Override
             public void onResponse(@NotNull Call<ProductSchema> call, @NotNull Response<ProductSchema> response) {
                 if (response.body() != null && response.code() == 200) {
@@ -85,6 +86,40 @@ public class ProductRepository {
         isLoading.setValue(true);
 
         productEndpoint.delete("Bearer " + token, id, ownerId).enqueue(new Callback<ProductSchema>() {
+            @Override
+            public void onResponse(@NotNull Call<ProductSchema> call, @NotNull Response<ProductSchema> response) {
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ProductSchema> call, @NotNull Throwable t) {
+                isLoading.postValue(false);
+            }
+        });
+    }
+
+    public void update(String token, ProductResponseModel productResponseModel) {
+        isLoading.setValue(true);
+        MultipartBody.Part image;
+
+        if (productResponseModel.getImageUrl() != null) {
+            File imageFile = new File(productResponseModel.getImageUrl());
+            RequestBody requestImage = RequestBody.create(imageFile, MediaType.parse("multipart/form-data"));
+            image = MultipartBody.Part.createFormData("image", imageFile.getName(), requestImage);
+        } else {
+            image = null;
+        }
+
+        RequestBody id = RequestBody.create(String.valueOf(productResponseModel.getProductModel().getId()), MediaType.parse("multipart/form-data"));
+        RequestBody productName = RequestBody.create(productResponseModel.getProductModel().getProductName(), MediaType.parse("multipart/form-data"));
+        RequestBody productQuantity = RequestBody.create(String.valueOf(productResponseModel.getProductModel().getProductQuantity()), MediaType.parse("multipart/form-data"));
+        RequestBody productPrice = RequestBody.create(String.valueOf(productResponseModel.getProductModel().getProductPrice()), MediaType.parse("multipart/form-data"));
+        RequestBody measurement = RequestBody.create(productResponseModel.getProductModel().getMeassurement(), MediaType.parse("multipart/form-data"));
+        RequestBody updatedBy = RequestBody.create(String.valueOf(productResponseModel.getProductModel().getUpdatedBy()), MediaType.parse("multipart/form-data"));
+        RequestBody minimumQty = RequestBody.create(String.valueOf(productResponseModel.getProductModel().getMinimumQty()), MediaType.parse("multipart/form-data"));
+
+        productEndpoint.update("Bearer " + token, id, productName, productQuantity, productPrice, measurement, updatedBy,
+                image, minimumQty).enqueue(new Callback<ProductSchema>() {
             @Override
             public void onResponse(@NotNull Call<ProductSchema> call, @NotNull Response<ProductSchema> response) {
                 isLoading.postValue(false);
