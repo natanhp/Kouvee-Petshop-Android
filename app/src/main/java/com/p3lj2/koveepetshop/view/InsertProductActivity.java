@@ -4,11 +4,8 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -25,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.model.ProductModel;
 import com.p3lj2.koveepetshop.model.ProductResponseModel;
+import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.viewmodel.ProductViewModel;
 
 import java.util.List;
@@ -80,7 +78,7 @@ public class InsertProductActivity extends AppCompatActivity {
             if (data != null) {
                 image = data.getData();
             }
-            String imagePath = getUriPath(image);
+            String imagePath = Util.getUriPath(image, this);
             tvImagePath.setText(imagePath);
             productResponseModel.setImageUrl(imagePath);
         }
@@ -135,35 +133,6 @@ public class InsertProductActivity extends AppCompatActivity {
         }
 
         finish();
-    }
-
-    private String getUriPath(Uri uri) {
-        String wholeID = DocumentsContract.getDocumentId(uri);
-
-        String id = wholeID.split(":")[1];
-
-        String[] column = {MediaStore.Images.Media.DATA};
-
-        String sel = MediaStore.Images.Media._ID + "=?";
-
-        Cursor cursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                column, sel, new String[]{id}, null);
-
-        String filePath = "";
-
-        int columnIndex;
-
-        if (cursor != null) {
-            columnIndex = cursor.getColumnIndex(column[0]);
-
-            if (cursor.moveToFirst()) {
-                filePath = cursor.getString(columnIndex);
-            }
-
-            cursor.close();
-        }
-
-        return filePath;
     }
 
     private void checkReadExternalFilePermission() {
