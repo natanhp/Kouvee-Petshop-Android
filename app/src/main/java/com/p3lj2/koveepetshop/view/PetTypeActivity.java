@@ -49,7 +49,7 @@ public class PetTypeActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.product);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.pet_type);
 
         petTypeViewModel = new ViewModelProvider.AndroidViewModelFactory(Objects.requireNonNull(this).getApplication()).create(PetTypeViewModel.class);
 
@@ -82,7 +82,7 @@ public class PetTypeActivity extends AppCompatActivity {
 
     private void createProduct() {
 
-        floatingActionButton.setOnClickListener(view -> startActivity(new Intent(this, InsertProductActivity.class)));
+        floatingActionButton.setOnClickListener(view -> startActivity(new Intent(this, InsertPetTypeActivity.class)));
     }
 
     private void setUpRecyclerView() {
