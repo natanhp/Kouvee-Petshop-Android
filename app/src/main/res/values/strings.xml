@@ -36,4 +36,7 @@
     <string name="right_paw">Cakar Kanan</string>
     <string name="kouvee_pet_shop_logo">Kouvee Pet Shop Logo</string>
     <string name="edit_product">Ubah Produk</string>
+    <string name="insert_pet_type">Masukan Tipe Hewan</string>
+    <string name="pet_type_cant_be_empty">Tipe hewan tidak boleh kosong</string>
+    <string name="pet_type_inserted">Tipe hewan berhasil dimmasukan</string>
 </resources>
