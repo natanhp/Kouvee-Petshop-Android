@@ -11,12 +11,12 @@
         android:id="@+id/image_view"
         android:layout_width="0dp"
         android:layout_height="181dp"
-        android:src="@drawable/kouve_mobile"
         android:background="@color/brown"
+        android:contentDescription="@string/kouvee_pet_shop_logo"
+        android:src="@drawable/kouve_mobile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/kouvee_pet_shop_logo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_product_name"
@@ -24,9 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:text="@string/product_name"
         android:textColor="@color/olive_green"
         android:textStyle="bold"
-        android:text="@string/product_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_view" />
 
@@ -36,9 +36,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
+        android:text="@string/product_quantity"
         android:textColor="@color/olive_green"
         android:textStyle="bold"
-        android:text="@string/product_quantity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_product_name" />
 
@@ -48,9 +48,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
+        android:text="@string/product_price"
         android:textColor="@color/olive_green"
         android:textStyle="bold"
-        android:text="@string/product_price"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_product_quantity" />
 
@@ -60,9 +60,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
+        android:text="@string/product_measurement"
         android:textColor="@color/olive_green"
         android:textStyle="bold"
-        android:text="@string/product_measurement"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_product_minimum_qty" />
 
@@ -72,9 +72,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
+        android:text="@string/minimum_quantity"
         android:textColor="@color/olive_green"
         android:textStyle="bold"
-        android:text="@string/minimum_quantity"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_product_price" />
 
@@ -84,9 +84,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
+        android:text="@string/product_image"
         android:textColor="@color/olive_green"
         android:textStyle="bold"
-        android:text="@string/product_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_product_measurement" />
 
@@ -158,9 +158,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:text="@string/image_path"
         android:textColor="@color/olive_green"
         android:textStyle="bold"
-        android:text="@string/image_path"
         app:layout_constraintBottom_toBottomOf="@+id/tv_product_image"
         app:layout_constraintEnd_toStartOf="@+id/btn_file"
         app:layout_constraintStart_toEndOf="@+id/tv_product_image"
@@ -171,8 +171,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/olive_green"
-        android:textColor="@color/white"
         android:text="@string/file"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/tv_image_path"
         app:layout_constraintEnd_toEndOf="@+id/edt_product_measurement"
         app:layout_constraintTop_toTopOf="@+id/tv_image_path" />
@@ -183,9 +183,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@color/olive_green"
+        android:text="@string/insert"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:text="@string/insert"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btn_file"
         app:layout_constraintStart_toStartOf="@+id/tv_product_image"
