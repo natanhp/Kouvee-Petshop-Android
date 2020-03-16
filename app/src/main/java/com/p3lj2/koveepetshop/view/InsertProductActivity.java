@@ -26,6 +26,7 @@ import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.viewmodel.ProductViewModel;
 
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.BindViews;
@@ -55,6 +56,8 @@ public class InsertProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_insert_product);
 
         ButterKnife.bind(this);
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.insert_product);
 
         checkReadExternalFilePermission();
 
@@ -101,11 +104,11 @@ public class InsertProductActivity extends AppCompatActivity {
 
         String productName = productForm.get(0).getText().toString().trim();
         String strProductQuantity = productForm.get(1).getText().toString().trim();
-        int productQuantity = Integer.valueOf(strProductQuantity);
+        int productQuantity = Integer.parseInt(strProductQuantity);
         String strProductPrice = productForm.get(2).getText().toString().trim();
-        double productPrice = Double.valueOf(strProductPrice);
+        double productPrice = Double.parseDouble(strProductPrice);
         String strMinimumQuantity = productForm.get(3).getText().toString().trim();
-        int minimumQuantity = Integer.valueOf(strMinimumQuantity);
+        int minimumQuantity = Integer.parseInt(strMinimumQuantity);
         String productMeasurement = productForm.get(4).getText().toString().trim();
         final String[] bearerToken = {""};
 
