@@ -4,20 +4,20 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.adapter.ProductAdapter;
 import com.p3lj2.koveepetshop.model.EmployeeDataModel;
@@ -29,7 +29,7 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ProductFragment extends Fragment {
+public class ProductActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -37,33 +37,32 @@ public class ProductFragment extends Fragment {
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
+    @BindView(R.id.search_view)
+    SearchView searchView;
+
+    @BindView(R.id.fab)
+    FloatingActionButton floatingActionButton;
+
     private ProductViewModel productViewModel;
-    private OwnerActivity ownerActivity;
     private ProductAdapter productAdapter;
     private EmployeeDataModel employee = new EmployeeDataModel();
     static final String EXTRA_PRODUCT = "com.p3lj2.koveepetshop.view.EXTRA_PRODUCT";
     private static final int UPDATE_REQUEST = 3;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_product, container, false);
-    }
-
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_product);
 
-        ownerActivity = (OwnerActivity) getActivity();
-        if (ownerActivity != null) {
-            Objects.requireNonNull(ownerActivity.getSupportActionBar()).setTitle(getString(R.string.product));
-        }
+        ButterKnife.bind(this);
 
-        productViewModel = new ViewModelProvider.AndroidViewModelFactory(Objects.requireNonNull(getActivity()).getApplication()).create(ProductViewModel.class);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.product);
+
+        productViewModel = new ViewModelProvider.AndroidViewModelFactory(Objects.requireNonNull(this).getApplication()).create(ProductViewModel.class);
 
         createProduct();
 
-        productViewModel.getIsLoading().observe(getViewLifecycleOwner(), aBoolean -> {
+        productViewModel.getIsLoading().observe(this, aBoolean -> {
             if (aBoolean != null) {
                 if (aBoolean) {
                     progressBar.setVisibility(View.VISIBLE);
@@ -75,18 +74,17 @@ public class ProductFragment extends Fragment {
 
         setUpRecyclerView();
         deleteOnSwipe();
+        searchViewHandler();
     }
 
     private void createProduct() {
 
-        if (ownerActivity != null) {
-            ownerActivity.floatingActionButton.setOnClickListener(view -> startActivity(new Intent(ownerActivity, InsertProductActivity.class)));
-        }
+            floatingActionButton.setOnClickListener(view -> startActivity(new Intent(this, InsertProductActivity.class)));
     }
 
     private void setUpRecyclerView() {
         productAdapter = new ProductAdapter(itemUpdateListener);
-        recyclerView.setLayoutManager(new LinearLayoutManager(ownerActivity.getApplicationContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.hasFixedSize();
         recyclerView.setAdapter(productAdapter);
 
@@ -94,7 +92,7 @@ public class ProductFragment extends Fragment {
     }
 
     private void getAllProducts() {
-        productViewModel.getAll().observe(getViewLifecycleOwner(), productResponseModels -> {
+        productViewModel.getAll().observe(this, productResponseModels -> {
             if (!productResponseModels.isEmpty()) {
                 productAdapter.setProductResponseModels(productResponseModels);
             }
@@ -112,7 +110,7 @@ public class ProductFragment extends Fragment {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 confirmationDialog(getString(R.string.product_deletion), getString(R.string.product_deletion_confirmation))
                         .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
-                            productViewModel.getEmployee().observe(getViewLifecycleOwner(), employeeDataModel -> {
+                            productViewModel.getEmployee().observe(ProductActivity.this, employeeDataModel -> {
                                 if (employeeDataModel != null) {
                                     employee = employeeDataModel;
                                 }
@@ -123,7 +121,7 @@ public class ProductFragment extends Fragment {
                                     employee.getId());
 
                             productAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-                            Toast.makeText(ownerActivity.getApplicationContext(), R.string.product_deletion_success, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProductActivity.this, R.string.product_deletion_success, Toast.LENGTH_SHORT).show();
                         })
                         .setNegativeButton(getString(R.string.no), (dialogInterface, i) -> productAdapter.notifyItemChanged(viewHolder.getAdapterPosition()))
                         .show();
@@ -133,7 +131,7 @@ public class ProductFragment extends Fragment {
     }
 
     private AlertDialog.Builder confirmationDialog(String title, String message) {
-        return new AlertDialog.Builder(ownerActivity)
+        return new AlertDialog.Builder(this)
                 .setTitle(title)
                 .setMessage(message);
     }
@@ -141,7 +139,7 @@ public class ProductFragment extends Fragment {
     private EventClickListener itemUpdateListener = new EventClickListener() {
         @Override
         public void onEventClick(int position) {
-            Intent intent = new Intent(ownerActivity, UpdateProductActivity.class);
+            Intent intent = new Intent(ProductActivity.this, UpdateProductActivity.class);
             intent.putExtra(EXTRA_PRODUCT, productAdapter.getProductResponseModels().get(position));
             startActivityForResult(intent, UPDATE_REQUEST);
         }
@@ -154,5 +152,27 @@ public class ProductFragment extends Fragment {
         if (requestCode == UPDATE_REQUEST && resultCode == Activity.RESULT_OK) {
             productViewModel.getAll();
         }
+    }
+
+    private void searchViewHandler() {
+        searchView.setEnabled(true);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                productViewModel.getByName(query).observe(ProductActivity.this, productResponseModels -> productAdapter.setProductResponseModels(productResponseModels));
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        searchView.setOnCloseListener(() -> {
+            productViewModel.getAll();
+            return false;
+        });
     }
 }
