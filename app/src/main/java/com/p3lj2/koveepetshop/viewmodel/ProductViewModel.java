@@ -49,4 +49,8 @@ public class ProductViewModel extends AndroidViewModel {
     public void update(String token, ProductResponseModel productResponseModel) {
         repository.update(token, productResponseModel);
     }
+
+    public LiveData<List<ProductResponseModel>> getByName(String productName) {
+        return repository.getByName(productName);
+    }
 }
