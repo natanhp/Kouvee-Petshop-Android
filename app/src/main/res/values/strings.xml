@@ -27,4 +27,13 @@
     <string name="no">Tidak</string>
     <string name="update">Ubah</string>
     <string name="product_updated">Produk berhasil diubah</string>
+    <string name="insert_product">Masukan Product</string>
+    <string name="home">Beranda</string>
+    <string name="pet_type">Tipe Hewan</string>
+    <string name="service">Layanan</string>
+    <string name="owner_menu">Menu Owner</string>
+    <string name="legt_paw">Cakar Kiri</string>
+    <string name="right_paw">Cakar Kanan</string>
+    <string name="kouvee_pet_shop_logo">Kouvee Pet Shop Logo</string>
+    <string name="edit_product">Ubah Produk</string>
 </resources>
