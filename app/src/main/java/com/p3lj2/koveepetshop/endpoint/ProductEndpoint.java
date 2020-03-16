@@ -33,4 +33,7 @@ public interface ProductEndpoint {
                                @Part("productQuantity") RequestBody productQuantity, @Part("productPrice") RequestBody productPrice,
                                @Part("meassurement") RequestBody measurement, @Part("updatedBy") RequestBody updatedBy,
                                @Part MultipartBody.Part image, @Part("minimumQty") RequestBody minimumQty);
+
+    @GET("noa/products/getbyname/{name}")
+    Call<ProductSchema> getByName(@Path("name") String productName);
 }
