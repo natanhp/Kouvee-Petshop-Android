@@ -79,7 +79,7 @@ public class ProductActivity extends AppCompatActivity {
 
     private void createProduct() {
 
-            floatingActionButton.setOnClickListener(view -> startActivity(new Intent(this, InsertProductActivity.class)));
+        floatingActionButton.setOnClickListener(view -> startActivity(new Intent(this, InsertProductActivity.class)));
     }
 
     private void setUpRecyclerView() {
