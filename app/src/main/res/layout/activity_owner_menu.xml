@@ -28,8 +28,8 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:padding="8dp"
         android:background="#8b8979"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -44,11 +44,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:contentDescription="@string/legt_paw"
             android:src="@drawable/paw_left"
             app:layout_constraintEnd_toStartOf="@+id/textView2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/legt_paw" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView2"
@@ -67,11 +67,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:contentDescription="@string/right_paw"
             android:src="@drawable/paw_right"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/right_paw" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/btn_product"
@@ -81,10 +81,10 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/products"
-            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            android:contentDescription="@string/product"
+            app:layout_constraintEnd_toStartOf="@+id/btn_pet_type"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
-            android:contentDescription="@string/product" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -101,12 +101,12 @@
             android:layout_height="100dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:contentDescription="@string/service"
             android:src="@drawable/services"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_pet_type"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="@+id/imageView2"
-            android:contentDescription="@string/service" />
+            app:layout_constraintStart_toEndOf="@+id/btn_pet_type"
+            app:layout_constraintTop_toTopOf="@+id/btn_pet_type" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -118,25 +118,25 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/btn_pet_type"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="24dp"
+            android:contentDescription="@string/pet_type"
             android:src="@drawable/pet_types"
             app:layout_constraintBottom_toBottomOf="@+id/btn_product"
             app:layout_constraintStart_toEndOf="@+id/btn_product"
             app:layout_constraintTop_toTopOf="@+id/btn_product"
-            app:layout_constraintVertical_bias="0.0"
-            android:contentDescription="@string/pet_type" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/pet_type"
-            app:layout_constraintEnd_toEndOf="@+id/imageView2"
-            app:layout_constraintStart_toStartOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintEnd_toEndOf="@+id/btn_pet_type"
+            app:layout_constraintStart_toStartOf="@+id/btn_pet_type"
+            app:layout_constraintTop_toBottomOf="@+id/btn_pet_type" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
