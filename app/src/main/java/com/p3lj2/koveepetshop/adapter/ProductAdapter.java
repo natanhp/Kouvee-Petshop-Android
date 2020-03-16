@@ -41,7 +41,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.itemBinder(productResponseModels.get(position), eventClickListener);
+        holder.itemBinder(productResponseModels.get(position));
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             ButterKnife.bind(this, itemView);
         }
 
-        void itemBinder(ProductResponseModel productResponseModel, EventClickListener eventClickListener) {
+        void itemBinder(ProductResponseModel productResponseModel) {
             Glide.with(itemView)
                     .load(productResponseModel.getImageUrl())
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
