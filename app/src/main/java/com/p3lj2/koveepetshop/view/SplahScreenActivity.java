@@ -6,12 +6,12 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.p3lj2.koveepetshop.R;
-import com.p3lj2.koveepetshop.model.EmployeeDataModel;
 import com.p3lj2.koveepetshop.viewmodel.EmployeeViewModel;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +28,8 @@ public class SplahScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splah_screen);
 
         ButterKnife.bind(this);
+
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         employeeViewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(EmployeeViewModel.class);
 
@@ -48,7 +50,7 @@ public class SplahScreenActivity extends AppCompatActivity {
                 finish();
             } else {
                 if (employeeDataModel.getRole().equals("Owner")) {
-                    startActivity(new Intent(SplahScreenActivity.this, OwnerActivity.class));
+                    startActivity(new Intent(SplahScreenActivity.this, OwnerMenuActivity.class));
                 }
 
                 finish();
