@@ -132,6 +132,27 @@ public class ProductRepository {
         });
     }
 
+    public LiveData<List<ProductResponseModel>> getByName(String productName) {
+        isLoading.setValue(true);
+        productEndpoint.getByName(productName).enqueue(new Callback<ProductSchema>() {
+            @Override
+            public void onResponse(@NotNull Call<ProductSchema> call, @NotNull Response<ProductSchema> response) {
+                if (response.body() != null && response.code() == 200) {
+                    productResponseLiveData.postValue(response.body().getProductResponseModels());
+                }
+
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ProductSchema> call, @NotNull Throwable t) {
+                isLoading.postValue(false);
+            }
+        });
+
+        return productResponseLiveData;
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return isLoading;
     }
