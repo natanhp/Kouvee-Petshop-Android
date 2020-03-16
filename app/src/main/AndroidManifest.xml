@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.p3lj2.koveepetshop">
+    package="com.p3lj2.koveepetshop" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,14 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".view.InsertProductActivity"/>
-        <activity android:name=".view.UpdateProductActivity"/>
-        <activity
-            android:name=".view.OwnerActivity"
-            android:label="@string/title_activity_owner" />
-        <activity android:name=".view.EmployeeActivity" />
-        <activity android:name=".view.SplahScreenActivity">
+        android:usesCleartextTraffic="true" >
+        <activity android:name=".view.ProductActivity" >
+        </activity>
+        <activity android:name=".view.OwnerMenuActivity" />
+        <activity android:name=".view.InsertProductActivity" />
+        <activity android:name=".view.UpdateProductActivity" />
+        <activity android:name=".view.SplahScreenActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
