@@ -32,6 +32,10 @@ public class PetSizeViewModel extends AndroidViewModel {
         petSizeRepository.insert(bearerToken, petSizeModel);
     }
 
+    public void update(String bearerToken, PetSizeModel petSizeModel) {
+        petSizeRepository.update(bearerToken, petSizeModel);
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return petSizeRepository.getIsLoading();
     }
