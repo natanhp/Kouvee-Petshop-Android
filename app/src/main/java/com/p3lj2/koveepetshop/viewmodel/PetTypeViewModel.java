@@ -30,6 +30,10 @@ public class PetTypeViewModel extends AndroidViewModel {
         petTypeRepository.insert(bearerToken, petTypeModel);
     }
 
+    public void update(String bearerToken, PetTypeModel petTypeModel) {
+        petTypeRepository.update(bearerToken ,petTypeModel);
+    }
+
     public LiveData<EmployeeDataModel> getEmployee() {
         return employeeRepository.getEmployee();
     }
