@@ -75,7 +75,7 @@ public class PetSizeActivity extends AppCompatActivity {
     }
 
     private void createSize() {
-        floatingActionButton.setOnClickListener(view -> startActivity(new Intent(this, InsertPetTypeActivity.class)));
+        floatingActionButton.setOnClickListener(view -> startActivity(new Intent(this, InsertPetSizeActivity.class)));
     }
 
     private void setUpRecyclerView() {
