@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.p3lj2.koveepetshop" >
+    package="com.p3lj2.koveepetshop">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -12,9 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true" >
-        <activity android:name=".view.InsertPetSizeActivity" >
-        </activity>
+        android:usesCleartextTraffic="true">
+        <activity android:name=".view.UpdatePetSizeActivity"></activity>
+        <activity android:name=".view.InsertPetSizeActivity"></activity>
         <activity android:name=".view.PetSizeActivity" />
         <activity android:name=".view.UpdatePetTypeActivity" />
         <activity android:name=".view.InsertPetTypeActivity" />
@@ -23,7 +23,7 @@
         <activity android:name=".view.OwnerMenuActivity" />
         <activity android:name=".view.InsertProductActivity" />
         <activity android:name=".view.UpdateProductActivity" />
-        <activity android:name=".view.SplahScreenActivity" >
+        <activity android:name=".view.SplahScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
