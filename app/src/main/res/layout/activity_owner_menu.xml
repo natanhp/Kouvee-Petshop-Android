@@ -87,6 +87,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -137,6 +138,26 @@
             app:layout_constraintEnd_toEndOf="@+id/btn_pet_type"
             app:layout_constraintStart_toStartOf="@+id/btn_pet_type"
             app:layout_constraintTop_toBottomOf="@+id/btn_pet_type" />
+
+        <ImageView
+            android:id="@+id/btn_pet_size"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/pet_size"
+            app:layout_constraintEnd_toEndOf="@+id/btn_pet_type"
+            app:layout_constraintStart_toStartOf="@+id/btn_product"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            android:contentDescription="@string/pet_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/pet_size"
+            app:layout_constraintEnd_toEndOf="@+id/btn_pet_size"
+            app:layout_constraintStart_toStartOf="@+id/btn_pet_size"
+            app:layout_constraintTop_toBottomOf="@+id/btn_pet_size" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
