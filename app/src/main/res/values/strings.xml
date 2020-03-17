@@ -39,4 +39,5 @@
     <string name="insert_pet_type">Masukan Tipe Hewan</string>
     <string name="pet_type_cant_be_empty">Tipe hewan tidak boleh kosong</string>
     <string name="pet_type_inserted">Tipe hewan berhasil dimmasukan</string>
+    <string name="pet_type_updated">Tipe hewan berhasil diubah</string>
 </resources>
