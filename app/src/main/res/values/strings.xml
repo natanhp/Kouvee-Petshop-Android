@@ -44,4 +44,8 @@
     <string name="pet_type_deletion">Penghapusan Tipe Hewan</string>
     <string name="pet_type_delete_confirmation">Apakah anda yakin untuk menghapus tipe hewan?</string>
     <string name="pet_type_deleted">Tipe Hewan berhasil dihapus</string>
+    <string name="insert_pet_size">Masukan Ukuran Hewan</string>
+    <string name="pet_size_cant_be_empty">Ukuran hewan tidak boleh kosong</string>
+    <string name="pet_size_inserted">Ukuran hewan berhasil dimasukan</string>
+    <string name="pet_size_restriction_message">Ukuran hewan hanya boleh small, medium, large, dan extra large</string>
 </resources>
