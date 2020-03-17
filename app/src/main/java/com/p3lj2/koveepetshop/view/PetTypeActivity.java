@@ -64,31 +64,22 @@ public class PetTypeActivity extends AppCompatActivity {
 
         petTypeViewModel.getIsLoading().observe(this, aBoolean -> {
             if (aBoolean != null) {
-                if (aBoolean) {
-                    progressBar.setVisibility(View.VISIBLE);
-                } else {
-                    progressBar.setVisibility(View.GONE);
-                }
+                handleProgressBar(aBoolean);
             }
         });
 
         petTypeViewModel.getIsLoadingEmployee().observe(this, aBoolean -> {
             if (aBoolean != null) {
-                if (aBoolean) {
-                    progressBar.setVisibility(View.VISIBLE);
-                } else {
-                    progressBar.setVisibility(View.GONE);
-                }
+                handleProgressBar(aBoolean);
             }
         });
 
         setUpRecyclerView();
         deleteOnSwipe();
-//        searchViewHandler();
+        searchViewHandler();
     }
 
     private void createProduct() {
-
         floatingActionButton.setOnClickListener(view -> startActivity(new Intent(this, InsertPetTypeActivity.class)));
     }
 
@@ -102,12 +93,11 @@ public class PetTypeActivity extends AppCompatActivity {
     }
 
     private void getAllProducts() {
-        petTypeViewModel.getEmployee().observe(this, employeeDataModel -> petTypeViewModel.getAll(employeeDataModel.getToken()).observe(this, petTypeModels -> {
-            if (!petTypeModels.isEmpty()) {
-                petTypeAdapter.setPetTypeModels(petTypeModels);
-            }
-        }));
+        petTypeViewModel.getEmployee().observe(this, employeeDataModel -> {
+            employee = employeeDataModel;
 
+            petTypeViewModel.getAll(employee.getToken()).observe(PetTypeActivity.this, petTypeModels -> petTypeAdapter.setPetTypeModels(petTypeModels));
+        });
     }
 
     private void deleteOnSwipe() {
@@ -121,12 +111,7 @@ public class PetTypeActivity extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 confirmationDialog(getString(R.string.product_deletion), getString(R.string.product_deletion_confirmation))
                         .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
-                            petTypeViewModel.getEmployee().observe(PetTypeActivity.this, employeeDataModel -> {
-                                if (employeeDataModel != null) {
-                                    employee = employeeDataModel;
-                                }
-                            });
-
+                            getEmployee();
                             petTypeViewModel.delete(employee.getToken(),
                                     petTypeAdapter.getPetTypeModels().get(viewHolder.getAdapterPosition()).getId(),
                                     employee.getId());
@@ -162,25 +147,43 @@ public class PetTypeActivity extends AppCompatActivity {
         }
     }
 
-//    private void searchViewHandler() {
-//        searchView.setEnabled(true);
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                productViewModel.getByName(query).observe(ProductActivity.this, productResponseModels -> productAdapter.setProductResponseModels(productResponseModels));
-//
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                return false;
-//            }
-//        });
-//
-//        searchView.setOnCloseListener(() -> {
-//            productViewModel.getAll();
-//            return false;
-//        });
-//    }
+    private void searchViewHandler() {
+        searchView.setEnabled(true);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                petTypeViewModel.search(employee.getToken(), query).observe(PetTypeActivity.this, petTypeModels -> petTypeAdapter.setPetTypeModels(petTypeModels));
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        searchView.setOnCloseListener(() -> {
+            getEmployee();
+            petTypeViewModel.getAll(employee.getToken());
+            return false;
+        });
+    }
+
+    private void getEmployee() {
+        if (employee == null) {
+            petTypeViewModel.getEmployee().observe(PetTypeActivity.this, employeeDataModel -> {
+                if (employeeDataModel != null) {
+                    employee = employeeDataModel;
+                }
+            });
+        }
+    }
+
+    private void handleProgressBar(boolean state) {
+        if (state) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
 }

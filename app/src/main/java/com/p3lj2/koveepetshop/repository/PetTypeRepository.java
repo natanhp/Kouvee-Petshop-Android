@@ -92,6 +92,27 @@ public class PetTypeRepository {
         });
     }
 
+    public LiveData<List<PetTypeModel>> search(String bearerToken, String type) {
+        isLoading.setValue(true);
+        petTypeEndpoint.search("Bearer " + bearerToken, type).enqueue(new Callback<PetTypeSchema>() {
+            @Override
+            public void onResponse(@NotNull Call<PetTypeSchema> call, @NotNull Response<PetTypeSchema> response) {
+                if (response.body() != null && response.code() == 200) {
+                    petTypeModels.postValue(response.body().getPetTypeModels());
+                }
+
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<PetTypeSchema> call, @NotNull Throwable t) {
+                isLoading.postValue(false);
+            }
+        });
+
+        return petTypeModels;
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return isLoading;
     }

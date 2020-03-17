@@ -38,6 +38,10 @@ public class PetTypeViewModel extends AndroidViewModel {
         petTypeRepository.delete(bearerToken, petTypeId, ownerId);
     }
 
+    public LiveData<List<PetTypeModel>> search(String bearerToken, String type) {
+        return petTypeRepository.search(bearerToken, type);
+    }
+
     public LiveData<EmployeeDataModel> getEmployee() {
         return employeeRepository.getEmployee();
     }
