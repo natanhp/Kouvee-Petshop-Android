@@ -60,7 +60,7 @@ public class PetTypeActivity extends AppCompatActivity {
 
         petTypeViewModel = new ViewModelProvider.AndroidViewModelFactory(Objects.requireNonNull(this).getApplication()).create(PetTypeViewModel.class);
 
-        createProduct();
+        createType();
 
         petTypeViewModel.getIsLoading().observe(this, aBoolean -> {
             if (aBoolean != null) {
@@ -79,7 +79,7 @@ public class PetTypeActivity extends AppCompatActivity {
         searchViewHandler();
     }
 
-    private void createProduct() {
+    private void createType() {
         floatingActionButton.setOnClickListener(view -> startActivity(new Intent(this, InsertPetTypeActivity.class)));
     }
 
@@ -89,10 +89,10 @@ public class PetTypeActivity extends AppCompatActivity {
         recyclerView.hasFixedSize();
         recyclerView.setAdapter(petTypeAdapter);
 
-        getAllProducts();
+        getAllTypes();
     }
 
-    private void getAllProducts() {
+    private void getAllTypes() {
         petTypeViewModel.getEmployee().observe(this, employeeDataModel -> {
             employee = employeeDataModel;
 
@@ -109,7 +109,7 @@ public class PetTypeActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                confirmationDialog(getString(R.string.product_deletion), getString(R.string.product_deletion_confirmation))
+                confirmationDialog(getString(R.string.pet_type_deletion), getString(R.string.pet_type_delete_confirmation))
                         .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
                             getEmployee();
                             petTypeViewModel.delete(employee.getToken(),
@@ -117,7 +117,7 @@ public class PetTypeActivity extends AppCompatActivity {
                                     employee.getId());
 
                             petTypeAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-                            Toast.makeText(PetTypeActivity.this, R.string.product_deletion_success, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PetTypeActivity.this, R.string.pet_type_deleted, Toast.LENGTH_SHORT).show();
                         })
                         .setNegativeButton(getString(R.string.no), (dialogInterface, i) -> petTypeAdapter.notifyItemChanged(viewHolder.getAdapterPosition()))
                         .show();
