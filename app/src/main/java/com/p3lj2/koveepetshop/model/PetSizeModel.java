@@ -25,6 +25,9 @@ public class PetSizeModel implements Parcelable {
     @Expose
     private int deletedBy;
 
+    public PetSizeModel() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
