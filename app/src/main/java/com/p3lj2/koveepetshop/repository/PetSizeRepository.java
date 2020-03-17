@@ -47,6 +47,21 @@ public class PetSizeRepository {
         return petSizeModels;
     }
 
+    public void insert(String bearerToken, PetSizeModel petSizeModel) {
+        isLoading.setValue(true);
+        petSizeEndpoint.insert("Bearer " + bearerToken, petSizeModel).enqueue(new Callback<PetSizeSchema>() {
+            @Override
+            public void onResponse(@NotNull Call<PetSizeSchema> call, @NotNull Response<PetSizeSchema> response) {
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<PetSizeSchema> call, @NotNull Throwable t) {
+                isLoading.postValue(false);
+            }
+        });
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return isLoading;
     }
