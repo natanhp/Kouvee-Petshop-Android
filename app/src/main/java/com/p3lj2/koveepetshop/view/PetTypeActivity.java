@@ -6,17 +6,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.adapter.PetTypeAdapter;
+import com.p3lj2.koveepetshop.model.EmployeeDataModel;
 import com.p3lj2.koveepetshop.util.EventClickListener;
 import com.p3lj2.koveepetshop.viewmodel.PetTypeViewModel;
 
@@ -41,6 +45,7 @@ public class PetTypeActivity extends AppCompatActivity {
 
     private PetTypeViewModel petTypeViewModel;
     private PetTypeAdapter petTypeAdapter;
+    private EmployeeDataModel employee;
     static final String EXTRA_PET_TYPE = "com.p3lj2.koveepetshop.view.EXTRA_PET_TYPE";
     private static final int UPDATE_REQUEST = 4;
 
@@ -78,7 +83,7 @@ public class PetTypeActivity extends AppCompatActivity {
         });
 
         setUpRecyclerView();
-//        deleteOnSwipe();
+        deleteOnSwipe();
 //        searchViewHandler();
     }
 
@@ -105,36 +110,36 @@ public class PetTypeActivity extends AppCompatActivity {
 
     }
 
-//    private void deleteOnSwipe() {
-//        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-//            @Override
-//            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-//                return false;
-//            }
-//
-//            @Override
-//            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-//                confirmationDialog(getString(R.string.product_deletion), getString(R.string.product_deletion_confirmation))
-//                        .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
-//                            productViewModel.getEmployee().observe(ProductActivity.this, employeeDataModel -> {
-//                                if (employeeDataModel != null) {
-//                                    employee = employeeDataModel;
-//                                }
-//                            });
-//
-//                            productViewModel.delete(employee.getToken(),
-//                                    productAdapter.getProductResponseModels().get(viewHolder.getAdapterPosition()).getProductModel().getId(),
-//                                    employee.getId());
-//
-//                            productAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-//                            Toast.makeText(ProductActivity.this, R.string.product_deletion_success, Toast.LENGTH_SHORT).show();
-//                        })
-//                        .setNegativeButton(getString(R.string.no), (dialogInterface, i) -> productAdapter.notifyItemChanged(viewHolder.getAdapterPosition()))
-//                        .show();
-//            }
-//        })
-//                .attachToRecyclerView(recyclerView);
-//    }
+    private void deleteOnSwipe() {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                confirmationDialog(getString(R.string.product_deletion), getString(R.string.product_deletion_confirmation))
+                        .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
+                            petTypeViewModel.getEmployee().observe(PetTypeActivity.this, employeeDataModel -> {
+                                if (employeeDataModel != null) {
+                                    employee = employeeDataModel;
+                                }
+                            });
+
+                            petTypeViewModel.delete(employee.getToken(),
+                                    petTypeAdapter.getPetTypeModels().get(viewHolder.getAdapterPosition()).getId(),
+                                    employee.getId());
+
+                            petTypeAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                            Toast.makeText(PetTypeActivity.this, R.string.product_deletion_success, Toast.LENGTH_SHORT).show();
+                        })
+                        .setNegativeButton(getString(R.string.no), (dialogInterface, i) -> petTypeAdapter.notifyItemChanged(viewHolder.getAdapterPosition()))
+                        .show();
+            }
+        })
+                .attachToRecyclerView(recyclerView);
+    }
 
     private AlertDialog.Builder confirmationDialog(String title, String message) {
         return new AlertDialog.Builder(this)
