@@ -22,7 +22,7 @@ import butterknife.OnClick;
 public class InsertPetTypeActivity extends AppCompatActivity {
 
     @BindView(R.id.edt_pet_type)
-    EditText edtTypeHewan;
+    EditText edtPetType;
 
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
@@ -56,7 +56,7 @@ public class InsertPetTypeActivity extends AppCompatActivity {
         });
 
         PetTypeModel petTypeModel = new PetTypeModel();
-        petTypeModel.setType(edtTypeHewan.getText().toString().trim());
+        petTypeModel.setType(edtPetType.getText().toString().trim());
 
         if (petTypeModel.getType().isEmpty()) {
             Toast.makeText(this, R.string.pet_type_cant_be_empty, Toast.LENGTH_SHORT).show();
