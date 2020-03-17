@@ -48,4 +48,6 @@
     <string name="pet_size_cant_be_empty">Ukuran hewan tidak boleh kosong</string>
     <string name="pet_size_inserted">Ukuran hewan berhasil dimasukan</string>
     <string name="pet_size_restriction_message">Ukuran hewan hanya boleh small, medium, large, dan extra large</string>
+    <string name="edit_pet_size">Ubah Ukuran Hewan</string>
+    <string name="pet_size_updated">Ukuran hewan berhasil diubah</string>
 </resources>
