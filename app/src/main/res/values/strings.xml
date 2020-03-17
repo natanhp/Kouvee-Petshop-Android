@@ -40,4 +40,8 @@
     <string name="pet_type_cant_be_empty">Tipe hewan tidak boleh kosong</string>
     <string name="pet_type_inserted">Tipe hewan berhasil dimmasukan</string>
     <string name="pet_type_updated">Tipe hewan berhasil diubah</string>
+    <string name="pet_size">Ukuran Hewan</string>
+    <string name="pet_type_deletion">Penghapusan Tipe Hewan</string>
+    <string name="pet_type_delete_confirmation">Apakah anda yakin untuk menghapus tipe hewan?</string>
+    <string name="pet_type_deleted">Tipe Hewan berhasil dihapus</string>
 </resources>
