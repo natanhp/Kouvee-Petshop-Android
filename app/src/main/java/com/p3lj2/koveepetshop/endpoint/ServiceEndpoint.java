@@ -5,10 +5,12 @@ import com.p3lj2.koveepetshop.model.ServiceSchema;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface ServiceEndpoint {
     @GET("services/getall")
@@ -19,4 +21,7 @@ public interface ServiceEndpoint {
 
     @PUT("services/update")
     Call<ServiceSchema> update(@Header("Authorization") String bearerToken, @Body ServiceModel serviceModel);
+
+    @DELETE("services/delete/{id}/{ownerId}")
+    Call<ServiceSchema> delete(@Header("Authorization") String bearerToken, @Path("id") int serviceId, @Path("ownerId") int ownerId);
 }
