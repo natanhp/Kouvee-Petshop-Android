@@ -120,7 +120,7 @@ public class ProductActivity extends AppCompatActivity {
                                     productAdapter.getProductResponseModels().get(viewHolder.getAdapterPosition()).getProductModel().getId(),
                                     employee.getId());
 
-                            productAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                            productAdapter.delete(viewHolder.getAdapterPosition());
                             Toast.makeText(ProductActivity.this, R.string.product_deletion_success, Toast.LENGTH_SHORT).show();
                         })
                         .setNegativeButton(getString(R.string.no), (dialogInterface, i) -> productAdapter.notifyItemChanged(viewHolder.getAdapterPosition()))

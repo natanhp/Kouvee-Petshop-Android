@@ -116,7 +116,7 @@ public class PetTypeActivity extends AppCompatActivity {
                                     petTypeAdapter.getPetTypeModels().get(viewHolder.getAdapterPosition()).getId(),
                                     employee.getId());
 
-                            petTypeAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                            petTypeAdapter.delete(viewHolder.getAdapterPosition());
                             Toast.makeText(PetTypeActivity.this, R.string.pet_type_deleted, Toast.LENGTH_SHORT).show();
                         })
                         .setNegativeButton(getString(R.string.no), (dialogInterface, i) -> petTypeAdapter.notifyItemChanged(viewHolder.getAdapterPosition()))

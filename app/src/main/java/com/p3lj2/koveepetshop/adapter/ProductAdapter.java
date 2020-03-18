@@ -87,4 +87,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         this.productResponseModels = productResponseModels;
         notifyDataSetChanged();
     }
+
+    public void delete(int position) {
+        productResponseModels.remove(position);
+        notifyItemRemoved(position);
+    }
 }

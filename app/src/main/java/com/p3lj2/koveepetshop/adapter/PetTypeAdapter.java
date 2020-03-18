@@ -71,4 +71,9 @@ public class PetTypeAdapter extends RecyclerView.Adapter<PetTypeAdapter.ViewHold
         this.petTypeModels = petTypeModels;
         notifyDataSetChanged();
     }
+
+    public void delete(int position) {
+        petTypeModels.remove(position);
+        notifyItemRemoved(position);
+    }
 }

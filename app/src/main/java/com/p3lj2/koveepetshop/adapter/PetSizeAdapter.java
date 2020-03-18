@@ -70,4 +70,9 @@ public class PetSizeAdapter extends RecyclerView.Adapter<PetSizeAdapter.ViewHold
         this.petSizeModels = petSizeModels;
         notifyDataSetChanged();
     }
+
+    public void delete(int position) {
+        petSizeModels.remove(position);
+        notifyItemRemoved(position);
+    }
 }
