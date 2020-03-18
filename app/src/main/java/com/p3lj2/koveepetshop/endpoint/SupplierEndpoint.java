@@ -24,4 +24,7 @@ public interface SupplierEndpoint {
 
     @DELETE("suppliers/delete/{id}/{ownerId}")
     Call<SupplierSchema> delete(@Header("Authorization") String bearerToken, @Path("id") int supplierId, @Path("ownerId") int ownerId);
+
+    @GET("suppliers/getbyname/{name}")
+    Call<SupplierSchema> search(@Header("Authorization") String bearerToken, @Path("name") String supplierName);
 }
