@@ -56,4 +56,6 @@
     <string name="address">Alamat</string>
     <string name="supplier_name">Nama Supplier</string>
     <string name="supplier">Supplier</string>
+    <string name="insert_supplier">Masukan Supplier</string>
+    <string name="supplier_inserted">Supplier berhasil dimasukan</string>
 </resources>
