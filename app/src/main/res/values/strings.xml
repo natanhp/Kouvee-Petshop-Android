@@ -60,4 +60,5 @@
     <string name="supplier_inserted">Supplier berhasil dimasukan</string>
     <string name="update_supplier">Ubah Supplier</string>
     <string name="supplier_updated">Supplier berhasil diubah</string>
+    <string name="supplier_deleted">Supplier berhasil dihapus</string>
 </resources>
