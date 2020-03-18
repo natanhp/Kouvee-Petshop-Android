@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.InsertSupplierActivity"></activity>
+        <activity android:name=".view.UpdateSupplierActivity"></activity>
+        <activity android:name=".view.InsertSupplierActivity" />
         <activity android:name=".view.SupplierActivity" />
         <activity android:name=".view.UpdatePetSizeActivity" />
         <activity android:name=".view.InsertPetSizeActivity" />
