@@ -77,6 +77,21 @@ public class ServiceRepository {
         });
     }
 
+    public void delete(String bearerToken, int serviceId, int ownerId) {
+        isLoading.setValue(true);
+        serviceEndpoint.delete("Bearer " + bearerToken, serviceId, ownerId).enqueue(new Callback<ServiceSchema>() {
+            @Override
+            public void onResponse(@NotNull Call<ServiceSchema> call, @NotNull Response<ServiceSchema> response) {
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ServiceSchema> call, @NotNull Throwable t) {
+                isLoading.postValue(false);
+            }
+        });
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return isLoading;
     }

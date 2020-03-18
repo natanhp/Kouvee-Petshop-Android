@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -72,7 +75,7 @@ public class ServiceActivity extends AppCompatActivity {
         });
 
         setUpRecyclerView();
-//        deleteOnSwipe();
+        deleteOnSwipe();
 //        searchViewHandler();
     }
 
@@ -97,31 +100,31 @@ public class ServiceActivity extends AppCompatActivity {
         });
     }
 
-//    private void deleteOnSwipe() {
-//        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-//            @Override
-//            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-//                return false;
-//            }
-//
-//            @Override
-//            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-//                confirmationDialog(getString(R.string.pet_type_deletion), getString(R.string.pet_type_delete_confirmation))
-//                        .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
-//                            getEmployee();
-//                            petTypeViewModel.delete(employee.getToken(),
-//                                    petTypeAdapter.getPetTypeModels().get(viewHolder.getAdapterPosition()).getId(),
-//                                    employee.getId());
-//
-//                            petTypeAdapter.delete(viewHolder.getAdapterPosition());
-//                            Toast.makeText(PetTypeActivity.this, R.string.pet_type_deleted, Toast.LENGTH_SHORT).show();
-//                        })
-//                        .setNegativeButton(getString(R.string.no), (dialogInterface, i) -> petTypeAdapter.notifyItemChanged(viewHolder.getAdapterPosition()))
-//                        .show();
-//            }
-//        })
-//                .attachToRecyclerView(recyclerView);
-//    }
+    private void deleteOnSwipe() {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                confirmationDialog(getString(R.string.service_deletion), getString(R.string.service_delete_confirmation))
+                        .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
+                            getEmployee();
+                            serviceViewModel.delete(employee.getToken(),
+                                    serviceAdapter.getServiceModels().get(viewHolder.getAdapterPosition()).getId(),
+                                    employee.getId());
+
+                            serviceAdapter.delete(viewHolder.getAdapterPosition());
+                            Toast.makeText(ServiceActivity.this, R.string.service_deleted, Toast.LENGTH_SHORT).show();
+                        })
+                        .setNegativeButton(getString(R.string.no), (dialogInterface, i) -> serviceAdapter.notifyItemChanged(viewHolder.getAdapterPosition()))
+                        .show();
+            }
+        })
+                .attachToRecyclerView(recyclerView);
+    }
 
     private AlertDialog.Builder confirmationDialog(String title, String message) {
         return new AlertDialog.Builder(this)
