@@ -92,6 +92,27 @@ public class ServiceRepository {
         });
     }
 
+    public LiveData<List<ServiceModel>> search(String bearerToken, String serviceName) {
+        isLoading.setValue(true);
+        serviceEndpoint.search("Bearer " + bearerToken, serviceName).enqueue(new Callback<ServiceSchema>() {
+            @Override
+            public void onResponse(@NotNull Call<ServiceSchema> call, @NotNull Response<ServiceSchema> response) {
+                if (response.body() != null && response.code() == 200) {
+                    serviceModels.postValue(response.body().getServiceModels());
+                }
+
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ServiceSchema> call, @NotNull Throwable t) {
+                isLoading.postValue(false);
+            }
+        });
+
+        return serviceModels;
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return isLoading;
     }

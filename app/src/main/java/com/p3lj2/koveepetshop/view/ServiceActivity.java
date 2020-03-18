@@ -76,7 +76,7 @@ public class ServiceActivity extends AppCompatActivity {
 
         setUpRecyclerView();
         deleteOnSwipe();
-//        searchViewHandler();
+        searchViewHandler();
     }
 
     private void createService() {
@@ -152,7 +152,7 @@ public class ServiceActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-//                serviceViewModel.search(employee.getToken(), query).observe(ServiceActivity.this, serviceModels -> serviceAdapter.setServiceModels(serviceModels));
+                serviceViewModel.search(employee.getToken(), query).observe(ServiceActivity.this, serviceModels -> serviceAdapter.setServiceModels(serviceModels));
                 return false;
             }
 
