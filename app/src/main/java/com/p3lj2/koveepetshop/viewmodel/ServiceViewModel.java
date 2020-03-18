@@ -28,6 +28,10 @@ public class ServiceViewModel extends AndroidViewModel {
         return serviceRepository.getAll(bearerToken);
     }
 
+    public void insert(String bearerToken, ServiceModel serviceModel) {
+        serviceRepository.insert(bearerToken, serviceModel);
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return serviceRepository.getIsLoading();
     }

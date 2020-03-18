@@ -57,7 +57,7 @@ public class ServiceActivity extends AppCompatActivity {
 
         serviceViewModel = new ViewModelProvider.AndroidViewModelFactory(Objects.requireNonNull(this).getApplication()).create(ServiceViewModel.class);
 
-//        createType();
+        createService();
 
         serviceViewModel.getIsLoading().observe(this, aBoolean -> {
             if (aBoolean != null) {
@@ -76,8 +76,8 @@ public class ServiceActivity extends AppCompatActivity {
 //        searchViewHandler();
     }
 
-    private void createType() {
-        floatingActionButton.setOnClickListener(view -> startActivity(new Intent(this, InsertPetTypeActivity.class)));
+    private void createService() {
+        floatingActionButton.setOnClickListener(view -> startActivity(new Intent(this, InsertServiceActivity.class)));
     }
 
     private void setUpRecyclerView() {
