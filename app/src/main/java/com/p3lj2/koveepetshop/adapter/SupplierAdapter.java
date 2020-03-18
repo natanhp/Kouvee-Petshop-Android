@@ -73,4 +73,9 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
         this.supplierModels = supplierModels;
         notifyDataSetChanged();
     }
+
+    public void delete(int position) {
+        supplierModels.remove(position);
+        notifyItemRemoved(position);
+    }
 }
