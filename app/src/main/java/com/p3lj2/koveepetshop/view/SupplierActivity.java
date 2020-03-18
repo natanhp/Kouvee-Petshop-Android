@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -72,7 +75,7 @@ public class SupplierActivity extends AppCompatActivity {
         });
 
         setUpRecyclerView();
-//        deleteOnSwipe();
+        deleteOnSwipe();
 //        searchViewHandler();
     }
 
@@ -97,31 +100,31 @@ public class SupplierActivity extends AppCompatActivity {
         });
     }
 
-//    private void deleteOnSwipe() {
-//        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-//            @Override
-//            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-//                return false;
-//            }
-//
-//            @Override
-//            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-//                confirmationDialog(getString(R.string.pet_size_deletion), getString(R.string.pet_size_delete_confirmation))
-//                        .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
-//                            getEmployee();
-//                            petSizeViewModel.delete(employee.getToken(),
-//                                    petSizeAdapter.getPetSizeModels().get(viewHolder.getAdapterPosition()).getId(),
-//                                    employee.getId());
-//
-//                            petSizeAdapter.delete(viewHolder.getAdapterPosition());
-//                            Toast.makeText(PetSizeActivity.this, R.string.pet_type_deleted, Toast.LENGTH_SHORT).show();
-//                        })
-//                        .setNegativeButton(getString(R.string.no), (dialogInterface, i) -> petSizeAdapter.notifyItemChanged(viewHolder.getAdapterPosition()))
-//                        .show();
-//            }
-//        })
-//                .attachToRecyclerView(recyclerView);
-//    }
+    private void deleteOnSwipe() {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                confirmationDialog(getString(R.string.pet_size_deletion), getString(R.string.pet_size_delete_confirmation))
+                        .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
+                            getEmployee();
+                            supplierViewModel.delete(employee.getToken(),
+                                    supplierAdapter.getSupplierModels().get(viewHolder.getAdapterPosition()).getIdSupplier(),
+                                    employee.getId());
+
+                            supplierAdapter.delete(viewHolder.getAdapterPosition());
+                            Toast.makeText(SupplierActivity.this, R.string.supplier_deleted, Toast.LENGTH_SHORT).show();
+                        })
+                        .setNegativeButton(getString(R.string.no), (dialogInterface, i) -> supplierAdapter.notifyItemChanged(viewHolder.getAdapterPosition()))
+                        .show();
+            }
+        })
+                .attachToRecyclerView(recyclerView);
+    }
 
     private AlertDialog.Builder confirmationDialog(String title, String message) {
         return new AlertDialog.Builder(this)
@@ -166,15 +169,15 @@ public class SupplierActivity extends AppCompatActivity {
 //        });
 //    }
 
-//    private void getEmployee() {
-//        if (employee == null) {
-//            petSizeViewModel.getEmployee().observe(PetSizeActivity.this, employeeDataModel -> {
-//                if (employeeDataModel != null) {
-//                    employee = employeeDataModel;
-//                }
-//            });
-//        }
-//    }
+    private void getEmployee() {
+        if (employee == null) {
+            supplierViewModel.getEmployee().observe(this, employeeDataModel -> {
+                if (employeeDataModel != null) {
+                    employee = employeeDataModel;
+                }
+            });
+        }
+    }
 
     private void handleProgressBar(boolean state) {
         if (state) {

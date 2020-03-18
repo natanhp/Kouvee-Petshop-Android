@@ -36,6 +36,10 @@ public class SupplierViewModel extends AndroidViewModel {
         supplierRepository.update(bearerToken, supplierModel);
     }
 
+    public void delete(String bearerToken, int supplierId, int ownerId) {
+        supplierRepository.delete(bearerToken, supplierId, ownerId);
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return supplierRepository.getIsLoading();
     }
