@@ -69,4 +69,7 @@
     <string name="service_deletion">Penghapusan Layanan</string>
     <string name="service_delete_confirmation">Apakah anda yakin akan menghapus layanan?</string>
     <string name="service_deleted">Layanan berhasil dihapus</string>
+    <string name="service_price">Harga Layanan</string>
+    <string name="service_name">Nama Layanan</string>
+    <string name="service_detail">Detail Layanan</string>
 </resources>
