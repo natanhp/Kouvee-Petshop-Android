@@ -92,6 +92,27 @@ public class SupplierRepository {
         });
     }
 
+    public LiveData<List<SupplierModel>> search(String bearerToken, String supplierName) {
+        isLoading.setValue(true);
+        supplierEndpoint.search("Bearer " + bearerToken, supplierName).enqueue(new Callback<SupplierSchema>() {
+            @Override
+            public void onResponse(@NotNull Call<SupplierSchema> call, @NotNull Response<SupplierSchema> response) {
+                if (response.body() != null && response.code() == 200) {
+                    supplierModels.postValue(response.body().getSupplierModels());
+                }
+
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<SupplierSchema> call, @NotNull Throwable t) {
+                isLoading.postValue(false);
+            }
+        });
+
+        return supplierModels;
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return isLoading;
     }

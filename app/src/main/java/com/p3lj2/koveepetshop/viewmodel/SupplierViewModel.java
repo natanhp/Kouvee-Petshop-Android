@@ -40,6 +40,10 @@ public class SupplierViewModel extends AndroidViewModel {
         supplierRepository.delete(bearerToken, supplierId, ownerId);
     }
 
+    public LiveData<List<SupplierModel>> search(String bearerToken, String supplierName) {
+        return supplierRepository.search(bearerToken, supplierName);
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return supplierRepository.getIsLoading();
     }
