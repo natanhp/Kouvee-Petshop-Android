@@ -44,7 +44,7 @@ public class InsertSupplierActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btn_insert)
-    public void insertPetSize(View view) {
+    public void insertSupplier(View view) {
         supplierViewModel.getIsLoading().observe(this, aBoolean -> {
             if (aBoolean != null) {
                 handleProgressBar(aBoolean);
