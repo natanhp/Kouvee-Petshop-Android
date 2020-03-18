@@ -5,10 +5,12 @@ import com.p3lj2.koveepetshop.model.PetSizeSchema;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface PetSizeEndpoint {
     @GET("petsizes/getall")
@@ -19,4 +21,7 @@ public interface PetSizeEndpoint {
 
     @PUT("petsizes/update")
     Call<PetSizeSchema> update(@Header("Authorization") String bearerToken, @Body PetSizeModel petSizeModel);
+
+    @DELETE("petsizes/delete/{id}/{ownerId}")
+    Call<PetSizeSchema> delete(@Header("Authorization") String bearerToken, @Path("id") int petSizeId, @Path("ownerId") int ownerId);
 }
