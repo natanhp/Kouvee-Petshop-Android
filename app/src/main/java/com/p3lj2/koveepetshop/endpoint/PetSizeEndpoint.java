@@ -24,4 +24,7 @@ public interface PetSizeEndpoint {
 
     @DELETE("petsizes/delete/{id}/{ownerId}")
     Call<PetSizeSchema> delete(@Header("Authorization") String bearerToken, @Path("id") int petSizeId, @Path("ownerId") int ownerId);
+
+    @GET("petsizes/getbysize/{size}")
+    Call<PetSizeSchema> search(@Header("Authorization") String bearerToken, @Path("size") String petSize);
 }
