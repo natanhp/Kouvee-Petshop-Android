@@ -25,6 +25,9 @@ public class ServiceModel implements Parcelable {
     @Expose
     private int deletedBy;
 
+    public ServiceModel() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
