@@ -130,7 +130,7 @@ public class ServiceActivity extends AppCompatActivity {
     }
 
     private EventClickListener itemUpdateListener = position -> {
-        Intent intent = new Intent(this, UpdatePetTypeActivity.class);
+        Intent intent = new Intent(this, UpdateServiceActivity.class);
         intent.putExtra(EXTRA_SERVICE, serviceAdapter.getServiceModels().get(position));
         startActivityForResult(intent, UPDATE_REQUEST);
     };
