@@ -77,6 +77,21 @@ public class PetSizeRepository {
         });
     }
 
+    public void delete(String bearerToken, int petSizeId, int ownerId) {
+        isLoading.setValue(true);
+        petSizeEndpoint.delete("Bearer " + bearerToken, petSizeId, ownerId).enqueue(new Callback<PetSizeSchema>() {
+            @Override
+            public void onResponse(@NotNull Call<PetSizeSchema> call, @NotNull Response<PetSizeSchema> response) {
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<PetSizeSchema> call, @NotNull Throwable t) {
+                isLoading.postValue(false);
+            }
+        });
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return isLoading;
     }
