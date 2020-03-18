@@ -64,4 +64,6 @@
     <string name="insert_service">Masukan Layanan</string>
     <string name="service_cant_be_empty">Layanan tidak boleh kosong</string>
     <string name="service_inserted">Layanan berhasil dimasukan</string>
+    <string name="update_service">Ubah Layanan</string>
+    <string name="service_updated">Layanan berhasil diubah</string>
 </resources>
