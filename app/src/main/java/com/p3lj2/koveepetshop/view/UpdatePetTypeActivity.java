@@ -9,11 +9,9 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.p3lj2.koveepetshop.R;
-import com.p3lj2.koveepetshop.model.EmployeeDataModel;
 import com.p3lj2.koveepetshop.model.PetTypeModel;
 import com.p3lj2.koveepetshop.viewmodel.PetTypeViewModel;
 
@@ -71,7 +69,7 @@ public class UpdatePetTypeActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick(R.id.btn_insert)
+    @OnClick(R.id.btn_update)
     public void onClickUpdate(View view) {
         String type = edtPetType.getText().toString().trim();
 
@@ -83,13 +81,10 @@ public class UpdatePetTypeActivity extends AppCompatActivity {
         petTypeModel.setType(type);
         final String[] token = {""};
 
-        petTypeViewModel.getEmployee().observe(this, new Observer<EmployeeDataModel>() {
-            @Override
-            public void onChanged(EmployeeDataModel employeeDataModel) {
-                if (employeeDataModel != null) {
-                    petTypeModel.setUpdatedBy(employeeDataModel.getId());
-                    token[0] = employeeDataModel.getToken();
-                }
+        petTypeViewModel.getEmployee().observe(this, employeeDataModel -> {
+            if (employeeDataModel != null) {
+                petTypeModel.setUpdatedBy(employeeDataModel.getId());
+                token[0] = employeeDataModel.getToken();
             }
         });
 

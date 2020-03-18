@@ -46,7 +46,7 @@
         app:layout_constraintTop_toTopOf="@+id/tv_pet_type_label" />
 
     <Button
-        android:id="@+id/btn_insert"
+        android:id="@+id/btn_update"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -54,7 +54,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="24dp"
         android:background="@color/olive_green"
-        android:text="@string/insert"
+        android:text="@string/update"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
