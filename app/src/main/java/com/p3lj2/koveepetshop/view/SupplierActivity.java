@@ -1,11 +1,13 @@
 package com.p3lj2.koveepetshop.view;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.lifecycle.ViewModelProvider;
@@ -128,19 +130,19 @@ public class SupplierActivity extends AppCompatActivity {
     }
 
     private EventClickListener itemUpdateListener = position -> {
-        Intent intent = new Intent(this, UpdatePetSizeActivity.class);
+        Intent intent = new Intent(this, UpdateSupplierActivity.class);
         intent.putExtra(EXTRA_SUPPLIER, supplierAdapter.getSupplierModels().get(position));
         startActivityForResult(intent, UPDATE_REQUEST);
     };
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == UPDATE_REQUEST && resultCode == Activity.RESULT_OK) {
-//            petSizeViewModel.getEmployee().observe(this, employeeDataModel -> petSizeViewModel.getAll(employeeDataModel.getToken()));
-//        }
-//    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == UPDATE_REQUEST && resultCode == Activity.RESULT_OK) {
+            supplierViewModel.getEmployee().observe(this, employeeDataModel -> supplierViewModel.getAll(employeeDataModel.getToken()));
+        }
+    }
 
 //    private void searchViewHandler() {
 //        searchView.setEnabled(true);
