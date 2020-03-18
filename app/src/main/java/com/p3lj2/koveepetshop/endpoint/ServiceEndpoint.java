@@ -24,4 +24,7 @@ public interface ServiceEndpoint {
 
     @DELETE("services/delete/{id}/{ownerId}")
     Call<ServiceSchema> delete(@Header("Authorization") String bearerToken, @Path("id") int serviceId, @Path("ownerId") int ownerId);
+
+    @GET("services/getbyname/{serviceName}")
+    Call<ServiceSchema> search(@Header("Authorization") String bearerToken, @Path("serviceName") String serviceName);
 }
