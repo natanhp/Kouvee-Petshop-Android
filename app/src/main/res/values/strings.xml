@@ -66,4 +66,7 @@
     <string name="service_inserted">Layanan berhasil dimasukan</string>
     <string name="update_service">Ubah Layanan</string>
     <string name="service_updated">Layanan berhasil diubah</string>
+    <string name="service_deletion">Penghapusan Layanan</string>
+    <string name="service_delete_confirmation">Apakah anda yakin akan menghapus layanan?</string>
+    <string name="service_deleted">Layanan berhasil dihapus</string>
 </resources>
