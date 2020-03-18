@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.UpdateServiceActivity"></activity>
+        <activity android:name=".view.ServiceDetailActivity"></activity>
+        <activity android:name=".view.UpdateServiceActivity" />
         <activity android:name=".view.InsertServiceActivity" />
         <activity android:name=".view.ServiceActivity" />
         <activity android:name=".view.UpdateSupplierActivity" />
