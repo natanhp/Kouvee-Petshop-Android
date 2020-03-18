@@ -62,6 +62,21 @@ public class SupplierRepository {
         });
     }
 
+    public void update(String bearerToken, SupplierModel supplierModel) {
+        isLoading.setValue(true);
+        supplierEndpoint.update("Bearer " + bearerToken, supplierModel).enqueue(new Callback<SupplierSchema>() {
+            @Override
+            public void onResponse(@NotNull Call<SupplierSchema> call, @NotNull Response<SupplierSchema> response) {
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<SupplierSchema> call, @NotNull Throwable t) {
+                isLoading.postValue(false);
+            }
+        });
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return isLoading;
     }

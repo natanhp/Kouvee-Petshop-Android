@@ -32,6 +32,10 @@ public class SupplierViewModel extends AndroidViewModel {
         supplierRepository.insert(bearerToken, supplierModel);
     }
 
+    public void update(String bearerToken, SupplierModel supplierModel) {
+        supplierRepository.update(bearerToken, supplierModel);
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return supplierRepository.getIsLoading();
     }
