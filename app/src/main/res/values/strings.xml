@@ -52,4 +52,8 @@
     <string name="pet_size_updated">Ukuran hewan berhasil diubah</string>
     <string name="pet_size_deletion">Penghapusan Ukuran Hewan</string>
     <string name="pet_size_delete_confirmation">Apakah anda yakin akan menghapus ukuran hewan?</string>
+    <string name="phone_number">Nomor Telepon</string>
+    <string name="address">Alamat</string>
+    <string name="supplier_name">Nama Supplier</string>
+    <string name="supplier">Supplier</string>
 </resources>
