@@ -55,7 +55,7 @@ public class SupplierActivity extends AppCompatActivity {
 
         supplierViewModel = new ViewModelProvider.AndroidViewModelFactory(Objects.requireNonNull(this).getApplication()).create(SupplierViewModel.class);
 
-//        createSize();
+        createSupplier();
 
         supplierViewModel.getIsLoading().observe(this, aBoolean -> {
             if (aBoolean != null) {
@@ -74,8 +74,8 @@ public class SupplierActivity extends AppCompatActivity {
 //        searchViewHandler();
     }
 
-    private void createSize() {
-        floatingActionButton.setOnClickListener(view -> startActivity(new Intent(this, InsertPetSizeActivity.class)));
+    private void createSupplier() {
+        floatingActionButton.setOnClickListener(view -> startActivity(new Intent(this, InsertSupplierActivity.class)));
     }
 
     private void setUpRecyclerView() {
