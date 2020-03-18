@@ -61,4 +61,7 @@
     <string name="update_supplier">Ubah Supplier</string>
     <string name="supplier_updated">Supplier berhasil diubah</string>
     <string name="supplier_deleted">Supplier berhasil dihapus</string>
+    <string name="insert_service">Masukan Layanan</string>
+    <string name="service_cant_be_empty">Layanan tidak boleh kosong</string>
+    <string name="service_inserted">Layanan berhasil dimasukan</string>
 </resources>
