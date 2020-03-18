@@ -35,4 +35,9 @@ public class OwnerMenuActivity extends AppCompatActivity {
     public void petSizeOnClick(View view) {
         startActivity(new Intent(this, PetSizeActivity.class));
     }
+
+    @OnClick(R.id.btn_supplier)
+    public void supplierOnClick(View view) {
+        startActivity(new Intent(this, SupplierActivity.class));
+    }
 }

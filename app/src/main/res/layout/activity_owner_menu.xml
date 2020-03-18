@@ -131,6 +131,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
+            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -144,11 +145,11 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="16dp"
+            android:contentDescription="@string/pet_size"
             android:src="@drawable/pet_size"
-            app:layout_constraintEnd_toEndOf="@+id/btn_pet_type"
+            app:layout_constraintEnd_toEndOf="@+id/btn_product"
             app:layout_constraintStart_toStartOf="@+id/btn_product"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
-            android:contentDescription="@string/pet_size" />
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -158,6 +159,26 @@
             app:layout_constraintEnd_toEndOf="@+id/btn_pet_size"
             app:layout_constraintStart_toStartOf="@+id/btn_pet_size"
             app:layout_constraintTop_toBottomOf="@+id/btn_pet_size" />
+
+        <ImageView
+            android:id="@+id/btn_supplier"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/suppliers"
+            app:layout_constraintEnd_toEndOf="@+id/btn_pet_type"
+            app:layout_constraintStart_toStartOf="@+id/btn_pet_type"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            android:contentDescription="@string/supplier" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/supplier"
+            app:layout_constraintEnd_toEndOf="@+id/btn_supplier"
+            app:layout_constraintStart_toStartOf="@+id/btn_supplier"
+            app:layout_constraintTop_toBottomOf="@+id/btn_supplier" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
