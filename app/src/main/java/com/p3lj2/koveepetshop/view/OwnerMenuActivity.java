@@ -45,4 +45,9 @@ public class OwnerMenuActivity extends AppCompatActivity {
     public void serviceOnClick(View view) {
         startActivity(new Intent(this, ServiceActivity.class));
     }
+
+    @OnClick(R.id.btn_service_detail)
+    public void serviceDetailOnClick(View view) {
+        startActivity(new Intent(this, ServiceDetailActivity.class));
+    }
 }
