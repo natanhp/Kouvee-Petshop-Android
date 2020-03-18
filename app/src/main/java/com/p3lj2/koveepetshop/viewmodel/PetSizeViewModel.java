@@ -40,6 +40,10 @@ public class PetSizeViewModel extends AndroidViewModel {
         petSizeRepository.delete(bearerToken, petSizeId, ownerId);
     }
 
+    public LiveData<List<PetSizeModel>> search(String bearerToken, String petSize) {
+        return petSizeRepository.search(bearerToken, petSize);
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return petSizeRepository.getIsLoading();
     }

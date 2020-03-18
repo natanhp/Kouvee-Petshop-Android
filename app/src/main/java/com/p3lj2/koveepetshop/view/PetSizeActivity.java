@@ -76,7 +76,7 @@ public class PetSizeActivity extends AppCompatActivity {
 
         setUpRecyclerView();
         deleteOnSwipe();
-//        searchViewHandler();
+        searchViewHandler();
     }
 
     private void createSize() {
@@ -147,27 +147,27 @@ public class PetSizeActivity extends AppCompatActivity {
         }
     }
 
-//    private void searchViewHandler() {
-//        searchView.setEnabled(true);
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                petTypeViewModel.search(employee.getToken(), query).observe(PetTypeActivity.this, petTypeModels -> petTypeAdapter.setPetTypeModels(petTypeModels));
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                return false;
-//            }
-//        });
-//
-//        searchView.setOnCloseListener(() -> {
-//            getEmployee();
-//            petTypeViewModel.getAll(employee.getToken());
-//            return false;
-//        });
-//    }
+    private void searchViewHandler() {
+        searchView.setEnabled(true);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                petSizeViewModel.search(employee.getToken(), query).observe(PetSizeActivity.this, petSizeModels -> petSizeAdapter.setPetSizeModels(petSizeModels));
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        searchView.setOnCloseListener(() -> {
+            getEmployee();
+            petSizeViewModel.getAll(employee.getToken());
+            return false;
+        });
+    }
 
     private void getEmployee() {
         if (employee == null) {
