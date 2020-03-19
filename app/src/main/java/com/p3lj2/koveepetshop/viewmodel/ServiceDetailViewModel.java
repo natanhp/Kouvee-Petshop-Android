@@ -49,6 +49,10 @@ public class ServiceDetailViewModel extends AndroidViewModel {
         serviceDetailRepository.update(bearerToken, serviceDetailModel);
     }
 
+    public void delete(String bearerToken, int serviceDetailId) {
+        serviceDetailRepository.delete(bearerToken, serviceDetailId);
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return serviceDetailRepository.getIsLoading();
     }

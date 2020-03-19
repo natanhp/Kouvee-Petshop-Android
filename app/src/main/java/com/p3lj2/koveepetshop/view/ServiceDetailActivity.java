@@ -75,7 +75,7 @@ public class ServiceDetailActivity extends AppCompatActivity {
         });
 
         setUpRecyclerView();
-//        deleteOnSwipe();
+        deleteOnSwipe();
 //        searchViewHandler();
     }
 
@@ -105,15 +105,14 @@ public class ServiceDetailActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                confirmationDialog(getString(R.string.pet_size_deletion), getString(R.string.pet_size_delete_confirmation))
+                confirmationDialog(getString(R.string.service_detail_deletion), getString(R.string.service_detail_delete_confirmation))
                         .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
                             getEmployee();
-//                            serviceDetailViewModel.delete(employee.getToken(),
-//                                    serviceDetailAdapter.getServiceDetailCompletes().get(viewHolder.getAdapterPosition()).getServiceDetailModel().getId(),
-//                                    employee.getId());
+                            serviceDetailViewModel.delete(employee.getToken(),
+                                    serviceDetailAdapter.getServiceDetailCompletes().get(viewHolder.getAdapterPosition()).getServiceDetailModel().getId());
 
                             serviceDetailAdapter.delete(viewHolder.getAdapterPosition());
-                            Toast.makeText(ServiceDetailActivity.this, R.string.pet_type_deleted, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ServiceDetailActivity.this, R.string.service_detail_deleted, Toast.LENGTH_SHORT).show();
                         })
                         .setNegativeButton(getString(R.string.no), (dialogInterface, i) -> serviceDetailAdapter.notifyItemChanged(viewHolder.getAdapterPosition()))
                         .show();
