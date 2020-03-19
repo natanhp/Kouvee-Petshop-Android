@@ -1,7 +1,6 @@
 package com.p3lj2.koveepetshop.view;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +21,7 @@ import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.adapter.ProductAdapter;
 import com.p3lj2.koveepetshop.model.EmployeeDataModel;
 import com.p3lj2.koveepetshop.util.EventClickListener;
+import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.viewmodel.ProductViewModel;
 
 import java.util.Objects;
@@ -108,7 +108,7 @@ public class ProductActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                confirmationDialog(getString(R.string.product_deletion), getString(R.string.product_deletion_confirmation))
+                Util.confirmationDialog(getString(R.string.product_deletion), getString(R.string.product_deletion_confirmation), ProductActivity.this)
                         .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
                             productViewModel.getEmployee().observe(ProductActivity.this, employeeDataModel -> {
                                 if (employeeDataModel != null) {
@@ -128,12 +128,6 @@ public class ProductActivity extends AppCompatActivity {
             }
         })
                 .attachToRecyclerView(recyclerView);
-    }
-
-    private AlertDialog.Builder confirmationDialog(String title, String message) {
-        return new AlertDialog.Builder(this)
-                .setTitle(title)
-                .setMessage(message);
     }
 
     private EventClickListener itemUpdateListener = new EventClickListener() {

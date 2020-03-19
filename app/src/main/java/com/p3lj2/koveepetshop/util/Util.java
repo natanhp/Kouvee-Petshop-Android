@@ -1,5 +1,6 @@
 package com.p3lj2.koveepetshop.util;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -40,5 +41,11 @@ public class Util {
 
     public static <K, V> K getKey(BidiMap<K, V> map, V value) {
         return map.inverseBidiMap().get(value);
+    }
+
+    public static AlertDialog.Builder confirmationDialog(String title, String message, Context context) {
+        return new AlertDialog.Builder(context)
+                .setTitle(title)
+                .setMessage(message);
     }
 }

@@ -1,7 +1,6 @@
 package com.p3lj2.koveepetshop.view;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +21,7 @@ import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.adapter.ServiceAdapter;
 import com.p3lj2.koveepetshop.model.EmployeeDataModel;
 import com.p3lj2.koveepetshop.util.EventClickListener;
+import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.viewmodel.ServiceViewModel;
 
 import java.util.Objects;
@@ -109,7 +109,7 @@ public class ServiceActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                confirmationDialog(getString(R.string.service_deletion), getString(R.string.service_delete_confirmation))
+                Util.confirmationDialog(getString(R.string.service_deletion), getString(R.string.service_delete_confirmation), ServiceActivity.this)
                         .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
                             getEmployee();
                             serviceViewModel.delete(employee.getToken(),
@@ -124,12 +124,6 @@ public class ServiceActivity extends AppCompatActivity {
             }
         })
                 .attachToRecyclerView(recyclerView);
-    }
-
-    private AlertDialog.Builder confirmationDialog(String title, String message) {
-        return new AlertDialog.Builder(this)
-                .setTitle(title)
-                .setMessage(message);
     }
 
     private EventClickListener itemUpdateListener = position -> {

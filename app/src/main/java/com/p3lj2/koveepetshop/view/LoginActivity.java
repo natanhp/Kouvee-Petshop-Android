@@ -7,7 +7,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.p3lj2.koveepetshop.R;
@@ -50,17 +49,16 @@ public class LoginActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.VISIBLE);
                 } else {
                     progressBar.setVisibility(View.GONE);
-                    startActivity(new Intent(LoginActivity.this, SplahScreenActivity.class));
-
-                    finish();
                 }
-            } else {
-                progressBar.setVisibility(View.GONE);
             }
         });
 
         if (!username.isEmpty() && !password.isEmpty()) {
-            employeeViewModel.login(username, password);
+            employeeViewModel.login(username, password).observe(this, employeeModel -> {
+                startActivity(new Intent(LoginActivity.this, OwnerMenuActivity.class));
+
+                finish();
+            });
         }
     }
 }
