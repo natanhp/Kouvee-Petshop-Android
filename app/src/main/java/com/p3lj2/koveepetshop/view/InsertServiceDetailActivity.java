@@ -9,15 +9,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.model.EmployeeDataModel;
-import com.p3lj2.koveepetshop.model.PetSizeModel;
-import com.p3lj2.koveepetshop.model.PetTypeModel;
 import com.p3lj2.koveepetshop.model.ServiceDetailModel;
-import com.p3lj2.koveepetshop.model.ServiceModel;
 import com.p3lj2.koveepetshop.viewmodel.ServiceDetailViewModel;
 
 import java.util.HashMap;
@@ -63,56 +59,44 @@ public class InsertServiceDetailActivity extends AppCompatActivity {
     }
 
     private void initSpinners() {
-        serviceDetailViewModel.getEmployee().observe(this, new Observer<EmployeeDataModel>() {
-            @Override
-            public void onChanged(EmployeeDataModel employeeDataModel) {
-                employee = employeeDataModel;
+        serviceDetailViewModel.getEmployee().observe(this, employeeDataModel -> {
+            employee = employeeDataModel;
 
-                serviceDetailViewModel.getAllServices(employee.getToken()).observe(InsertServiceDetailActivity.this, new Observer<List<ServiceModel>>() {
-                    @Override
-                    public void onChanged(List<ServiceModel> serviceModels) {
-                        String[] serviceNames = new String[serviceModels.size()];
+            serviceDetailViewModel.getAllServices(employee.getToken()).observe(InsertServiceDetailActivity.this, serviceModels -> {
+                String[] serviceNames = new String[serviceModels.size()];
 
-                        for (int i = 0; i < serviceModels.size(); i++) {
-                            serviceNameMap.put(i, serviceModels.get(i).getId());
-                            serviceNames[i] = serviceModels.get(i).getServiceName();
-                        }
+                for (int i = 0; i < serviceModels.size(); i++) {
+                    serviceNameMap.put(i, serviceModels.get(i).getId());
+                    serviceNames[i] = serviceModels.get(i).getServiceName();
+                }
 
-                        ArrayAdapter<String> serviceNameAdapter = new ArrayAdapter<>(InsertServiceDetailActivity.this, android.R.layout.simple_spinner_item, serviceNames);
-                        spinners.get(0).setAdapter(serviceNameAdapter);
-                    }
-                });
+                ArrayAdapter<String> serviceNameAdapter = new ArrayAdapter<>(InsertServiceDetailActivity.this, android.R.layout.simple_spinner_item, serviceNames);
+                spinners.get(0).setAdapter(serviceNameAdapter);
+            });
 
-                serviceDetailViewModel.getAllPetTypes(employee.getToken()).observe(InsertServiceDetailActivity.this, new Observer<List<PetTypeModel>>() {
-                    @Override
-                    public void onChanged(List<PetTypeModel> petTypeModels) {
-                        String [] petTypes = new String[petTypeModels.size()];
+            serviceDetailViewModel.getAllPetTypes(employee.getToken()).observe(InsertServiceDetailActivity.this, petTypeModels -> {
+                String [] petTypes = new String[petTypeModels.size()];
 
-                        for (int i = 0; i < petTypeModels.size(); i++) {
-                            petTypeMap.put(i, petTypeModels.get(i).getId());
-                            petTypes[i] = petTypeModels.get(i).getType();
-                        }
+                for (int i = 0; i < petTypeModels.size(); i++) {
+                    petTypeMap.put(i, petTypeModels.get(i).getId());
+                    petTypes[i] = petTypeModels.get(i).getType();
+                }
 
-                        ArrayAdapter<String> petTypeAdapter = new ArrayAdapter<>(InsertServiceDetailActivity.this, android.R.layout.simple_spinner_item, petTypes);
-                        spinners.get(1).setAdapter(petTypeAdapter);
-                    }
-                });
+                ArrayAdapter<String> petTypeAdapter = new ArrayAdapter<>(InsertServiceDetailActivity.this, android.R.layout.simple_spinner_item, petTypes);
+                spinners.get(1).setAdapter(petTypeAdapter);
+            });
 
-                serviceDetailViewModel.getAllPetSizes(employee.getToken()).observe(InsertServiceDetailActivity.this, new Observer<List<PetSizeModel>>() {
-                    @Override
-                    public void onChanged(List<PetSizeModel> petSizeModels) {
-                        String [] petSizes = new String[petSizeModels.size()];
+            serviceDetailViewModel.getAllPetSizes(employee.getToken()).observe(InsertServiceDetailActivity.this, petSizeModels -> {
+                String [] petSizes = new String[petSizeModels.size()];
 
-                        for (int i = 0; i < petSizeModels.size(); i++) {
-                            petSizeMap.put(i, petSizeModels.get(i).getId());
-                            petSizes[i] = petSizeModels.get(i).getSize();
-                        }
+                for (int i = 0; i < petSizeModels.size(); i++) {
+                    petSizeMap.put(i, petSizeModels.get(i).getId());
+                    petSizes[i] = petSizeModels.get(i).getSize();
+                }
 
-                        ArrayAdapter<String> petSizeAdapter = new ArrayAdapter<>(InsertServiceDetailActivity.this, android.R.layout.simple_spinner_item, petSizes);
-                        spinners.get(2).setAdapter(petSizeAdapter);
-                    }
-                });
-            }
+                ArrayAdapter<String> petSizeAdapter = new ArrayAdapter<>(InsertServiceDetailActivity.this, android.R.layout.simple_spinner_item, petSizes);
+                spinners.get(2).setAdapter(petSizeAdapter);
+            });
         });
 
     }
