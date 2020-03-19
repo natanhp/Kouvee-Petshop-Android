@@ -62,6 +62,21 @@ public class ServiceDetailRepository {
         });
     }
 
+    public void update(String bearerToken, ServiceDetailModel serviceDetailModel) {
+        isLoading.setValue(true);
+        serviceDetailEndpoint.update("Bearer " + bearerToken, serviceDetailModel).enqueue(new Callback<ServiceDetailSchema>() {
+            @Override
+            public void onResponse(@NotNull Call<ServiceDetailSchema> call, @NotNull Response<ServiceDetailSchema> response) {
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ServiceDetailSchema> call, @NotNull Throwable t) {
+                isLoading.postValue(false);
+            }
+        });
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return isLoading;
     }

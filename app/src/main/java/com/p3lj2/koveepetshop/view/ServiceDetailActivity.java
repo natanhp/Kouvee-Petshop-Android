@@ -129,7 +129,7 @@ public class ServiceDetailActivity extends AppCompatActivity {
     }
 
     private EventClickListener itemUpdateListener = position -> {
-        Intent intent = new Intent(ServiceDetailActivity.this, UpdatePetSizeActivity.class);
+        Intent intent = new Intent(ServiceDetailActivity.this, UpdateServiceDetailActivity.class);
         intent.putExtra(EXTRA_SERVICE_DETAIL, serviceDetailAdapter.getServiceDetailCompletes().get(position));
         startActivityForResult(intent, UPDATE_REQUEST);
     };
@@ -139,7 +139,7 @@ public class ServiceDetailActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == UPDATE_REQUEST && resultCode == Activity.RESULT_OK) {
-//            serviceDetailViewModel.getEmployee().observe(this, serviceDe -> serviceDetailViewModel.getAll(employeeDataModel.getToken()));
+            serviceDetailViewModel.getAll();
         }
     }
 
