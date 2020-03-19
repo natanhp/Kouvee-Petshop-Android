@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.p3lj2.koveepetshop.endpoint.ServiceDetailEndpoint;
 import com.p3lj2.koveepetshop.model.ServiceDetailComplete;
+import com.p3lj2.koveepetshop.model.ServiceDetailModel;
 import com.p3lj2.koveepetshop.model.ServiceDetailSchema;
 import com.p3lj2.koveepetshop.util.RetrofitInstance;
 
@@ -44,6 +45,21 @@ public class ServiceDetailRepository {
         });
 
         return serviceDetailCompletes;
+    }
+
+    public void insert(String bearerToken, ServiceDetailModel serviceDetailModel) {
+        isLoading.setValue(true);
+        serviceDetailEndpoint.insert("Bearer " + bearerToken, serviceDetailModel).enqueue(new Callback<ServiceDetailSchema>() {
+            @Override
+            public void onResponse(@NotNull Call<ServiceDetailSchema> call, @NotNull Response<ServiceDetailSchema> response) {
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ServiceDetailSchema> call, @NotNull Throwable t) {
+                isLoading.postValue(false);
+            }
+        });
     }
 
     public LiveData<Boolean> getIsLoading() {
