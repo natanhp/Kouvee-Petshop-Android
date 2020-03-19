@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">KoveePetshop</string>
-    <string name="username">Username</string>
-    <string name="password">Password</string>
-    <string name="login">Login</string>
+    <string name="username">Nama Pengguna</string>
+    <string name="password">Kata Sandi</string>
+    <string name="login">Masuk</string>
     <string name="title_activity_owner">OwnerActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -79,4 +79,6 @@
     <string name="service_detail_deletion">Penghapusan Detail Layanan</string>
     <string name="service_detail_delete_confirmation">Apakah anda yakin akan menghapus detail layanan?</string>
     <string name="service_detail_deleted">Detail layanan berhasil dihapus</string>
+    <string name="logout">Keluar</string>
+    <string name="logout_confirmation">Apakah anda yakin untuk keluar?</string>
 </resources>
