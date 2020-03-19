@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
+import org.apache.commons.collections4.BidiMap;
+
 public class Util {
     public static String getUriPath(Uri uri, Context context) {
         String wholeID = DocumentsContract.getDocumentId(uri);
@@ -34,5 +36,9 @@ public class Util {
         }
 
         return filePath;
+    }
+
+    public static <K, V> K getKey(BidiMap<K, V> map, V value) {
+        return map.inverseBidiMap().get(value);
     }
 }
