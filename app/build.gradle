@@ -10,7 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "BASE_URL", '"http://10.5.50.57:8000/api/v1/"'
+        buildConfigField "String", "BASE_URL", '"http://192.168.100.2:8000/api/v1/"'
     }
     buildTypes {
         release {
@@ -74,6 +74,9 @@ dependencies {
 //    Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+//    Apache common collection
+    implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.0'
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
