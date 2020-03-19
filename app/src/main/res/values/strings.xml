@@ -72,4 +72,7 @@
     <string name="service_price">Harga Layanan</string>
     <string name="service_name">Nama Layanan</string>
     <string name="service_detail">Detail Layanan</string>
+    <string name="insert_service_detail">Masukan Detail Layanan</string>
+    <string name="price_cant_be_empty">Harga layanan tidak boleh kosong</string>
+    <string name="service_detail_created">Detail layanan berhasil dimasukan</string>
 </resources>
