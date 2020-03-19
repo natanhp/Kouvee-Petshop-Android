@@ -153,6 +153,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
+            android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -173,6 +174,7 @@
             android:contentDescription="@string/supplier" />
 
         <TextView
+            android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -193,6 +195,7 @@
             android:contentDescription="@string/service_detail" />
 
         <TextView
+            android:id="@+id/textView10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -201,6 +204,24 @@
             app:layout_constraintStart_toStartOf="@+id/btn_service_detail"
             app:layout_constraintTop_toBottomOf="@+id/btn_service_detail" />
 
+        <ImageView
+            android:id="@+id/btn_logout"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/services"
+            app:layout_constraintEnd_toEndOf="@+id/btn_service_detail"
+            app:layout_constraintStart_toStartOf="@+id/btn_pet_size"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/logout"
+            app:layout_constraintEnd_toEndOf="@+id/btn_logout"
+            app:layout_constraintStart_toStartOf="@+id/btn_logout"
+            app:layout_constraintTop_toBottomOf="@+id/btn_logout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
