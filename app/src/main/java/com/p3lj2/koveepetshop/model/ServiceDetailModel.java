@@ -34,6 +34,9 @@ public class ServiceDetailModel implements Parcelable {
     @SerializedName("Services_id")
     private int serviceId;
 
+    public ServiceDetailModel() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
