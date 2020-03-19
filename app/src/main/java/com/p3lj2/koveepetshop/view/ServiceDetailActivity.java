@@ -21,9 +21,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.adapter.ServiceDetailAdapter;
 import com.p3lj2.koveepetshop.model.EmployeeDataModel;
+import com.p3lj2.koveepetshop.model.ServiceDetailComplete;
 import com.p3lj2.koveepetshop.util.EventClickListener;
 import com.p3lj2.koveepetshop.viewmodel.ServiceDetailViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -48,6 +51,7 @@ public class ServiceDetailActivity extends AppCompatActivity {
     private EmployeeDataModel employee;
     static final String EXTRA_SERVICE_DETAIL = "com.p3lj2.koveepetshop.view.EXTRA_SERVICE_DETAIL";
     private static final int UPDATE_REQUEST = 8;
+    private List<ServiceDetailComplete> serviceDetailCompletesBak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +80,7 @@ public class ServiceDetailActivity extends AppCompatActivity {
 
         setUpRecyclerView();
         deleteOnSwipe();
-//        searchViewHandler();
+        searchViewHandler();
     }
 
     private void createServiceDetail() {
@@ -93,7 +97,10 @@ public class ServiceDetailActivity extends AppCompatActivity {
     }
 
     private void getAllSizes() {
-        serviceDetailViewModel.getAll().observe(this, serviceDetailCompletes -> serviceDetailAdapter.setServiceDetailCompletes(serviceDetailCompletes));
+        serviceDetailViewModel.getAll().observe(this, serviceDetailCompletes -> {
+            serviceDetailCompletesBak = new ArrayList<>(serviceDetailCompletes);
+            serviceDetailAdapter.setServiceDetailCompletes(serviceDetailCompletes);
+        });
     }
 
     private void deleteOnSwipe() {
@@ -147,7 +154,18 @@ public class ServiceDetailActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-//                serviceDetailViewModel.search(employee.getToken(), query).observe(ServiceDetailActivity.this,  serviceDetailCompletes-> serviceDetailAdapter.setServiceDetailCompletes(serviceDetailCompletes));
+                progressBar.setVisibility(View.VISIBLE);
+                List<ServiceDetailComplete> serviceDetailCompletes = new ArrayList<>();
+
+                for (ServiceDetailComplete serviceDetailComplete : serviceDetailCompletesBak) {
+                    String serviceDetailName = serviceDetailComplete.getServiceCompleteName().toLowerCase();
+                    if (serviceDetailName.contains(query.toLowerCase())) {
+                        serviceDetailCompletes.add(serviceDetailComplete);
+                    }
+                    serviceDetailAdapter.setServiceDetailCompletes(serviceDetailCompletes);
+                }
+
+                progressBar.setVisibility(View.GONE);
                 return false;
             }
 
