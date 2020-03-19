@@ -76,4 +76,7 @@
     <string name="price_cant_be_empty">Harga layanan tidak boleh kosong</string>
     <string name="service_detail_created">Detail layanan berhasil dimasukan</string>
     <string name="service_detail_updated">Detail layanan berhasil diubah</string>
+    <string name="service_detail_deletion">Penghapusan Detail Layanan</string>
+    <string name="service_detail_delete_confirmation">Apakah anda yakin akan menghapus detail layanan?</string>
+    <string name="service_detail_deleted">Detail layanan berhasil dihapus</string>
 </resources>
