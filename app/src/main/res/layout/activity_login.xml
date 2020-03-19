@@ -4,24 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/yellow_background"
     tools:context=".view.LoginActivity">
 
     <ImageView
         android:id="@+id/image_view"
-        android:layout_width="277dp"
+        android:layout_width="0dp"
         android:layout_height="201dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/kouvee_logo"
+        android:background="@color/brown"
+        android:contentDescription="Kovee Pet Shop Logo"
+        android:src="@drawable/kouve_mobile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="Kovee Pet Shop Logo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/edt_username"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="@string/username"
         android:inputType="textPersonName"
@@ -46,6 +49,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/login"
+        android:background="@color/olive_green"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/edt_password"
         app:layout_constraintHorizontal_bias="0.0"
