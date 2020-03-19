@@ -8,6 +8,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface ServiceDetailEndpoint {
     @GET("noa/servicedetails/getall")
@@ -15,4 +16,7 @@ public interface ServiceDetailEndpoint {
 
     @POST("servicedetails/insert")
     Call<ServiceDetailSchema> insert(@Header("Authorization") String bearerToken, @Body ServiceDetailModel serviceDetailModel);
+
+    @PUT("servicedetails/update")
+    Call<ServiceDetailSchema> update(@Header("Authorization") String bearerToken, @Body ServiceDetailModel serviceDetailModel);
 }
