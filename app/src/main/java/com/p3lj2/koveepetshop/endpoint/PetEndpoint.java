@@ -25,4 +25,7 @@ public interface PetEndpoint {
 
     @DELETE("pets/delete/{id}/{csId}")
     Call<PetSchema> delete(@Header("Authorization") String bearerToken, @Path("id") int petId, @Path("csId") int csId);
+
+    @GET("pets/getbyname/{name}")
+    Call<PetSchema> search(@Header("Authorization") String bearerToken, @Path("name") String petName);
 }
