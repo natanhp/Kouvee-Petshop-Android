@@ -71,4 +71,12 @@ public class Util {
 
         return outputFormated;
     }
+
+    public static String stdDateFormater(Date date) {
+        DateFormat outputDate = new SimpleDateFormat("yyyy-MM-dd");
+        String outputFormated = "";
+        outputFormated = outputDate.format(date);
+
+        return outputFormated;
+    }
 }
