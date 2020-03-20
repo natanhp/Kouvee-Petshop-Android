@@ -157,5 +157,11 @@ public class InsertServiceDetailActivity extends AppCompatActivity {
                 handleProgressBar(aBoolean);
             }
         });
+
+        serviceDetailViewModel.getPetSizeIsLoading().observe(this, aBoolean -> {
+            if (aBoolean != null) {
+                handleProgressBar(aBoolean);
+            }
+        });
     }
 }
