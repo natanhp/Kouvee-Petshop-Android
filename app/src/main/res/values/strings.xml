@@ -86,4 +86,7 @@
     <string name="customer_name">Nama Customer</string>
     <string name="pet_name">Nama Hewan</string>
     <string name="birth_date">Tanggal Lahir</string>
+    <string name="insert_pet">Masukan Hewan</string>
+    <string name="pet_name_cant_be_empty">Nama hewan tidak boleh kosong!</string>
+    <string name="pet_inserted">Hewan berhasil dimasukan</string>
 </resources>
