@@ -13,7 +13,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface PetSizeEndpoint {
-    @GET("petsizes/getall")
+    @GET("uni/petsizes/getall")
     Call<PetSizeSchema> getAll(@Header("Authorization") String bearerToken);
 
     @POST("petsizes/insert")
@@ -25,6 +25,6 @@ public interface PetSizeEndpoint {
     @DELETE("petsizes/delete/{id}/{ownerId}")
     Call<PetSizeSchema> delete(@Header("Authorization") String bearerToken, @Path("id") int petSizeId, @Path("ownerId") int ownerId);
 
-    @GET("petsizes/getbysize/{size}")
+    @GET("uni/petsizes/getbysize/{size}")
     Call<PetSizeSchema> search(@Header("Authorization") String bearerToken, @Path("size") String petSize);
 }
