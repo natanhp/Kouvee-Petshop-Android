@@ -60,17 +60,17 @@ public class PetActivity extends AppCompatActivity {
 
         petViewModel = new ViewModelProvider.AndroidViewModelFactory(Objects.requireNonNull(this).getApplication()).create(PetViewModel.class);
 
-//        createPet();
+        createPet();
 
         petViewModel.getIsLoading().observe(this, aBoolean -> {
             if (aBoolean != null) {
-//                handleProgressBar(aBoolean);
+                handleProgressBar(aBoolean);
             }
         });
 
         petViewModel.getEmployeeIsLoading().observe(this, aBoolean -> {
             if (aBoolean != null) {
-//                handleProgressBar(aBoolean);
+                handleProgressBar(aBoolean);
             }
         });
 
@@ -80,7 +80,7 @@ public class PetActivity extends AppCompatActivity {
     }
 
     private void createPet() {
-        floatingActionButton.setOnClickListener(view -> startActivity(new Intent(this, InsertPetTypeActivity.class)));
+        floatingActionButton.setOnClickListener(view -> startActivityForResult(new Intent(this, InsertPetActivity.class), UPDATE_REQUEST));
     }
 
     private void setUpRecyclerView() {

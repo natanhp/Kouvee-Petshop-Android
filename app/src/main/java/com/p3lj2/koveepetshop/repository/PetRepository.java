@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.p3lj2.koveepetshop.endpoint.PetEndpoint;
 import com.p3lj2.koveepetshop.model.PetComplete;
+import com.p3lj2.koveepetshop.model.PetModel;
 import com.p3lj2.koveepetshop.model.PetSchema;
 import com.p3lj2.koveepetshop.util.RetrofitInstance;
 
@@ -45,6 +46,21 @@ public class PetRepository {
         });
 
         return petCompletes;
+    }
+
+    public void insert(String bearerToken, PetModel petModel) {
+        isLoading.setValue(true);
+        petEndpoint.insert("Bearer " + bearerToken, petModel).enqueue(new Callback<PetSchema>() {
+            @Override
+            public void onResponse(@NotNull Call<PetSchema> call, @NotNull Response<PetSchema> response) {
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<PetSchema> call, @NotNull Throwable t) {
+                isLoading.postValue(false);
+            }
+        });
     }
 
     public LiveData<Boolean> getIsLoading() {
