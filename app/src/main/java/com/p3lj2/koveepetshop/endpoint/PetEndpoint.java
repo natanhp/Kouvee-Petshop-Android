@@ -8,6 +8,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface PetEndpoint {
 
@@ -16,4 +17,7 @@ public interface PetEndpoint {
 
     @POST("pets/insert")
     Call<PetSchema> insert(@Header("Authorization") String bearerToken, @Body PetModel petModel);
+
+    @PUT("pets/update")
+    Call<PetSchema> update(@Header("Authorization") String bearerToken, @Body PetModel petModel);
 }
