@@ -9,6 +9,12 @@ import android.provider.MediaStore;
 
 import org.apache.commons.collections4.BidiMap;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class Util {
     public static String getUriPath(Uri uri, Context context) {
         String wholeID = DocumentsContract.getDocumentId(uri);
@@ -47,5 +53,22 @@ public class Util {
         return new AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message);
+    }
+
+    public static String dateFormater(String date) {
+        Locale locale = new Locale("in", "ID");
+        DateFormat inputDate = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat outputDate = new SimpleDateFormat("dd MMMM yyyy", locale);
+        String outputFormated = "";
+        try {
+            Date formatedInput = inputDate.parse(date);
+            if (formatedInput != null) {
+                outputFormated = outputDate.format(formatedInput);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return outputFormated;
     }
 }
