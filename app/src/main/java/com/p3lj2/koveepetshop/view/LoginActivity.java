@@ -55,7 +55,11 @@ public class LoginActivity extends AppCompatActivity {
 
         if (!username.isEmpty() && !password.isEmpty()) {
             employeeViewModel.login(username, password).observe(this, employeeModel -> {
-                startActivity(new Intent(LoginActivity.this, OwnerMenuActivity.class));
+                if (employeeModel.getRole().equalsIgnoreCase("owner")) {
+                    startActivity(new Intent(LoginActivity.this, OwnerMenuActivity.class));
+                } else if (employeeModel.getRole().equalsIgnoreCase("cs")) {
+                    startActivity(new Intent(LoginActivity.this, CSMenuActivity.class));
+                }
 
                 finish();
             });

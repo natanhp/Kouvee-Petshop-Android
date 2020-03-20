@@ -49,8 +49,10 @@ public class SplahScreenActivity extends AppCompatActivity {
 
                 finish();
             } else {
-                if (employeeDataModel.getRole().equals("Owner")) {
+                if (employeeDataModel.getRole().equalsIgnoreCase("Owner")) {
                     startActivity(new Intent(SplahScreenActivity.this, OwnerMenuActivity.class));
+                } else if (employeeDataModel.getRole().equalsIgnoreCase("cs")) {
+                    startActivity(new Intent(SplahScreenActivity.this, CSMenuActivity.class));
                 }
 
                 finish();
