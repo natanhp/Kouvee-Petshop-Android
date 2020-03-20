@@ -130,7 +130,7 @@ public class InsertPetActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btn_insert)
-    public void insertServiceDetail(View view) {
+    public void insertPet(View view) {
         PetModel petModel = new PetModel();
         petModel.setPetTypeId(petTypeMap.get(spinners.get(0).getSelectedItemPosition()));
         petModel.setPetSizeId(petSizeMap.get(spinners.get(1).getSelectedItemPosition()));
