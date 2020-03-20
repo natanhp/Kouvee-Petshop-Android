@@ -89,4 +89,5 @@
     <string name="insert_pet">Masukan Hewan</string>
     <string name="pet_name_cant_be_empty">Nama hewan tidak boleh kosong!</string>
     <string name="pet_inserted">Hewan berhasil dimasukan</string>
+    <string name="update_pet">Ubah Hewan</string>
 </resources>
