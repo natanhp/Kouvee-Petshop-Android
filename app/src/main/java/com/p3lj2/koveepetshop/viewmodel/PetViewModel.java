@@ -53,6 +53,10 @@ public class PetViewModel extends AndroidViewModel {
         petRepository.delete(bearerToken, petId, csId);
     }
 
+    public LiveData<List<PetComplete>> search(String bearerToken, String petName) {
+        return petRepository.search(bearerToken, petName);
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return petRepository.getIsLoading();
     }

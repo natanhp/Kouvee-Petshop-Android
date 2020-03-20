@@ -76,7 +76,7 @@ public class PetActivity extends AppCompatActivity {
 
         setUpRecyclerView();
         deleteOnSwipe();
-//        searchViewHandler();
+        searchViewHandler();
     }
 
     private void createPet() {
@@ -146,7 +146,7 @@ public class PetActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-//                petViewModel.search(employee.getToken(), query).observe(PetActivity.this, petCompletes -> petAdapter.setPetCompletes(petCompletes));
+                petViewModel.search(employee.getToken(), query).observe(PetActivity.this, petCompletes -> petAdapter.setPetCompletes(petCompletes));
                 return false;
             }
 
