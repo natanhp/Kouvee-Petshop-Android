@@ -81,4 +81,9 @@
     <string name="service_detail_deleted">Detail layanan berhasil dihapus</string>
     <string name="logout">Keluar</string>
     <string name="logout_confirmation">Apakah anda yakin untuk keluar?</string>
+    <string name="cs_menu">CS Menu</string>
+    <string name="pet">Hewan</string>
+    <string name="customer_name">Nama Customer</string>
+    <string name="pet_name">Nama Hewan</string>
+    <string name="birth_date">Tanggal Lahir</string>
 </resources>
