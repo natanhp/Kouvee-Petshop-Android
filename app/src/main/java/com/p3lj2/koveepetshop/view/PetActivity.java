@@ -127,7 +127,7 @@ public class PetActivity extends AppCompatActivity {
     }
 
     private EventClickListener itemUpdateListener = position -> {
-        Intent intent = new Intent(this, UpdatePetTypeActivity.class);
+        Intent intent = new Intent(this, UpdatePetActivity.class);
         intent.putExtra(EXTRA_PET, petAdapter.getPetCompletes().get(position));
         startActivityForResult(intent, UPDATE_REQUEST);
     };
