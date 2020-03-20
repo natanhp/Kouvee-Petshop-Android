@@ -21,16 +21,25 @@ public class PetModel implements Parcelable {
     private String dateBirth;
 
     @Expose
-    @SerializedName("Customers_id")
+    @SerializedName("customers_id")
     private int customerId;
 
     @Expose
-    @SerializedName("PetSizes_id")
+    @SerializedName("petsizes_id")
     private int petSizeId;
 
     @Expose
-    @SerializedName("PetTypes_id")
+    @SerializedName("pettypes_id")
     private int petTypeId;
+
+    @Expose
+    private int createdBy;
+
+    @Expose
+    private int updatedBy;
+
+    @Expose
+    private int deletedBy;
 
     public PetModel() {
     }
@@ -48,6 +57,9 @@ public class PetModel implements Parcelable {
         dest.writeInt(this.customerId);
         dest.writeInt(this.petSizeId);
         dest.writeInt(this.petTypeId);
+        dest.writeInt(this.createdBy);
+        dest.writeInt(this.updatedBy);
+        dest.writeInt(this.deletedBy);
     }
 
     protected PetModel(Parcel in) {
@@ -57,6 +69,9 @@ public class PetModel implements Parcelable {
         this.customerId = in.readInt();
         this.petSizeId = in.readInt();
         this.petTypeId = in.readInt();
+        this.createdBy = in.readInt();
+        this.updatedBy = in.readInt();
+        this.deletedBy = in.readInt();
     }
 
     public static final Parcelable.Creator<PetModel> CREATOR = new Parcelable.Creator<PetModel>() {
