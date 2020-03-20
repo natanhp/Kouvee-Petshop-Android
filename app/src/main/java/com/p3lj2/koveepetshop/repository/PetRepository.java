@@ -78,6 +78,21 @@ public class PetRepository {
         });
     }
 
+    public void delete(String bearerToken, int petId, int csId) {
+        isLoading.setValue(true);
+        petEndpoint.delete("Bearer " + bearerToken, petId, csId).enqueue(new Callback<PetSchema>() {
+            @Override
+            public void onResponse(@NotNull Call<PetSchema> call, @NotNull Response<PetSchema> response) {
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<PetSchema> call, @NotNull Throwable t) {
+                isLoading.postValue(false);
+            }
+        });
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return  isLoading;
     }

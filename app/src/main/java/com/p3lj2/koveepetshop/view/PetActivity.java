@@ -75,7 +75,7 @@ public class PetActivity extends AppCompatActivity {
         });
 
         setUpRecyclerView();
-//        deleteOnSwipe();
+        deleteOnSwipe();
 //        searchViewHandler();
     }
 
@@ -109,15 +109,15 @@ public class PetActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                Util.confirmationDialog(getString(R.string.pet_type_deletion), getString(R.string.pet_type_delete_confirmation), PetActivity.this)
+                Util.confirmationDialog(getString(R.string.pet_deletion), getString(R.string.delete_pet_confirmation), PetActivity.this)
                         .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
                             getEmployee();
-//                            petViewModel.delete(employee.getToken(),
-//                                    petAdapter.getPetCompletes().get(viewHolder.getAdapterPosition()).getPet().getId(),
-//                                    employee.getId());
+                            petViewModel.delete(employee.getToken(),
+                                    petAdapter.getPetCompletes().get(viewHolder.getAdapterPosition()).getPet().getId(),
+                                    employee.getId());
 
                             petAdapter.delete(viewHolder.getAdapterPosition());
-                            Toast.makeText(PetActivity.this, R.string.pet_type_deleted, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PetActivity.this, R.string.pet_deleted, Toast.LENGTH_SHORT).show();
                         })
                         .setNegativeButton(getString(R.string.no), (dialogInterface, i) -> petAdapter.notifyItemChanged(viewHolder.getAdapterPosition()))
                         .show();
