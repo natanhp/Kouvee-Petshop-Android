@@ -21,15 +21,15 @@ public class PetModel implements Parcelable {
     private String dateBirth;
 
     @Expose
-    @SerializedName("customers_id")
+    @SerializedName("Customers_id")
     private int customerId;
 
     @Expose
-    @SerializedName("petsizes_id")
+    @SerializedName("PetSizes_id")
     private int petSizeId;
 
     @Expose
-    @SerializedName("pettypes_id")
+    @SerializedName("PetTypes_id")
     private int petTypeId;
 
     @Expose
