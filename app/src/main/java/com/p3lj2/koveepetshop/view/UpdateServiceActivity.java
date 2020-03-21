@@ -77,11 +77,11 @@ public class UpdateServiceActivity extends AppCompatActivity {
         final String[] token = {""};
 
         serviceViewModel.getEmployee().observe(this, employeeDataModel -> {
-            serviceModel.setCreatedBy(employeeDataModel.getId());
+            serviceModel.setUpdatedBy(employeeDataModel.getId());
             token[0] = employeeDataModel.getToken();
         });
 
-        serviceViewModel.insert(token[0], serviceModel);
+        serviceViewModel.update(token[0], serviceModel);
 
         Toast.makeText(this, R.string.service_updated, Toast.LENGTH_SHORT).show();
         setResult(Activity.RESULT_OK, new Intent());
