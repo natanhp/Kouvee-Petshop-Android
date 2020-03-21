@@ -25,4 +25,7 @@ public interface CustomerEndpoint {
 
     @DELETE("customers/delete/{id}/{csId}")
     Call<CustomerSchema> delete(@Header("Authorization") String bearerToken, @Path("id") int customerId, @Path("csId") int csId);
+
+    @GET("customers/getbyname/{name}")
+    Call<CustomerSchema> search(@Header("Authorization") String bearerToken, @Path("name") String customerName);
 }
