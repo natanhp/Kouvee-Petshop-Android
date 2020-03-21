@@ -13,8 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.UpdatePetActivity"></activity>
-        <activity android:name=".view.InsertPetActivity"></activity>
+        <activity android:name=".view.CustomersActivity"></activity>
+        <activity android:name=".view.UpdatePetActivity" />
+        <activity android:name=".view.InsertPetActivity" />
         <activity android:name=".view.PetActivity" />
         <activity android:name=".view.CSMenuActivity" />
         <activity android:name=".view.UpdateServiceDetailActivity" />
