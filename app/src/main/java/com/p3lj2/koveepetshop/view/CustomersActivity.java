@@ -60,7 +60,7 @@ public class CustomersActivity extends AppCompatActivity {
 
         customerViewModel = new ViewModelProvider.AndroidViewModelFactory(Objects.requireNonNull(this).getApplication()).create(CustomerViewModel.class);
 
-//        createCustomer();
+        createCustomer();
 
         setUpRecyclerView();
 //        deleteOnSwipe();
@@ -90,7 +90,7 @@ public class CustomersActivity extends AppCompatActivity {
     }
 
     private void createCustomer() {
-        floatingActionButton.setOnClickListener(view -> startActivity(new Intent(this, InsertPetSizeActivity.class)));
+        floatingActionButton.setOnClickListener(view -> startActivityForResult(new Intent(this, InsertCustomerActivity.class), UPDATE_REQUEST));
     }
 
     private void setUpRecyclerView() {
