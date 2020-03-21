@@ -22,6 +22,18 @@ public class CustomerModel implements Parcelable {
     @Expose
     private String phoneNumber;
 
+    @Expose
+    private String address;
+
+    @Expose
+    private int createdBy;
+
+    @Expose
+    private int updatedBy;
+
+    @Expose
+    private int deletedBy;
+
     public CustomerModel() {
     }
 
@@ -36,6 +48,10 @@ public class CustomerModel implements Parcelable {
         dest.writeString(this.name);
         dest.writeString(this.dateBirth);
         dest.writeString(this.phoneNumber);
+        dest.writeString(this.address);
+        dest.writeInt(this.createdBy);
+        dest.writeInt(this.updatedBy);
+        dest.writeInt(this.deletedBy);
     }
 
     protected CustomerModel(Parcel in) {
@@ -43,6 +59,10 @@ public class CustomerModel implements Parcelable {
         this.name = in.readString();
         this.dateBirth = in.readString();
         this.phoneNumber = in.readString();
+        this.address = in.readString();
+        this.createdBy = in.readInt();
+        this.updatedBy = in.readInt();
+        this.deletedBy = in.readInt();
     }
 
     public static final Parcelable.Creator<CustomerModel> CREATOR = new Parcelable.Creator<CustomerModel>() {
