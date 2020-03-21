@@ -64,7 +64,7 @@ public class CustomersActivity extends AppCompatActivity {
 
         setUpRecyclerView();
         deleteOnSwipe();
-//        searchViewHandler();
+        searchViewHandler();
     }
 
     private void initProgressBar() {
@@ -156,7 +156,7 @@ public class CustomersActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-//                customerViewModel.search(employee.getToken(), query).observe(this, customerModels -> customerAdapter.setCustomerModels(customerModels));
+                customerViewModel.search(employee.getToken(), query).observe(CustomersActivity.this, customerModels -> customerAdapter.setCustomerModels(customerModels));
                 return false;
             }
 

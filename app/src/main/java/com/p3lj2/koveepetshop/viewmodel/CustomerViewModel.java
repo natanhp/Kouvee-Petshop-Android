@@ -40,6 +40,10 @@ public class CustomerViewModel extends AndroidViewModel {
         customerRepository.delete(bearerToken, customerId, csId);
     }
 
+    public LiveData<List<CustomerModel>> search(String bearerToken, String customerName) {
+        return customerRepository.search(bearerToken, customerName);
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return customerRepository.getIsLoading();
     }

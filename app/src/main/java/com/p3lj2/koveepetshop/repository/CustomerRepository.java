@@ -92,6 +92,27 @@ public class CustomerRepository {
         });
     }
 
+    public LiveData<List<CustomerModel>> search(String bearerToken, String customerName) {
+        isLoading.setValue(true);
+        customerEndpoint.search("Bearer " + bearerToken, customerName).enqueue(new Callback<CustomerSchema>() {
+            @Override
+            public void onResponse(@NotNull Call<CustomerSchema> call, @NotNull Response<CustomerSchema> response) {
+                if (response.body() != null && response.code() == 200) {
+                    customerModels.postValue(response.body().getCustomerModels());
+                }
+
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<CustomerSchema> call, @NotNull Throwable t) {
+                isLoading.postValue(false);
+            }
+        });
+
+        return customerModels;
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return isLoading;
     }
