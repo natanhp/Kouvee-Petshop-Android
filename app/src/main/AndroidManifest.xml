@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.InsertCustomerActivity"></activity>
+        <activity android:name=".view.UpdateCustomerActivity"></activity>
+        <activity android:name=".view.InsertCustomerActivity" />
         <activity android:name=".view.CustomersActivity" />
         <activity android:name=".view.UpdatePetActivity" />
         <activity android:name=".view.InsertPetActivity" />
