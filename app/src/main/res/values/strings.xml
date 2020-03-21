@@ -96,4 +96,6 @@
     <string name="customer">Customer</string>
     <string name="insert_customer">Masukan Customer</string>
     <string name="customer_inserted">Customer berhasil dimasukan</string>
+    <string name="update_customer">Ubah Customer</string>
+    <string name="customer_updated">Customer berhasil diubah</string>
 </resources>
