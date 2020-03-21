@@ -94,4 +94,6 @@
     <string name="delete_pet_confirmation">Apakah anda yakin akan menghapus hewan?</string>
     <string name="pet_deleted">Hewan berhasil dihapus</string>
     <string name="customer">Customer</string>
+    <string name="insert_customer">Masukan Customer</string>
+    <string name="customer_inserted">Customer berhasil dimasukan</string>
 </resources>
