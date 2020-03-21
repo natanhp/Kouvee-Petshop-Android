@@ -137,7 +137,7 @@ public class CustomersActivity extends AppCompatActivity {
     }
 
     private EventClickListener itemUpdateListener = position -> {
-        Intent intent = new Intent(this, UpdatePetSizeActivity.class);
+        Intent intent = new Intent(this, UpdateCustomerActivity.class);
         intent.putExtra(EXTRA_CUSTOMER, customerAdapter.getCustomerModels().get(position));
         startActivityForResult(intent, UPDATE_REQUEST);
     };

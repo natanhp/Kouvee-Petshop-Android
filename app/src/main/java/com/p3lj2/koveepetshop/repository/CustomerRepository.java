@@ -62,6 +62,21 @@ public class CustomerRepository {
         });
     }
 
+    public void update(String bearerToken, CustomerModel customerModel) {
+        isLoading.setValue(true);
+        customerEndpoint.update("Bearer " + bearerToken, customerModel).enqueue(new Callback<CustomerSchema>() {
+            @Override
+            public void onResponse(@NotNull Call<CustomerSchema> call, @NotNull Response<CustomerSchema> response) {
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<CustomerSchema> call, @NotNull Throwable t) {
+                isLoading.postValue(false);
+            }
+        });
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return isLoading;
     }

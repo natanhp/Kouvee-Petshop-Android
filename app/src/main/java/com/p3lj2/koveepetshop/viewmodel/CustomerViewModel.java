@@ -32,6 +32,10 @@ public class CustomerViewModel extends AndroidViewModel {
         customerRepository.insert(bearerToken, customerModel);
     }
 
+    public void update(String bearerToken, CustomerModel customerModel) {
+        customerRepository.update(bearerToken, customerModel);
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return customerRepository.getIsLoading();
     }
