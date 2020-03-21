@@ -36,6 +36,10 @@ public class CustomerViewModel extends AndroidViewModel {
         customerRepository.update(bearerToken, customerModel);
     }
 
+    public void delete(String bearerToken, int customerId, int csId) {
+        customerRepository.delete(bearerToken, customerId, csId);
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return customerRepository.getIsLoading();
     }

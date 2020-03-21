@@ -63,7 +63,7 @@ public class CustomersActivity extends AppCompatActivity {
         createCustomer();
 
         setUpRecyclerView();
-//        deleteOnSwipe();
+        deleteOnSwipe();
 //        searchViewHandler();
     }
 
@@ -119,15 +119,15 @@ public class CustomersActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                Util.confirmationDialog(getString(R.string.pet_size_deletion), getString(R.string.pet_size_delete_confirmation), CustomersActivity.this)
+                Util.confirmationDialog(getString(R.string.customer_deletion), getString(R.string.customer_delete_confirmation), CustomersActivity.this)
                         .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
                             getEmployee();
-//                            customerViewModel.delete(employee.getToken(),
-//                                    customerAdapter.getCustomerModels().get(viewHolder.getAdapterPosition()).getId(),
-//                                    employee.getId());
+                            customerViewModel.delete(employee.getToken(),
+                                    customerAdapter.getCustomerModels().get(viewHolder.getAdapterPosition()).getId(),
+                                    employee.getId());
 
                             customerAdapter.delete(viewHolder.getAdapterPosition());
-                            Toast.makeText(CustomersActivity.this, R.string.pet_type_deleted, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CustomersActivity.this, R.string.customer_deleted, Toast.LENGTH_SHORT).show();
                         })
                         .setNegativeButton(getString(R.string.no), (dialogInterface, i) -> customerAdapter.notifyItemChanged(viewHolder.getAdapterPosition()))
                         .show();

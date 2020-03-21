@@ -77,6 +77,21 @@ public class CustomerRepository {
         });
     }
 
+    public void delete(String bearerToken, int customerId, int csId) {
+        isLoading.setValue(true);
+        customerEndpoint.delete("Bearer " + bearerToken, customerId, csId).enqueue(new Callback<CustomerSchema>() {
+            @Override
+            public void onResponse(@NotNull Call<CustomerSchema> call, @NotNull Response<CustomerSchema> response) {
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<CustomerSchema> call, @NotNull Throwable t) {
+                isLoading.postValue(false);
+            }
+        });
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return isLoading;
     }
