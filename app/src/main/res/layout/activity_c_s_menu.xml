@@ -83,7 +83,7 @@
             android:layout_marginEnd="8dp"
             android:background="@drawable/pets"
             android:contentDescription="@string/product"
-            app:layout_constraintEnd_toStartOf="@+id/btn_pet_type"
+            app:layout_constraintEnd_toStartOf="@+id/btn_customer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -105,10 +105,10 @@
             android:layout_marginEnd="8dp"
             android:contentDescription="@string/service"
             android:src="@drawable/services"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_pet_type"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_customer"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btn_pet_type"
-            app:layout_constraintTop_toTopOf="@+id/btn_pet_type" />
+            app:layout_constraintStart_toEndOf="@+id/btn_customer"
+            app:layout_constraintTop_toTopOf="@+id/btn_customer" />
 
         <TextView
             android:id="@+id/textView7"
@@ -121,7 +121,7 @@
             app:layout_constraintTop_toBottomOf="@+id/btn_service" />
 
         <ImageView
-            android:id="@+id/btn_pet_type"
+            android:id="@+id/btn_customer"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="24dp"
@@ -137,10 +137,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/pet_type"
-            app:layout_constraintEnd_toEndOf="@+id/btn_pet_type"
-            app:layout_constraintStart_toStartOf="@+id/btn_pet_type"
-            app:layout_constraintTop_toBottomOf="@+id/btn_pet_type" />
+            android:text="@string/customer"
+            app:layout_constraintEnd_toEndOf="@+id/btn_customer"
+            app:layout_constraintStart_toStartOf="@+id/btn_customer"
+            app:layout_constraintTop_toBottomOf="@+id/btn_customer" />
 
         <ImageView
             android:id="@+id/btn_pet_size"
@@ -169,8 +169,8 @@
             android:layout_height="100dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/suppliers"
-            app:layout_constraintEnd_toEndOf="@+id/btn_pet_type"
-            app:layout_constraintStart_toStartOf="@+id/btn_pet_type"
+            app:layout_constraintEnd_toEndOf="@+id/btn_customer"
+            app:layout_constraintStart_toStartOf="@+id/btn_customer"
             app:layout_constraintTop_toBottomOf="@+id/textView4"
             android:contentDescription="@string/supplier" />
 

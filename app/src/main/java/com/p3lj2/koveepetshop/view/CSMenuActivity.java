@@ -25,4 +25,9 @@ public class CSMenuActivity extends AppCompatActivity {
     public void onClickPet(View view) {
         startActivity(new Intent(this, PetActivity.class));
     }
+
+    @OnClick(R.id.btn_customer)
+    public void onClickCustomer(View view) {
+        startActivity(new Intent(this, CustomersActivity.class));
+    }
 }
