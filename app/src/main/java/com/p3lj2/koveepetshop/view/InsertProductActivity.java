@@ -104,16 +104,17 @@ public class InsertProductActivity extends AppCompatActivity {
 
         String productName = productForm.get(0).getText().toString().trim();
         String strProductQuantity = productForm.get(1).getText().toString().trim();
-        int productQuantity = Integer.parseInt(strProductQuantity);
         String strProductPrice = productForm.get(2).getText().toString().trim();
-        double productPrice = Double.parseDouble(strProductPrice);
         String strMinimumQuantity = productForm.get(3).getText().toString().trim();
-        int minimumQuantity = Integer.parseInt(strMinimumQuantity);
         String productMeasurement = productForm.get(4).getText().toString().trim();
         final String[] bearerToken = {""};
 
         if (!productName.isEmpty() && !productMeasurement.isEmpty() && !strProductQuantity.isEmpty() && !strProductPrice.isEmpty() &&
                 !strMinimumQuantity.isEmpty()) {
+            int productQuantity = Integer.parseInt(strProductQuantity);
+            double productPrice = Double.parseDouble(strProductPrice);
+            int minimumQuantity = Integer.parseInt(strMinimumQuantity);
+
             productModel.setProductName(productName);
             productModel.setProductQuantity(productQuantity);
             productModel.setProductPrice(productPrice);
@@ -131,11 +132,12 @@ public class InsertProductActivity extends AppCompatActivity {
             productViewModel.insert(bearerToken[0], productResponseModel);
 
             Toast.makeText(this, R.string.product_created, Toast.LENGTH_SHORT).show();
+            setResult(Activity.RESULT_OK);
+            finish();
         } else {
             Toast.makeText(this, R.string.all_column_must_be_filled, Toast.LENGTH_SHORT).show();
         }
 
-        finish();
     }
 
     private void checkReadExternalFilePermission() {
