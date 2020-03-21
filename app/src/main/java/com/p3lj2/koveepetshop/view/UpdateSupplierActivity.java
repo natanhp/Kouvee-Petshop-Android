@@ -88,11 +88,11 @@ public class UpdateSupplierActivity extends AppCompatActivity {
         final String[] token = {""};
 
         supplierViewModel.getEmployee().observe(this, employeeDataModel -> {
-            supplierModel.setCreatedBy(employeeDataModel.getId());
+            supplierModel.setUpdatedBy(employeeDataModel.getId());
             token[0] = employeeDataModel.getToken();
         });
 
-        supplierViewModel.insert(token[0], supplierModel);
+        supplierViewModel.update(token[0], supplierModel);
 
         Toast.makeText(this, R.string.supplier_updated, Toast.LENGTH_SHORT).show();
         setResult(Activity.RESULT_OK, new Intent());
