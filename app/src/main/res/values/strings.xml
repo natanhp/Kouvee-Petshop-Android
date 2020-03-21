@@ -98,4 +98,7 @@
     <string name="customer_inserted">Customer berhasil dimasukan</string>
     <string name="update_customer">Ubah Customer</string>
     <string name="customer_updated">Customer berhasil diubah</string>
+    <string name="customer_deletion">Penghapusan Customer</string>
+    <string name="customer_delete_confirmation">Apakah anda yakin akan menghapus customer?</string>
+    <string name="customer_deleted">Customer berhasil dihapus</string>
 </resources>
