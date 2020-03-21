@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -63,6 +64,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 finish();
             });
+        } else {
+            Toast.makeText(this, R.string.all_column_must_be_filled, Toast.LENGTH_SHORT).show();
         }
     }
 }
