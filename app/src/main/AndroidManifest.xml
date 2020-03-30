@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.p3lj2.koveepetshop">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -10,15 +11,42 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".view.LoginActivity">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".view.UpdateCustomerActivity"></activity>
+        <activity android:name=".view.InsertCustomerActivity" />
+        <activity android:name=".view.CustomersActivity" />
+        <activity android:name=".view.UpdatePetActivity" />
+        <activity android:name=".view.InsertPetActivity" />
+        <activity android:name=".view.PetActivity" />
+        <activity android:name=".view.CSMenuActivity" />
+        <activity android:name=".view.UpdateServiceDetailActivity" />
+        <activity android:name=".view.InsertServiceDetailActivity" />
+        <activity android:name=".view.ServiceDetailActivity" />
+        <activity android:name=".view.UpdateServiceActivity" />
+        <activity android:name=".view.InsertServiceActivity" />
+        <activity android:name=".view.ServiceActivity" />
+        <activity android:name=".view.UpdateSupplierActivity" />
+        <activity android:name=".view.InsertSupplierActivity" />
+        <activity android:name=".view.SupplierActivity" />
+        <activity android:name=".view.UpdatePetSizeActivity" />
+        <activity android:name=".view.InsertPetSizeActivity" />
+        <activity android:name=".view.PetSizeActivity" />
+        <activity android:name=".view.UpdatePetTypeActivity" />
+        <activity android:name=".view.InsertPetTypeActivity" />
+        <activity android:name=".view.PetTypeActivity" />
+        <activity android:name=".view.ProductActivity" />
+        <activity android:name=".view.OwnerMenuActivity" />
+        <activity android:name=".view.InsertProductActivity" />
+        <activity android:name=".view.UpdateProductActivity" />
+        <activity android:name=".view.SplahScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.LoginActivity" />
     </application>
 
 </manifest>

@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.p3lj2.koveepetshop.dao.EmployeeDAO;
 import com.p3lj2.koveepetshop.database.KouveeDatabase;
@@ -14,34 +15,33 @@ import com.p3lj2.koveepetshop.model.EmployeeLoginSchema;
 import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.util.RetrofitInstance;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Objects;
 
-import lombok.Getter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class EmployeeRepository {
-    private RetrofitInstance retrofitInstance;
     private EmployeeEndpoint employeeEndpoint;
-    private Application application;
     private EmployeeDAO employeeDAO;
-
-    @Getter
-    private LiveData<EmployeeModel> employeeModelLiveData;
+    private static MutableLiveData<EmployeeDataModel> employeeDataModelLiveData = new MutableLiveData<>();
+    private static MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+    private static MutableLiveData<EmployeeModel> employeeModel = new MutableLiveData<>();
 
     public EmployeeRepository(Application application) {
-        this.application = application;
-        retrofitInstance = RetrofitInstance.getRetrofitInstance();
+        RetrofitInstance retrofitInstance = RetrofitInstance.getRetrofitInstance();
         employeeEndpoint = retrofitInstance.getRetrofit().create(EmployeeEndpoint.class);
         KouveeDatabase kouveeDatabase = KouveeDatabase.getInstance(application);
         employeeDAO = kouveeDatabase.employeeDAO();
     }
 
-    public void login(String username, String password) {
+    public LiveData<EmployeeModel> login(String username, String password) {
+        isLoading.setValue(true);
         employeeEndpoint.login(username, password).enqueue(new Callback<EmployeeLoginSchema>() {
             @Override
-            public void onResponse(Call<EmployeeLoginSchema> call, Response<EmployeeLoginSchema> response) {
+            public void onResponse(@NotNull Call<EmployeeLoginSchema> call, @NotNull Response<EmployeeLoginSchema> response) {
                 if (response.body() != null && response.code() == 200) {
                     EmployeeModel employeeModel = response.body().getEmployee();
 
@@ -57,18 +57,19 @@ public class EmployeeRepository {
                     employeeDataModel.setToken(response.body().getToken());
 
                     insert(employeeDataModel);
-
-                    //                    TODO=Move to the next activity
+                    EmployeeRepository.employeeModel.postValue(employeeModel);
                 } else {
                     Log.d("Login", "Login failed");
                 }
             }
 
             @Override
-            public void onFailure(Call<EmployeeLoginSchema> call, Throwable t) {
+            public void onFailure(@NotNull Call<EmployeeLoginSchema> call, @NotNull Throwable t) {
                 Log.e("Login Error", Objects.requireNonNull(t.getMessage()));
             }
         });
+
+        return employeeModel;
     }
 
     private static class InsertEmployeeAsyncTask extends AsyncTask<EmployeeDataModel, Void, Void> {
@@ -84,9 +85,72 @@ public class EmployeeRepository {
 
             return null;
         }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            isLoading.setValue(false);
+        }
+    }
+
+    private static class GetEmployeeAsyncTask extends AsyncTask<Void, Void, EmployeeDataModel> {
+        private EmployeeDAO employeeDAO;
+
+        private GetEmployeeAsyncTask(EmployeeDAO employeeDAO) {
+            this.employeeDAO = employeeDAO;
+        }
+
+        @Override
+        protected EmployeeDataModel doInBackground(Void... voids) {
+
+            return employeeDAO.getEmployee();
+        }
+
+        @Override
+        protected void onPostExecute(EmployeeDataModel employeeDataModel) {
+            super.onPostExecute(employeeDataModel);
+            employeeDataModelLiveData.postValue(employeeDataModel);
+            isLoading.setValue(false);
+        }
+    }
+
+    private static class DeleteEmployeeAsynckTask extends AsyncTask<EmployeeDataModel, Void, Void> {
+        private EmployeeDAO employeeDAO;
+
+        private DeleteEmployeeAsynckTask(EmployeeDAO employeeDAO) {
+            this.employeeDAO = employeeDAO;
+        }
+
+        @Override
+        protected Void doInBackground(EmployeeDataModel... employeeDataModels) {
+            employeeDAO.delete(employeeDataModels[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            isLoading.postValue(false);
+        }
     }
 
     private void insert(EmployeeDataModel employeeDataModel) {
         new InsertEmployeeAsyncTask(employeeDAO).execute(employeeDataModel);
+    }
+
+    public LiveData<EmployeeDataModel> getEmployee() {
+        isLoading.setValue(true);
+        new GetEmployeeAsyncTask(employeeDAO).execute();
+        return employeeDataModelLiveData;
+    }
+
+    public void delete(EmployeeDataModel employeeDataModel) {
+        isLoading.setValue(true);
+        new DeleteEmployeeAsynckTask(employeeDAO).execute(employeeDataModel);
+    }
+
+    public LiveData<Boolean> getIsLoading() {
+        return isLoading;
     }
 }
