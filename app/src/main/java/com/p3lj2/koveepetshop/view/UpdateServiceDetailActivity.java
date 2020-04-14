@@ -93,7 +93,7 @@ public class UpdateServiceDetailActivity extends AppCompatActivity {
 
             serviceDetailViewModel.getAllPetTypes(employee.getToken()).observe(UpdateServiceDetailActivity.this, petTypeModels -> {
                 progressBar.setVisibility(View.VISIBLE);
-                String [] petTypes = new String[petTypeModels.size()];
+                String[] petTypes = new String[petTypeModels.size()];
 
                 for (int i = 0; i < petTypeModels.size(); i++) {
                     petTypeMap.put(i, petTypeModels.get(i).getId());
@@ -113,7 +113,7 @@ public class UpdateServiceDetailActivity extends AppCompatActivity {
             serviceDetailViewModel.getAllPetSizes(employee.getToken()).observe(UpdateServiceDetailActivity.this, petSizeModels -> {
                 progressBar.setVisibility(View.VISIBLE);
 
-                String [] petSizes = new String[petSizeModels.size()];
+                String[] petSizes = new String[petSizeModels.size()];
 
                 for (int i = 0; i < petSizeModels.size(); i++) {
                     petSizeMap.put(i, petSizeModels.get(i).getId());
@@ -139,6 +139,9 @@ public class UpdateServiceDetailActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_update)
     public void insertServiceDetail(View view) {
+        if (serviceNameMap == null || petTypeMap == null || petSizeMap == null) {
+            return;
+        }
         serviceDetailModel.setServiceId(serviceNameMap.get(spinners.get(0).getSelectedItemPosition()));
         serviceDetailModel.setPetTypeId(petTypeMap.get(spinners.get(1).getSelectedItemPosition()));
         serviceDetailModel.setPetSizeId(petSizeMap.get(spinners.get(2).getSelectedItemPosition()));
@@ -152,9 +155,9 @@ public class UpdateServiceDetailActivity extends AppCompatActivity {
 
         serviceDetailModel.setPrice(Double.parseDouble(servicePrice));
 
-        serviceDetailModel.setCreatedBy(employee.getId());
+        serviceDetailModel.setUpdatedBy(employee.getId());
 
-        serviceDetailViewModel.insert(employee.getToken(), serviceDetailModel);
+        serviceDetailViewModel.update(employee.getToken(), serviceDetailModel);
 
         Toast.makeText(this, R.string.service_detail_updated, Toast.LENGTH_SHORT).show();
         setResult(Activity.RESULT_OK, new Intent());

@@ -84,7 +84,7 @@ public class ServiceDetailActivity extends AppCompatActivity {
     }
 
     private void createServiceDetail() {
-        floatingActionButton.setOnClickListener(view -> startActivity(new Intent(this, InsertServiceDetailActivity.class)));
+        floatingActionButton.setOnClickListener(view -> startActivityForResult(new Intent(this, InsertServiceDetailActivity.class), UPDATE_REQUEST));
     }
 
     private void setUpRecyclerView() {
