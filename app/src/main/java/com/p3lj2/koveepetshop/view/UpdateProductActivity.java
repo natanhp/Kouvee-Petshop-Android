@@ -22,7 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.model.ProductModel;
 import com.p3lj2.koveepetshop.model.ProductResponseModel;
-import com.p3lj2.koveepetshop.util.Util;
+import com.p3lj2.koveepetshop.util.FilePath;
 import com.p3lj2.koveepetshop.viewmodel.ProductViewModel;
 
 import java.util.List;
@@ -85,7 +85,7 @@ public class UpdateProductActivity extends AppCompatActivity {
             if (data != null) {
                 image = data.getData();
             }
-            String imagePath = Util.getUriPath(image, this);
+            String imagePath = FilePath.getPath(this, image);
             tvImagePath.setText(imagePath);
             productResponseModel.setImageUrl(imagePath);
         }
@@ -124,6 +124,7 @@ public class UpdateProductActivity extends AppCompatActivity {
             productModel.setMinimumQty(minimumQuantity);
             productModel.setMeassurement(productMeasurement);
             productModel.setId(tmpProductResponse.getProductModel().getId());
+            productResponseModel.setProductModel(productModel);
 
             productViewModel.getEmployee().observe(this, employeeDataModel -> {
                 if (employeeDataModel != null) {
@@ -132,8 +133,11 @@ public class UpdateProductActivity extends AppCompatActivity {
                 }
             });
 
-            productResponseModel.setProductModel(productModel);
-            productViewModel.update(bearerToken[0], productResponseModel);
+            do {
+                if (!bearerToken[0].isEmpty()) {
+                    productViewModel.update(bearerToken[0], productResponseModel);
+                }
+            } while (bearerToken[0].isEmpty());
 
             Toast.makeText(this, R.string.product_updated, Toast.LENGTH_SHORT).show();
         } else {
