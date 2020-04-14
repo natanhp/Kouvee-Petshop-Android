@@ -22,7 +22,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.model.ProductModel;
 import com.p3lj2.koveepetshop.model.ProductResponseModel;
-import com.p3lj2.koveepetshop.util.Util;
+import com.p3lj2.koveepetshop.util.FilePath;
 import com.p3lj2.koveepetshop.viewmodel.ProductViewModel;
 
 import java.util.List;
@@ -81,7 +81,8 @@ public class InsertProductActivity extends AppCompatActivity {
             if (data != null) {
                 image = data.getData();
             }
-            String imagePath = Util.getUriPath(image, this);
+
+            String imagePath = FilePath.getPath(this, image);
             tvImagePath.setText(imagePath);
             productResponseModel.setImageUrl(imagePath);
         }
@@ -120,6 +121,7 @@ public class InsertProductActivity extends AppCompatActivity {
             productModel.setProductPrice(productPrice);
             productModel.setMinimumQty(minimumQuantity);
             productModel.setMeassurement(productMeasurement);
+            productResponseModel.setProductModel(productModel);
 
             productViewModel.getEmployee().observe(this, employeeDataModel -> {
                 if (employeeDataModel != null) {
@@ -128,8 +130,11 @@ public class InsertProductActivity extends AppCompatActivity {
                 }
             });
 
-            productResponseModel.setProductModel(productModel);
-            productViewModel.insert(bearerToken[0], productResponseModel);
+            do {
+                if (!bearerToken[0].isEmpty()) {
+                    productViewModel.insert(bearerToken[0], productResponseModel);
+                }
+            } while (bearerToken[0].isEmpty());
 
             Toast.makeText(this, R.string.product_created, Toast.LENGTH_SHORT).show();
             setResult(Activity.RESULT_OK);
