@@ -75,7 +75,7 @@ public class InsertServiceDetailActivity extends AppCompatActivity {
             });
 
             serviceDetailViewModel.getAllPetTypes(employee.getToken()).observe(InsertServiceDetailActivity.this, petTypeModels -> {
-                String [] petTypes = new String[petTypeModels.size()];
+                String[] petTypes = new String[petTypeModels.size()];
 
                 for (int i = 0; i < petTypeModels.size(); i++) {
                     petTypeMap.put(i, petTypeModels.get(i).getId());
@@ -87,7 +87,7 @@ public class InsertServiceDetailActivity extends AppCompatActivity {
             });
 
             serviceDetailViewModel.getAllPetSizes(employee.getToken()).observe(InsertServiceDetailActivity.this, petSizeModels -> {
-                String [] petSizes = new String[petSizeModels.size()];
+                String[] petSizes = new String[petSizeModels.size()];
 
                 for (int i = 0; i < petSizeModels.size(); i++) {
                     petSizeMap.put(i, petSizeModels.get(i).getId());
@@ -103,6 +103,10 @@ public class InsertServiceDetailActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_insert)
     public void insertServiceDetail(View view) {
+        if (serviceNameMap == null || petTypeMap == null || petSizeMap == null) {
+            return;
+        }
+
         ServiceDetailModel serviceDetailModel = new ServiceDetailModel();
         serviceDetailModel.setServiceId(serviceNameMap.get(spinners.get(0).getSelectedItemPosition()));
         serviceDetailModel.setPetTypeId(petTypeMap.get(spinners.get(1).getSelectedItemPosition()));
@@ -122,6 +126,7 @@ public class InsertServiceDetailActivity extends AppCompatActivity {
         serviceDetailViewModel.insert(employee.getToken(), serviceDetailModel);
 
         Toast.makeText(this, R.string.service_detail_created, Toast.LENGTH_SHORT).show();
+        setResult(RESULT_OK);
         finish();
     }
 
