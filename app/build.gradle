@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -77,6 +78,9 @@ dependencies {
 
 //    Apache common collection
     implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.0'
+
+//    Firebase
+    implementation 'com.google.firebase:firebase-messaging:20.1.5'
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'

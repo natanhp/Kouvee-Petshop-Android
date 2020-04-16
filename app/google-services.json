@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "6801312767",
+    "firebase_url": "https://kovee-pet-shop.firebaseio.com",
+    "project_id": "kovee-pet-shop",
+    "storage_bucket": "kovee-pet-shop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6801312767:android:da1e407a6a158087e135ca",
+        "android_client_info": {
+          "package_name": "com.p3lj2.koveepetshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "6801312767-shv9k8i2k5klnikvnhiqaprjq8c3jstn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.p3lj2.koveepetshop",
+            "certificate_hash": "b27126541e995f755564a9fbac16c26ae9dcbb83"
+          }
+        },
+        {
+          "client_id": "6801312767-8etk8fdv0eb59irn0rj2emklkdbparjb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSxElgVV64vOeHexn1G01Y1LrUDu2ODF0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "6801312767-8etk8fdv0eb59irn0rj2emklkdbparjb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
