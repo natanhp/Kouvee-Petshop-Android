@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.p3lj2.koveepetshop.model.EmployeeDataModel;
+import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.model.PetTypeModel;
 import com.p3lj2.koveepetshop.repository.EmployeeRepository;
 import com.p3lj2.koveepetshop.repository.PetTypeRepository;
@@ -31,7 +31,7 @@ public class PetTypeViewModel extends AndroidViewModel {
     }
 
     public void update(String bearerToken, PetTypeModel petTypeModel) {
-        petTypeRepository.update(bearerToken ,petTypeModel);
+        petTypeRepository.update(bearerToken, petTypeModel);
     }
 
     public void delete(String bearerToken, int petTypeId, int ownerId) {
@@ -42,7 +42,7 @@ public class PetTypeViewModel extends AndroidViewModel {
         return petTypeRepository.search(bearerToken, type);
     }
 
-    public LiveData<EmployeeDataModel> getEmployee() {
+    public LiveData<EmployeeModel> getEmployee() {
         return employeeRepository.getEmployee();
     }
 

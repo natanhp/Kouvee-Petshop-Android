@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.adapter.ServiceAdapter;
-import com.p3lj2.koveepetshop.model.EmployeeDataModel;
+import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.util.EventClickListener;
 import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.viewmodel.ServiceViewModel;
@@ -45,7 +45,7 @@ public class ServiceActivity extends AppCompatActivity {
 
     private ServiceViewModel serviceViewModel;
     private ServiceAdapter serviceAdapter;
-    private EmployeeDataModel employee;
+    private EmployeeModel employee;
     static final String EXTRA_SERVICE = "com.p3lj2.koveepetshop.view.EXTRA_SERVICE";
     private static final int UPDATE_REQUEST = 7;
 

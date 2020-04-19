@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.p3lj2.koveepetshop.R;
-import com.p3lj2.koveepetshop.model.EmployeeDataModel;
+import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.model.PetComplete;
 import com.p3lj2.koveepetshop.model.PetModel;
 import com.p3lj2.koveepetshop.util.Util;
@@ -49,7 +49,7 @@ public class UpdatePetActivity extends AppCompatActivity {
     ProgressBar progressBar;
 
     private PetViewModel petViewModel;
-    private EmployeeDataModel employee = new EmployeeDataModel();
+    private EmployeeModel employee = new EmployeeModel();
     private BidiMap<Integer, Integer> petTypeMap = new DualHashBidiMap<>();
     private BidiMap<Integer, Integer> petSizeMap = new DualHashBidiMap<>();
     private BidiMap<Integer, Integer> customerMap = new DualHashBidiMap<>();

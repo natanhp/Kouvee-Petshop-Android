@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.adapter.PetAdapter;
-import com.p3lj2.koveepetshop.model.EmployeeDataModel;
+import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.util.EventClickListener;
 import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.viewmodel.PetViewModel;
@@ -45,7 +45,7 @@ public class PetActivity extends AppCompatActivity {
 
     private PetViewModel petViewModel;
     private PetAdapter petAdapter;
-    private EmployeeDataModel employee;
+    private EmployeeModel employee;
     static final String EXTRA_PET = "com.p3lj2.koveepetshop.view.EXTRA_PET";
     private static final int UPDATE_REQUEST = 9;
 

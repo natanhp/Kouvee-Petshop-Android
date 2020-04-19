@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.p3lj2.koveepetshop.model.CustomerModel;
-import com.p3lj2.koveepetshop.model.EmployeeDataModel;
+import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.model.PetComplete;
 import com.p3lj2.koveepetshop.model.PetModel;
 import com.p3lj2.koveepetshop.model.PetSizeModel;
@@ -61,7 +61,7 @@ public class PetViewModel extends AndroidViewModel {
         return petRepository.getIsLoading();
     }
 
-    public LiveData<EmployeeDataModel> getEmployee() {
+    public LiveData<EmployeeModel> getEmployee() {
         return employeeRepository.getEmployee();
     }
 

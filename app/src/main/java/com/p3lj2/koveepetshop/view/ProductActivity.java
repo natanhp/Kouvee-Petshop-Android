@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.adapter.ProductAdapter;
-import com.p3lj2.koveepetshop.model.EmployeeDataModel;
+import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.util.EventClickListener;
 import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.viewmodel.ProductViewModel;
@@ -45,7 +45,7 @@ public class ProductActivity extends AppCompatActivity {
 
     private ProductViewModel productViewModel;
     private ProductAdapter productAdapter;
-    private EmployeeDataModel employee = new EmployeeDataModel();
+    private EmployeeModel employee = new EmployeeModel();
     static final String EXTRA_PRODUCT = "com.p3lj2.koveepetshop.view.EXTRA_PRODUCT";
     private static final int UPDATE_REQUEST = 3;
 

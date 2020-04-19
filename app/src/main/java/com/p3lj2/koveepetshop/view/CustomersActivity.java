@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.adapter.CustomerAdapter;
-import com.p3lj2.koveepetshop.model.EmployeeDataModel;
+import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.util.EventClickListener;
 import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.viewmodel.CustomerViewModel;
@@ -45,7 +45,7 @@ public class CustomersActivity extends AppCompatActivity {
 
     private CustomerViewModel customerViewModel;
     private CustomerAdapter customerAdapter;
-    private EmployeeDataModel employee = new EmployeeDataModel();
+    private EmployeeModel employee = new EmployeeModel();
     static final String EXTRA_CUSTOMER = "com.p3lj2.koveepetshop.view.EXTRA_CUSTOMER";
     private static final int UPDATE_REQUEST = 10;
 

@@ -7,9 +7,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.p3lj2.koveepetshop.dao.EmployeeDAO;
-import com.p3lj2.koveepetshop.model.EmployeeDataModel;
+import com.p3lj2.koveepetshop.model.EmployeeModel;
 
-@Database(entities = {EmployeeDataModel.class}, version = 1, exportSchema = false)
+@Database(entities = {EmployeeModel.class}, version = 1, exportSchema = false)
 public abstract class KouveeDatabase extends RoomDatabase {
     private static KouveeDatabase kouveeDatabase;
 

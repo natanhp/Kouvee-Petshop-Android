@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.p3lj2.koveepetshop.model.EmployeeDataModel;
+import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.model.PetSizeModel;
 import com.p3lj2.koveepetshop.model.PetTypeModel;
 import com.p3lj2.koveepetshop.model.ServiceDetailComplete;
@@ -57,7 +57,7 @@ public class ServiceDetailViewModel extends AndroidViewModel {
         return serviceDetailRepository.getIsLoading();
     }
 
-    public LiveData<EmployeeDataModel> getEmployee() {
+    public LiveData<EmployeeModel> getEmployee() {
         return employeeRepository.getEmployee();
     }
 

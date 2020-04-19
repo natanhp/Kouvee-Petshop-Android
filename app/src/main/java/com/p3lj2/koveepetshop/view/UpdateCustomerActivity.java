@@ -10,12 +10,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.model.CustomerModel;
-import com.p3lj2.koveepetshop.model.EmployeeDataModel;
+import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.viewmodel.CustomerViewModel;
 
@@ -40,7 +39,7 @@ public class UpdateCustomerActivity extends AppCompatActivity {
     ProgressBar progressBar;
 
     private CustomerViewModel customerViewModel;
-    private EmployeeDataModel employee = new EmployeeDataModel();
+    private EmployeeModel employee = new EmployeeModel();
     private String birthDate = "";
     private DatePickerDialog datePickerDialog;
     private CustomerModel customerModel;
@@ -145,11 +144,6 @@ public class UpdateCustomerActivity extends AppCompatActivity {
     }
 
     public void getEmployee() {
-        customerViewModel.getEmployee().observe(this, new Observer<EmployeeDataModel>() {
-            @Override
-            public void onChanged(EmployeeDataModel employeeDataModel) {
-                employee = employeeDataModel;
-            }
-        });
+        customerViewModel.getEmployee().observe(this, employeeDataModel -> employee = employeeDataModel);
     }
 }
