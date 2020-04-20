@@ -122,10 +122,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT > -Build.VERSION_CODES.O) {
-            CharSequence name = "Min Qty Warning";
-            String description = "Channel for min qty warning";
+            CharSequence name = getString(R.string.min_qty_warning);
+            String description = getString(R.string.min_qty_warning_desc);
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("min_qty_warning", name, importance);
+            NotificationChannel channel = new NotificationChannel(getString(R.string.min_qty_warning_id), name, importance);
             channel.setDescription(description);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             if (notificationManager != null) {

@@ -101,4 +101,7 @@
     <string name="customer_deletion">Penghapusan Customer</string>
     <string name="customer_delete_confirmation">Apakah anda yakin akan menghapus customer?</string>
     <string name="customer_deleted">Customer berhasil dihapus</string>
+    <string name="min_qty_warning">Minimum Product Quantity Warning</string>
+    <string name="min_qty_warning_desc">Channel for minimum product quantity warning.</string>
+    <string name="min_qty_warning_id">min_qty_warning</string>
 </resources>
