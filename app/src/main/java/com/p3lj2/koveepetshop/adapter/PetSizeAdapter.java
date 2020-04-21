@@ -62,7 +62,7 @@ public class PetSizeAdapter extends RecyclerView.Adapter<PetSizeAdapter.ViewHold
 
         @Override
         public void onClick(View view) {
-            eventClickListener.onEventClick(getAdapterPosition());
+            eventClickListener.onEventClick(getAdapterPosition(), null);
         }
     }
 

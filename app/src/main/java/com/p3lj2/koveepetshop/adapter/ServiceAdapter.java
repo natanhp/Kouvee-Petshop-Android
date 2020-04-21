@@ -64,7 +64,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
 
         @Override
         public void onClick(View view) {
-            eventClickListener.onEventClick(getAdapterPosition());
+            eventClickListener.onEventClick(getAdapterPosition(), null);
         }
     }
 

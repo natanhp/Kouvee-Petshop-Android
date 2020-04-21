@@ -128,10 +128,13 @@ public class ServiceDetailActivity extends AppCompatActivity {
                 .attachToRecyclerView(recyclerView);
     }
 
-    private EventClickListener itemUpdateListener = position -> {
-        Intent intent = new Intent(ServiceDetailActivity.this, UpdateServiceDetailActivity.class);
-        intent.putExtra(EXTRA_SERVICE_DETAIL, serviceDetailAdapter.getServiceDetailCompletes().get(position));
-        startActivityForResult(intent, UPDATE_REQUEST);
+    private EventClickListener itemUpdateListener = new EventClickListener() {
+        @Override
+        public void onEventClick(int position, @Nullable Integer viewId) {
+            Intent intent = new Intent(ServiceDetailActivity.this, UpdateServiceDetailActivity.class);
+            intent.putExtra(EXTRA_SERVICE_DETAIL, serviceDetailAdapter.getServiceDetailCompletes().get(position));
+            ServiceDetailActivity.this.startActivityForResult(intent, UPDATE_REQUEST);
+        }
     };
 
     @Override

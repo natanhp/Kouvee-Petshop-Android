@@ -104,4 +104,6 @@
     <string name="min_qty_warning">Minimum Product Quantity Warning</string>
     <string name="min_qty_warning_desc">Channel for minimum product quantity warning.</string>
     <string name="min_qty_warning_id">min_qty_warning</string>
+    <string name="something_wrong_msg">Terjadi Kesalahan</string>
+    <string name="restock">Restock</string>
 </resources>

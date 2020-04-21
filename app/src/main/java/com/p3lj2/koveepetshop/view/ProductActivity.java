@@ -132,10 +132,23 @@ public class ProductActivity extends AppCompatActivity {
 
     private EventClickListener itemUpdateListener = new EventClickListener() {
         @Override
-        public void onEventClick(int position) {
-            Intent intent = new Intent(ProductActivity.this, UpdateProductActivity.class);
-            intent.putExtra(EXTRA_PRODUCT, productAdapter.getProductResponseModels().get(position));
-            startActivityForResult(intent, UPDATE_REQUEST);
+        public void onEventClick(int position, @Nullable Integer data) {
+            if (data != null) {
+                switch (data) {
+                    case R.id.tv_update:
+                        Intent intent = new Intent(ProductActivity.this, UpdateProductActivity.class);
+                        intent.putExtra(EXTRA_PRODUCT, productAdapter.getProductResponseModels().get(position));
+                        startActivityForResult(intent, UPDATE_REQUEST);
+                        break;
+
+                    case R.id.tv_restock:
+//                        TODO = Create restock with dialog box
+                        break;
+
+                    default:
+                        Toast.makeText(ProductActivity.this, R.string.something_wrong_msg, Toast.LENGTH_SHORT).show();
+                }
+            }
         }
     };
 

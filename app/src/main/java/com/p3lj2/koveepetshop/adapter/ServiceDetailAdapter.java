@@ -63,7 +63,7 @@ public class ServiceDetailAdapter extends RecyclerView.Adapter<ServiceDetailAdap
 
         @Override
         public void onClick(View view) {
-            eventClickListener.onEventClick(getAdapterPosition());
+            eventClickListener.onEventClick(getAdapterPosition(), null);
         }
     }
 

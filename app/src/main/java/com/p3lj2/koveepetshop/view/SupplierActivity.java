@@ -126,10 +126,13 @@ public class SupplierActivity extends AppCompatActivity {
                 .attachToRecyclerView(recyclerView);
     }
 
-    private EventClickListener itemUpdateListener = position -> {
-        Intent intent = new Intent(this, UpdateSupplierActivity.class);
-        intent.putExtra(EXTRA_SUPPLIER, supplierAdapter.getSupplierModels().get(position));
-        startActivityForResult(intent, UPDATE_REQUEST);
+    private EventClickListener itemUpdateListener = new EventClickListener() {
+        @Override
+        public void onEventClick(int position, @Nullable Integer viewId) {
+            Intent intent = new Intent(SupplierActivity.this, UpdateSupplierActivity.class);
+            intent.putExtra(EXTRA_SUPPLIER, supplierAdapter.getSupplierModels().get(position));
+            SupplierActivity.this.startActivityForResult(intent, UPDATE_REQUEST);
+        }
     };
 
     @Override

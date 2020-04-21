@@ -126,10 +126,13 @@ public class PetSizeActivity extends AppCompatActivity {
                 .attachToRecyclerView(recyclerView);
     }
 
-    private EventClickListener itemUpdateListener = position -> {
-        Intent intent = new Intent(PetSizeActivity.this, UpdatePetSizeActivity.class);
-        intent.putExtra(EXTRA_PET_SIZE, petSizeAdapter.getPetSizeModels().get(position));
-        startActivityForResult(intent, UPDATE_REQUEST);
+    private EventClickListener itemUpdateListener = new EventClickListener() {
+        @Override
+        public void onEventClick(int position, @Nullable Integer viewId) {
+            Intent intent = new Intent(PetSizeActivity.this, UpdatePetSizeActivity.class);
+            intent.putExtra(EXTRA_PET_SIZE, petSizeAdapter.getPetSizeModels().get(position));
+            PetSizeActivity.this.startActivityForResult(intent, UPDATE_REQUEST);
+        }
     };
 
     @Override

@@ -54,7 +54,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         @BindView(R.id.img_product_image)
         ImageView imageView;
 
-        @BindViews({R.id.tv_product_name, R.id.tv_product_measurement, R.id.tv_product_price, R.id.tv_product_quantity, R.id.tv_update})
+        @BindViews({R.id.tv_product_name, R.id.tv_product_measurement, R.id.tv_product_price, R.id.tv_product_quantity, R.id.tv_update, R.id.tv_restock})
         List<TextView> productAttribute;
 
         ViewHolder(@NonNull View itemView) {
@@ -75,11 +75,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             productAttribute.get(2).setText(String.valueOf(productResponseModel.getProductModel().getProductPrice()));
             productAttribute.get(3).setText(String.valueOf(productResponseModel.getProductModel().getProductQuantity()));
             productAttribute.get(4).setOnClickListener(this);
+            productAttribute.get(5).setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            eventClickListener.onEventClick(getAdapterPosition());
+            eventClickListener.onEventClick(getAdapterPosition(), view.getId());
         }
     }
 
