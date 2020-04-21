@@ -148,6 +148,8 @@ public class ProductActivity extends AppCompatActivity {
                     default:
                         Toast.makeText(ProductActivity.this, R.string.something_wrong_msg, Toast.LENGTH_SHORT).show();
                 }
+            } else {
+                Toast.makeText(ProductActivity.this, R.string.something_wrong_msg, Toast.LENGTH_SHORT).show();
             }
         }
     };
