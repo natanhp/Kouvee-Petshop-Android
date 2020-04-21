@@ -3,7 +3,9 @@ package com.p3lj2.koveepetshop.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -142,7 +144,7 @@ public class ProductActivity extends AppCompatActivity {
                         break;
 
                     case R.id.tv_restock:
-//                        TODO = Create restock with dialog box
+                        restockDialog();
                         break;
 
                     default:
@@ -183,5 +185,17 @@ public class ProductActivity extends AppCompatActivity {
             productViewModel.getAll();
             return false;
         });
+    }
+
+    private void restockDialog() {
+        View view = LayoutInflater.from(this).inflate(R.layout.restock_input, findViewById(android.R.id.content), false);
+        EditText inputRestock = view.findViewById(R.id.edt_product_quantity);
+        Util.confirmationDialog("Restock Produk", "", this)
+                .setView(view)
+                .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+//                        TODO = Restock product and refreseh recyclerview
+                })
+                .setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.cancel())
+                .show();
     }
 }
