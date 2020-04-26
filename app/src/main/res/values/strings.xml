@@ -106,4 +106,12 @@
     <string name="min_qty_warning_id">min_qty_warning</string>
     <string name="something_wrong_msg">Terjadi Kesalahan</string>
     <string name="restock">Restock</string>
+    <string name="choose_supplier">Pilih Supplier</string>
+    <string name="title_activity_restock">RestockActivity</string>
+    <string name="booked_quantity">Jumlah dipesan</string>
+    <string name="process">Proses</string>
+    <string name="no_booked_product">Tidak ada produk yang dipesan</string>
+    <string name="product_restock">Restock Produk</string>
+    <string name="product_stock">Stock Produk</string>
+    <string name="product_restock_detail">Detail Produk Restock</string>
 </resources>
