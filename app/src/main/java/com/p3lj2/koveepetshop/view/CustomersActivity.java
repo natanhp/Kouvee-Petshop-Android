@@ -59,7 +59,7 @@ public class CustomersActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.customer);
 
         customerViewModel = new ViewModelProvider.AndroidViewModelFactory(Objects.requireNonNull(this).getApplication()).create(CustomerViewModel.class);
-
+        initProgressBar();
         createCustomer();
 
         setUpRecyclerView();
