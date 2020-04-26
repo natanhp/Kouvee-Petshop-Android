@@ -13,6 +13,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.util.Util;
+import com.p3lj2.koveepetshop.view.restock.RestockActivity;
 import com.p3lj2.koveepetshop.viewmodel.EmployeeViewModel;
 
 import java.util.Objects;
@@ -34,6 +35,7 @@ public class OwnerMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_menu);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         ButterKnife.bind(this);
 
@@ -104,6 +106,11 @@ public class OwnerMenuActivity extends AppCompatActivity {
                 })
                 .setNegativeButton(getString(R.string.no), null)
                 .show();
+    }
+
+    @OnClick(R.id.btn_restock)
+    public void productRestockClick(View view) {
+        startActivity(new Intent(this, RestockActivity.class));
     }
 
     private void handleProgressBar(boolean state) {
