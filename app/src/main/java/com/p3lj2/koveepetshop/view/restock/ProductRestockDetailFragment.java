@@ -237,6 +237,10 @@ public class ProductRestockDetailFragment extends Fragment {
                 productRestockModel.setSupplierId(supplierId);
                 productRestockModel.setProductRestockDetails(productRestockDetails);
                 productRestockViewModel.insert(employee.getToken(), productRestockModel);
+
+                productRestockViewModel.clearProductRestockDetail();
+                restockAdapter.setProductModels(new ArrayList<>());
+                spinnerSupplier.setSelection(0);
             }
         }
     }

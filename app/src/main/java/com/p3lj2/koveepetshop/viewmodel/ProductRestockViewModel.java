@@ -40,6 +40,11 @@ public class ProductRestockViewModel extends AndroidViewModel {
         return productRepository.getAll();
     }
 
+    public void clearProductRestockDetail() {
+        bookedProductModels = new MutableLiveData<>();
+        viewPositions = new MutableLiveData<>();
+    }
+
     public void setBookedProductModels(ProductModel productModel) {
         List<ProductModel> bookedProductModelsTmp = new ArrayList<>();
         if (bookedProductModels.getValue() != null) {
