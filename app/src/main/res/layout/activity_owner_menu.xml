@@ -248,7 +248,7 @@
             android:layout_height="100dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:src="@drawable/abc_vector_test"
+            android:src="@drawable/product_restock"
             app:layout_constraintBottom_toTopOf="@+id/textView22"
             app:layout_constraintEnd_toStartOf="@+id/btn_logout"
             app:layout_constraintStart_toStartOf="@+id/btn_pet_size"
