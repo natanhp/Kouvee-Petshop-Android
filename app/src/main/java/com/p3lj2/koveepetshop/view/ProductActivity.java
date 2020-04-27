@@ -3,9 +3,7 @@ package com.p3lj2.koveepetshop.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -25,6 +23,9 @@ import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.util.EventClickListener;
 import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.viewmodel.ProductViewModel;
+
+import org.apache.commons.collections4.BidiMap;
+import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 
 import java.util.Objects;
 
@@ -50,6 +51,7 @@ public class ProductActivity extends AppCompatActivity {
     private EmployeeModel employee = new EmployeeModel();
     static final String EXTRA_PRODUCT = "com.p3lj2.koveepetshop.view.EXTRA_PRODUCT";
     private static final int UPDATE_REQUEST = 3;
+    private BidiMap<Integer, Integer> supplierMap = new DualHashBidiMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,18 +64,9 @@ public class ProductActivity extends AppCompatActivity {
 
         productViewModel = new ViewModelProvider.AndroidViewModelFactory(Objects.requireNonNull(this).getApplication()).create(ProductViewModel.class);
 
+        loadingStateHandler();
+        getEmployeeData();
         createProduct();
-
-        productViewModel.getIsLoading().observe(this, aBoolean -> {
-            if (aBoolean != null) {
-                if (aBoolean) {
-                    progressBar.setVisibility(View.VISIBLE);
-                } else {
-                    progressBar.setVisibility(View.GONE);
-                }
-            }
-        });
-
         setUpRecyclerView();
         deleteOnSwipe();
         searchViewHandler();
@@ -112,12 +105,6 @@ public class ProductActivity extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 Util.confirmationDialog(getString(R.string.product_deletion), getString(R.string.product_deletion_confirmation), ProductActivity.this)
                         .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
-                            productViewModel.getEmployee().observe(ProductActivity.this, employeeDataModel -> {
-                                if (employeeDataModel != null) {
-                                    employee = employeeDataModel;
-                                }
-                            });
-
                             productViewModel.delete(employee.getToken(),
                                     productAdapter.getProductResponseModels().get(viewHolder.getAdapterPosition()).getProductModel().getId(),
                                     employee.getId());
@@ -142,11 +129,6 @@ public class ProductActivity extends AppCompatActivity {
                         intent.putExtra(EXTRA_PRODUCT, productAdapter.getProductResponseModels().get(position));
                         startActivityForResult(intent, UPDATE_REQUEST);
                         break;
-
-                    case R.id.tv_restock:
-                        restockDialog();
-                        break;
-
                     default:
                         Toast.makeText(ProductActivity.this, R.string.something_wrong_msg, Toast.LENGTH_SHORT).show();
                 }
@@ -187,15 +169,24 @@ public class ProductActivity extends AppCompatActivity {
         });
     }
 
-    private void restockDialog() {
-        View view = LayoutInflater.from(this).inflate(R.layout.restock_input, findViewById(android.R.id.content), false);
-        EditText inputRestock = view.findViewById(R.id.edt_product_quantity);
-        Util.confirmationDialog("Restock Produk", "", this)
-                .setView(view)
-                .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
-//                        TODO = Restock product and refreseh recyclerview
-                })
-                .setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.cancel())
-                .show();
+    private void getEmployeeData() {
+        productViewModel.getEmployee().observe(ProductActivity.this, employeeDataModel -> {
+            if (employeeDataModel != null) {
+                employee = employeeDataModel;
+            }
+        });
+    }
+
+    private void loadingStateHandler() {
+        productViewModel.getIsLoading().observe(this, this::progressBarHandler);
+        productViewModel.getEmployeeLoading().observe(this, this::progressBarHandler);
+    }
+
+    private void progressBarHandler(boolean status) {
+        if (status) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }
