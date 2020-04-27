@@ -8,8 +8,8 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="product_name">Nama Produk</string>
-    <string name="product_quantity">Jumlah Produk</string>
-    <string name="product_price">Harga Produk</string>
+    <string name="product_quantity">Jumlah</string>
+    <string name="product_price">Harga</string>
     <string name="product_measurement">Satuan Produk</string>
     <string name="minimum_quantity">Jumlah Minmal</string>
     <string name="product_image">Gambar Produk</string>
@@ -114,4 +114,10 @@
     <string name="product_restock">Restock Produk</string>
     <string name="product_stock">Stock Produk</string>
     <string name="product_restock_detail">Detail Produk Restock</string>
+    <string name="restock_code">Kode Restock</string>
+    <string name="confirm">Konfirmasi</string>
+    <string name="product_arrived">Pesanan Sampai</string>
+    <string name="booking_confirmation">Konfirmasi Pesanan</string>
+    <string name="confirm_booking_confirmation">Apakah anda yakin ingin mengkonfirmasi pesananan?</string>
+    <string name="confirmation_success">Konfirmasi sukses</string>
 </resources>
