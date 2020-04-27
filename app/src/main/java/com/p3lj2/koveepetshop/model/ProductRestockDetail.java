@@ -16,4 +16,11 @@ public class ProductRestockDetail {
 
     @Expose
     private int createdBy;
+
+    @Expose(serialize = false)
+    @SerializedName("product_name")
+    private String productName;
+
+    @Expose(serialize = false)
+    private String measurement;
 }
