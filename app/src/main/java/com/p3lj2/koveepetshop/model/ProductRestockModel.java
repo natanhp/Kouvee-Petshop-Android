@@ -10,6 +10,9 @@ import lombok.Data;
 @Data
 public class ProductRestockModel {
     @Expose
+    private String id;
+
+    @Expose
     @SerializedName("Suppliers_id")
     private int supplierId;
 
@@ -18,6 +21,10 @@ public class ProductRestockModel {
 
     @Expose
     private int isArrived;
+
+    @Expose(serialize = false)
+    @SerializedName("supplier_name")
+    private String supplierName;
 
     @Expose
     private List<ProductRestockDetail> productRestockDetails;
