@@ -123,6 +123,14 @@ public class ProductRestockViewModel extends AndroidViewModel {
         productRestockRepository.insert(bearer, productRestockModel);
     }
 
+    public LiveData<List<ProductRestockModel>> getAll(String bearerToken) {
+        return productRestockRepository.getAll(bearerToken);
+    }
+
+    public void confirm(String bearerToken, String productId, int ownerId) {
+        productRestockRepository.confirm(bearerToken, productId, ownerId);
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return productRestockRepository.getIsLoading();
     }
