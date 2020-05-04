@@ -63,6 +63,11 @@ public class InsertPetTypeActivity extends AppCompatActivity {
             return;
         }
 
+        if (petTypeModel.getType().length() > 10) {
+            Toast.makeText(this, R.string.max_10_chars, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         final String[] token = {""};
 
         petTypeViewModel.getEmployee().observe(this, employeeDataModel -> {

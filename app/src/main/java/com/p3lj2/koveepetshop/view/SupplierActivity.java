@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.adapter.SupplierAdapter;
-import com.p3lj2.koveepetshop.model.EmployeeDataModel;
+import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.util.EventClickListener;
 import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.viewmodel.SupplierViewModel;
@@ -45,7 +45,7 @@ public class SupplierActivity extends AppCompatActivity {
 
     private SupplierViewModel supplierViewModel;
     private SupplierAdapter supplierAdapter;
-    private EmployeeDataModel employee;
+    private EmployeeModel employee;
     static final String EXTRA_SUPPLIER = "com.p3lj2.koveepetshop.view.EXTRA_SUPPLIER";
     private static final int UPDATE_REQUEST = 6;
 
@@ -126,10 +126,13 @@ public class SupplierActivity extends AppCompatActivity {
                 .attachToRecyclerView(recyclerView);
     }
 
-    private EventClickListener itemUpdateListener = position -> {
-        Intent intent = new Intent(this, UpdateSupplierActivity.class);
-        intent.putExtra(EXTRA_SUPPLIER, supplierAdapter.getSupplierModels().get(position));
-        startActivityForResult(intent, UPDATE_REQUEST);
+    private EventClickListener itemUpdateListener = new EventClickListener() {
+        @Override
+        public void onEventClick(int position, @Nullable Integer viewId) {
+            Intent intent = new Intent(SupplierActivity.this, UpdateSupplierActivity.class);
+            intent.putExtra(EXTRA_SUPPLIER, supplierAdapter.getSupplierModels().get(position));
+            SupplierActivity.this.startActivityForResult(intent, UPDATE_REQUEST);
+        }
     };
 
     @Override

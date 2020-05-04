@@ -5,6 +5,8 @@ com.p3lj2.koveepetshop.database
 com.p3lj2.koveepetshop.endpoint
 com.p3lj2.koveepetshop.model
 com.p3lj2.koveepetshop.repository
+com.p3lj2.koveepetshop.service
 com.p3lj2.koveepetshop.util
 com.p3lj2.koveepetshop.view
+com.p3lj2.koveepetshop.view.restock
 com.p3lj2.koveepetshop.viewmodel

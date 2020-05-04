@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.adapter.CustomerAdapter;
-import com.p3lj2.koveepetshop.model.EmployeeDataModel;
+import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.util.EventClickListener;
 import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.viewmodel.CustomerViewModel;
@@ -45,7 +45,7 @@ public class CustomersActivity extends AppCompatActivity {
 
     private CustomerViewModel customerViewModel;
     private CustomerAdapter customerAdapter;
-    private EmployeeDataModel employee = new EmployeeDataModel();
+    private EmployeeModel employee = new EmployeeModel();
     static final String EXTRA_CUSTOMER = "com.p3lj2.koveepetshop.view.EXTRA_CUSTOMER";
     private static final int UPDATE_REQUEST = 10;
 
@@ -59,7 +59,7 @@ public class CustomersActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.customer);
 
         customerViewModel = new ViewModelProvider.AndroidViewModelFactory(Objects.requireNonNull(this).getApplication()).create(CustomerViewModel.class);
-
+        initProgressBar();
         createCustomer();
 
         setUpRecyclerView();
@@ -136,10 +136,13 @@ public class CustomersActivity extends AppCompatActivity {
                 .attachToRecyclerView(recyclerView);
     }
 
-    private EventClickListener itemUpdateListener = position -> {
-        Intent intent = new Intent(this, UpdateCustomerActivity.class);
-        intent.putExtra(EXTRA_CUSTOMER, customerAdapter.getCustomerModels().get(position));
-        startActivityForResult(intent, UPDATE_REQUEST);
+    private EventClickListener itemUpdateListener = new EventClickListener() {
+        @Override
+        public void onEventClick(int position, @Nullable Integer viewId) {
+            Intent intent = new Intent(CustomersActivity.this, UpdateCustomerActivity.class);
+            intent.putExtra(EXTRA_CUSTOMER, customerAdapter.getCustomerModels().get(position));
+            CustomersActivity.this.startActivityForResult(intent, UPDATE_REQUEST);
+        }
     };
 
     @Override

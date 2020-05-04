@@ -6,15 +6,12 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 @Data
-public class EmployeeLoginSchema {
-
-    @Expose
-    private String message;
-
-    @Expose
-    @SerializedName("data")
-    private EmployeeModel employee;
+public class FCMModel {
 
     @Expose
     private String token;
+
+    @SerializedName("employee_id")
+    @Expose
+    private int employeeId;
 }

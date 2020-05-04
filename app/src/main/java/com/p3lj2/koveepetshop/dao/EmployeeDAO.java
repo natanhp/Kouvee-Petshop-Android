@@ -5,16 +5,16 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.p3lj2.koveepetshop.model.EmployeeDataModel;
+import com.p3lj2.koveepetshop.model.EmployeeModel;
 
 @Dao
 public interface EmployeeDAO {
     @Insert
-    void insert(EmployeeDataModel employeeDataModel);
+    void insert(EmployeeModel employeeDataModel);
 
     @Delete
-    void delete(EmployeeDataModel employeeDataModel);
+    void delete(EmployeeModel employeeDataModel);
 
     @Query("SELECT * FROM employee_table LIMIT 1")
-    EmployeeDataModel getEmployee();
+    EmployeeModel getEmployee();
 }

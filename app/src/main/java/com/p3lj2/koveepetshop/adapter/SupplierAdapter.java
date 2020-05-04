@@ -65,7 +65,7 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.ViewHo
 
         @Override
         public void onClick(View view) {
-            eventClickListener.onEventClick(getAdapterPosition());
+            eventClickListener.onEventClick(getAdapterPosition(), null);
         }
     }
 

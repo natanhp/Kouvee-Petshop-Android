@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.p3lj2.koveepetshop.model.EmployeeDataModel;
+import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.model.ProductResponseModel;
 import com.p3lj2.koveepetshop.repository.EmployeeRepository;
 import com.p3lj2.koveepetshop.repository.ProductRepository;
@@ -26,7 +26,7 @@ public class ProductViewModel extends AndroidViewModel {
         repository.insert(token, productResponseModel);
     }
 
-    public LiveData<EmployeeDataModel> getEmployee() {
+    public LiveData<EmployeeModel> getEmployee() {
         return employeeRepository.getEmployee();
     }
 

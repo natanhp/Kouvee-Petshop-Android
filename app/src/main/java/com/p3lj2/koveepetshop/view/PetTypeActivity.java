@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.adapter.PetTypeAdapter;
-import com.p3lj2.koveepetshop.model.EmployeeDataModel;
+import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.util.EventClickListener;
 import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.viewmodel.PetTypeViewModel;
@@ -45,7 +45,7 @@ public class PetTypeActivity extends AppCompatActivity {
 
     private PetTypeViewModel petTypeViewModel;
     private PetTypeAdapter petTypeAdapter;
-    private EmployeeDataModel employee;
+    private EmployeeModel employee;
     static final String EXTRA_PET_TYPE = "com.p3lj2.koveepetshop.view.EXTRA_PET_TYPE";
     private static final int UPDATE_REQUEST = 4;
 
@@ -126,10 +126,13 @@ public class PetTypeActivity extends AppCompatActivity {
                 .attachToRecyclerView(recyclerView);
     }
 
-    private EventClickListener itemUpdateListener = position -> {
-        Intent intent = new Intent(PetTypeActivity.this, UpdatePetTypeActivity.class);
+    private EventClickListener itemUpdateListener = new EventClickListener() {
+        @Override
+        public void onEventClick(int position, @Nullable Integer viewId) {
+            Intent intent = new Intent(PetTypeActivity.this, UpdatePetTypeActivity.class);
             intent.putExtra(EXTRA_PET_TYPE, petTypeAdapter.getPetTypeModels().get(position));
-            startActivityForResult(intent, UPDATE_REQUEST);
+            PetTypeActivity.this.startActivityForResult(intent, UPDATE_REQUEST);
+        }
     };
 
     @Override

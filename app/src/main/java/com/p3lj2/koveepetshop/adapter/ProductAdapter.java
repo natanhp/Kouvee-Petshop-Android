@@ -54,7 +54,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         @BindView(R.id.img_product_image)
         ImageView imageView;
 
-        @BindViews({R.id.tv_product_name, R.id.tv_product_measurement, R.id.tv_product_price, R.id.tv_product_quantity, R.id.tv_update})
+        @BindViews({R.id.tv_product_name, R.id.tv_product_price, R.id.tv_product_quantity, R.id.tv_update})
         List<TextView> productAttribute;
 
         ViewHolder(@NonNull View itemView) {
@@ -70,16 +70,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                     .skipMemoryCache(true)
                     .into(imageView);
 
+            String quantity = productResponseModel.getProductModel().getProductQuantity() + " " + productResponseModel.getProductModel().getMeassurement();
             productAttribute.get(0).setText(productResponseModel.getProductModel().getProductName());
-            productAttribute.get(1).setText(productResponseModel.getProductModel().getMeassurement());
-            productAttribute.get(2).setText(String.valueOf(productResponseModel.getProductModel().getProductPrice()));
-            productAttribute.get(3).setText(String.valueOf(productResponseModel.getProductModel().getProductQuantity()));
-            productAttribute.get(4).setOnClickListener(this);
+            productAttribute.get(1).setText(String.valueOf(productResponseModel.getProductModel().getProductPrice()));
+            productAttribute.get(2).setText(quantity);
+            productAttribute.get(3).setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            eventClickListener.onEventClick(getAdapterPosition());
+            eventClickListener.onEventClick(getAdapterPosition(), view.getId());
         }
     }
 

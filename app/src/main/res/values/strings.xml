@@ -8,8 +8,8 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="product_name">Nama Produk</string>
-    <string name="product_quantity">Jumlah Produk</string>
-    <string name="product_price">Harga Produk</string>
+    <string name="product_quantity">Jumlah</string>
+    <string name="product_price">Harga</string>
     <string name="product_measurement">Satuan Produk</string>
     <string name="minimum_quantity">Jumlah Minmal</string>
     <string name="product_image">Gambar Produk</string>
@@ -101,4 +101,26 @@
     <string name="customer_deletion">Penghapusan Customer</string>
     <string name="customer_delete_confirmation">Apakah anda yakin akan menghapus customer?</string>
     <string name="customer_deleted">Customer berhasil dihapus</string>
+    <string name="min_qty_warning">Minimum Product Quantity Warning</string>
+    <string name="min_qty_warning_desc">Channel for minimum product quantity warning.</string>
+    <string name="min_qty_warning_id">min_qty_warning</string>
+    <string name="something_wrong_msg">Terjadi Kesalahan</string>
+    <string name="restock">Restock</string>
+    <string name="choose_supplier">Pilih Supplier</string>
+    <string name="title_activity_restock">RestockActivity</string>
+    <string name="booked_quantity">Jumlah dipesan</string>
+    <string name="process">Proses</string>
+    <string name="no_booked_product">Tidak ada produk yang dipesan</string>
+    <string name="product_restock">Restock Produk</string>
+    <string name="product_stock">Stock Produk</string>
+    <string name="product_restock_detail">Detail Produk Restock</string>
+    <string name="restock_code">Kode Restock</string>
+    <string name="confirm">Konfirmasi</string>
+    <string name="product_arrived">Pesanan Sampai</string>
+    <string name="booking_confirmation">Konfirmasi Pesanan</string>
+    <string name="confirm_booking_confirmation">Apakah anda yakin ingin mengkonfirmasi pesananan?</string>
+    <string name="confirmation_success">Konfirmasi sukses</string>
+    <string name="max_10_chars">Maksimal 10 karakter</string>
+    <string name="number_only_product_qty">Jumlah produk hanya boleh angka</string>
+    <string name="phone_number_max">Nomor telepon maksimal 15 karakter</string>
 </resources>

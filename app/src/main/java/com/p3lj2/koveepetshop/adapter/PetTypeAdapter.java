@@ -63,7 +63,7 @@ public class PetTypeAdapter extends RecyclerView.Adapter<PetTypeAdapter.ViewHold
 
         @Override
         public void onClick(View view) {
-            eventClickListener.onEventClick(getAdapterPosition());
+            eventClickListener.onEventClick(getAdapterPosition(), null);
         }
     }
 

@@ -19,10 +19,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.adapter.ProductAdapter;
-import com.p3lj2.koveepetshop.model.EmployeeDataModel;
+import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.util.EventClickListener;
 import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.viewmodel.ProductViewModel;
+
+import org.apache.commons.collections4.BidiMap;
+import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 
 import java.util.Objects;
 
@@ -45,9 +48,10 @@ public class ProductActivity extends AppCompatActivity {
 
     private ProductViewModel productViewModel;
     private ProductAdapter productAdapter;
-    private EmployeeDataModel employee = new EmployeeDataModel();
+    private EmployeeModel employee = new EmployeeModel();
     static final String EXTRA_PRODUCT = "com.p3lj2.koveepetshop.view.EXTRA_PRODUCT";
     private static final int UPDATE_REQUEST = 3;
+    private BidiMap<Integer, Integer> supplierMap = new DualHashBidiMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,18 +64,9 @@ public class ProductActivity extends AppCompatActivity {
 
         productViewModel = new ViewModelProvider.AndroidViewModelFactory(Objects.requireNonNull(this).getApplication()).create(ProductViewModel.class);
 
+        loadingStateHandler();
+        getEmployeeData();
         createProduct();
-
-        productViewModel.getIsLoading().observe(this, aBoolean -> {
-            if (aBoolean != null) {
-                if (aBoolean) {
-                    progressBar.setVisibility(View.VISIBLE);
-                } else {
-                    progressBar.setVisibility(View.GONE);
-                }
-            }
-        });
-
         setUpRecyclerView();
         deleteOnSwipe();
         searchViewHandler();
@@ -110,12 +105,6 @@ public class ProductActivity extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 Util.confirmationDialog(getString(R.string.product_deletion), getString(R.string.product_deletion_confirmation), ProductActivity.this)
                         .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
-                            productViewModel.getEmployee().observe(ProductActivity.this, employeeDataModel -> {
-                                if (employeeDataModel != null) {
-                                    employee = employeeDataModel;
-                                }
-                            });
-
                             productViewModel.delete(employee.getToken(),
                                     productAdapter.getProductResponseModels().get(viewHolder.getAdapterPosition()).getProductModel().getId(),
                                     employee.getId());
@@ -132,10 +121,20 @@ public class ProductActivity extends AppCompatActivity {
 
     private EventClickListener itemUpdateListener = new EventClickListener() {
         @Override
-        public void onEventClick(int position) {
-            Intent intent = new Intent(ProductActivity.this, UpdateProductActivity.class);
-            intent.putExtra(EXTRA_PRODUCT, productAdapter.getProductResponseModels().get(position));
-            startActivityForResult(intent, UPDATE_REQUEST);
+        public void onEventClick(int position, @Nullable Integer data) {
+            if (data != null) {
+                switch (data) {
+                    case R.id.tv_update:
+                        Intent intent = new Intent(ProductActivity.this, UpdateProductActivity.class);
+                        intent.putExtra(EXTRA_PRODUCT, productAdapter.getProductResponseModels().get(position));
+                        startActivityForResult(intent, UPDATE_REQUEST);
+                        break;
+                    default:
+                        Toast.makeText(ProductActivity.this, R.string.something_wrong_msg, Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(ProductActivity.this, R.string.something_wrong_msg, Toast.LENGTH_SHORT).show();
+            }
         }
     };
 
@@ -168,5 +167,26 @@ public class ProductActivity extends AppCompatActivity {
             productViewModel.getAll();
             return false;
         });
+    }
+
+    private void getEmployeeData() {
+        productViewModel.getEmployee().observe(ProductActivity.this, employeeDataModel -> {
+            if (employeeDataModel != null) {
+                employee = employeeDataModel;
+            }
+        });
+    }
+
+    private void loadingStateHandler() {
+        productViewModel.getIsLoading().observe(this, this::progressBarHandler);
+        productViewModel.getEmployeeLoading().observe(this, this::progressBarHandler);
+    }
+
+    private void progressBarHandler(boolean status) {
+        if (status) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }
