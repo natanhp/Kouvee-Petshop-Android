@@ -120,4 +120,7 @@
     <string name="booking_confirmation">Konfirmasi Pesanan</string>
     <string name="confirm_booking_confirmation">Apakah anda yakin ingin mengkonfirmasi pesananan?</string>
     <string name="confirmation_success">Konfirmasi sukses</string>
+    <string name="max_10_chars">Maksimal 10 karakter</string>
+    <string name="number_only_product_qty">Jumlah produk hanya boleh angka</string>
+    <string name="phone_number_max">Nomor telepon maksimal 15 karakter</string>
 </resources>

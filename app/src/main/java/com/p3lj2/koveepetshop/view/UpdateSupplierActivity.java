@@ -81,6 +81,11 @@ public class UpdateSupplierActivity extends AppCompatActivity {
             return;
         }
 
+        if (phoneNumber.length() > 15) {
+            Toast.makeText(this, R.string.phone_number_max, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         supplierModel.setName(name);
         supplierModel.setPhoneNumber(phoneNumber);
         supplierModel.setAddress(address);

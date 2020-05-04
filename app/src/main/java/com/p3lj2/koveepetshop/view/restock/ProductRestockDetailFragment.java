@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,7 @@ public class ProductRestockDetailFragment extends Fragment {
     private BidiMap<Integer, Integer> supplierMap = new DualHashBidiMap<>();
     private final int MY_PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 3;
     private List<SupplierModel> supplierModels = new ArrayList<>();
+    private final String TAG = this.getClass().getCanonicalName();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -136,12 +138,17 @@ public class ProductRestockDetailFragment extends Fragment {
         Util.confirmationDialog(getString(R.string.product_restock), "", getContext())
                 .setView(view)
                 .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
-                    if (inputRestock.getText().toString().trim().isEmpty()) {
-                        Toast.makeText(getContext(), R.string.all_column_must_be_filled, Toast.LENGTH_SHORT).show();
-                    } else {
-                        productRestockViewModel.updateeBookedProductByPosition(position, Integer.parseInt(inputRestock.getText().toString().trim()));
-                        restockAdapter.notifyDataSetChanged();
-                        Toast.makeText(getContext(), R.string.product_updated, Toast.LENGTH_SHORT).show();
+                    try {
+                        if (inputRestock.getText().toString().trim().isEmpty()) {
+                            Toast.makeText(getContext(), R.string.all_column_must_be_filled, Toast.LENGTH_SHORT).show();
+                        } else {
+                            productRestockViewModel.updateeBookedProductByPosition(position, Integer.parseInt(inputRestock.getText().toString().trim()));
+                            restockAdapter.notifyDataSetChanged();
+                            Toast.makeText(getContext(), R.string.product_updated, Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(requireContext(), R.string.number_only_product_qty, Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, e.toString());
                     }
                 })
                 .setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.cancel())

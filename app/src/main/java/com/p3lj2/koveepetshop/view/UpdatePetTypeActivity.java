@@ -78,6 +78,11 @@ public class UpdatePetTypeActivity extends AppCompatActivity {
             return;
         }
 
+        if (petTypeModel.getType().length() > 10) {
+            Toast.makeText(this, R.string.max_10_chars, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         petTypeModel.setType(type);
         final String[] token = {""};
 
