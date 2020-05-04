@@ -1,6 +1,8 @@
 package com.p3lj2.koveepetshop.view.restock;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +17,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -28,6 +32,7 @@ import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.model.ProductModel;
 import com.p3lj2.koveepetshop.model.ProductRestockDetail;
 import com.p3lj2.koveepetshop.model.ProductRestockModel;
+import com.p3lj2.koveepetshop.model.SupplierModel;
 import com.p3lj2.koveepetshop.util.EventClickListener;
 import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.viewmodel.ProductRestockViewModel;
@@ -59,6 +64,8 @@ public class ProductRestockDetailFragment extends Fragment {
     private RestockAdapter restockAdapter;
     private EmployeeModel employee;
     private BidiMap<Integer, Integer> supplierMap = new DualHashBidiMap<>();
+    private final int MY_PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 3;
+    private List<SupplierModel> supplierModels = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -76,6 +83,7 @@ public class ProductRestockDetailFragment extends Fragment {
         getEmployeeData();
         initRecyclerView();
         deleteOnSwipe();
+        checkPermission();
     }
 
     private void initRecyclerView() {
@@ -144,6 +152,7 @@ public class ProductRestockDetailFragment extends Fragment {
         if (employee != null) {
             productRestockViewModel.getAllSuppliers(employee.getToken()).observe(getViewLifecycleOwner(), supplierModels -> {
                 if (supplierModels != null) {
+                    this.supplierModels = supplierModels;
                     String[] supplierNames = new String[supplierModels.size() + 1];
                     supplierNames[0] = getString(R.string.choose_supplier);
                     for (int i = 1; i < supplierNames.length; i++) {
@@ -221,7 +230,11 @@ public class ProductRestockDetailFragment extends Fragment {
         } else {
             if (employee != null) {
                 int spinnerPosition = spinnerSupplier.getSelectedItemPosition();
-                int supplierId = supplierMap.getKey(spinnerPosition);
+                if (supplierMap.get(spinnerPosition) == null) {
+                    Toast.makeText(requireContext(), R.string.all_column_must_be_filled, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                int supplierId = supplierMap.get(spinnerPosition);
                 List<ProductRestockDetail> productRestockDetails = new ArrayList<>();
                 for (ProductModel productModel : restockAdapter.getProductModels()) {
                     ProductRestockDetail productRestockDetail = new ProductRestockDetail();
@@ -236,11 +249,37 @@ public class ProductRestockDetailFragment extends Fragment {
                 productRestockModel.setCreatedBy(employee.getId());
                 productRestockModel.setSupplierId(supplierId);
                 productRestockModel.setProductRestockDetails(productRestockDetails);
-                productRestockViewModel.insert(employee.getToken(), productRestockModel);
+                List<ProductModel> productModels = restockAdapter.getProductModels();
+                Observer<ProductRestockModel> observer = new Observer<ProductRestockModel>() {
+                    @Override
+                    public void onChanged(ProductRestockModel productRestockModel) {
+                        if (productRestockModel != null) {
+                            Util.createInvoicePdf(requireContext(), productModels, supplierModels.get(spinnerPosition-1), productRestockModel.getId(), productRestockModel.getCreatedAt());
+                        }
+                    }
+                };
 
+                productRestockViewModel.insert(employee.getToken(), productRestockModel).observe(getViewLifecycleOwner(), observer);
                 productRestockViewModel.clearProductRestockDetail();
                 restockAdapter.setProductModels(new ArrayList<>());
                 spinnerSupplier.setSelection(0);
+            }
+        }
+    }
+
+    private void checkPermission() {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},  MY_PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == MY_PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_DENIED) {
+                ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE);
             }
         }
     }
