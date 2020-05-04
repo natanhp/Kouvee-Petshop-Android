@@ -97,8 +97,8 @@ public class ProductArrivedFragment extends Fragment {
         Util.confirmationDialog(getString(R.string.booking_confirmation), getString(R.string.confirm_booking_confirmation), getContext())
                 .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> {
                     productRestockViewModel.confirm(employee.getToken(), productId, employee.getId());
+                    initExpandableListAdapter();
                     productRestockViewModel.getAll(employee.getToken());
-                    arrivedRestockAdapter.notifyDataSetChanged();
                     Toast.makeText(getContext(), R.string.confirmation_success, Toast.LENGTH_SHORT).show();
                 })
                 .setNegativeButton(getString(R.string.no), (dialogInterface, i) -> arrivedRestockAdapter.notifyDataSetChanged())
