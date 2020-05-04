@@ -26,6 +26,9 @@ public class ProductRestockModel {
     @SerializedName("supplier_name")
     private String supplierName;
 
+    @Expose(serialize = false)
+    private String createdAt;
+
     @Expose
     private List<ProductRestockDetail> productRestockDetails;
 }
