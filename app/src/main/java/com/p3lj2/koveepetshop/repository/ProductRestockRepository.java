@@ -20,17 +20,22 @@ public class ProductRestockRepository {
     private ProductRestockEndpoint productRestockEndpoint;
     private static MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     private static MutableLiveData<List<ProductRestockModel>> restockModels = new MutableLiveData<>();
+    private static MutableLiveData<ProductRestockModel> restockModel = new MutableLiveData<>();
 
     public ProductRestockRepository() {
         RetrofitInstance retrofitInstance = RetrofitInstance.getRetrofitInstance();
         productRestockEndpoint = retrofitInstance.getRetrofit().create(ProductRestockEndpoint.class);
     }
 
-    public void insert(String bearerToken, ProductRestockModel productRestockModel) {
+    public LiveData<ProductRestockModel> insert(String bearerToken, ProductRestockModel productRestockModel) {
         isLoading.setValue(true);
+        restockModel = new MutableLiveData<>();
         productRestockEndpoint.insert("Bearer " + bearerToken, productRestockModel).enqueue(new Callback<ResponseSchema<ProductRestockModel>>() {
             @Override
             public void onResponse(@NotNull Call<ResponseSchema<ProductRestockModel>> call, @NotNull Response<ResponseSchema<ProductRestockModel>> response) {
+                if (response.body() != null && response.code() == 200) {
+                    restockModel.postValue(response.body().getData().get(0));
+                }
                 isLoading.postValue(false);
             }
 
@@ -39,6 +44,8 @@ public class ProductRestockRepository {
                 isLoading.postValue(false);
             }
         });
+
+        return restockModel;
     }
 
     public LiveData<List<ProductRestockModel>> getAll(String bearerToken) {

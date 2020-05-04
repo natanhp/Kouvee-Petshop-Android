@@ -119,8 +119,8 @@ public class ProductRestockViewModel extends AndroidViewModel {
         return employeeRepository.getIsLoading();
     }
 
-    public void insert(String bearer, ProductRestockModel productRestockModel) {
-        productRestockRepository.insert(bearer, productRestockModel);
+    public LiveData<ProductRestockModel> insert(String bearer, ProductRestockModel productRestockModel) {
+        return productRestockRepository.insert(bearer, productRestockModel);
     }
 
     public LiveData<List<ProductRestockModel>> getAll(String bearerToken) {
