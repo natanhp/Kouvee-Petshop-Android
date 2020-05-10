@@ -123,4 +123,8 @@
     <string name="max_10_chars">Maksimal 10 karakter</string>
     <string name="number_only_product_qty">Jumlah produk hanya boleh angka</string>
     <string name="phone_number_max">Nomor telepon maksimal 15 karakter</string>
+    <string name="title_activity_product_transaction">ProductTransactionActivity</string>
+    <string name="product_stock_left">Tersisa</string>
+    <string name="add">Tambah</string>
+    <string name="product_transaction">Transaksi Produk</string>
 </resources>
