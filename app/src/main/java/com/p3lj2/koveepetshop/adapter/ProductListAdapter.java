@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.model.ProductResponseModel;
 import com.p3lj2.koveepetshop.util.EventClickListener;
@@ -68,6 +69,8 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         void viewBinder(ProductResponseModel productResponseModel) {
             Glide.with(itemView)
                     .load(productResponseModel.getImageUrl())
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
                     .into(imgProduct);
 
             String productQuantity = productResponseModel.getProductModel().getProductQuantity() + " " + productResponseModel.getProductModel().getMeassurement();
