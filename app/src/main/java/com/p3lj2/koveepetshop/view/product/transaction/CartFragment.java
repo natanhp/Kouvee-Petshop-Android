@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,9 @@ import butterknife.ButterKnife;
 public class CartFragment extends Fragment {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
+
+    @BindView(R.id.tv_total)
+    TextView tvTotal;
 
     private ProductTransactionViewModel productTransactionViewModel;
     private CartAdapter cartAdapter;
@@ -66,6 +70,7 @@ public class CartFragment extends Fragment {
             public void onChanged(List<ProductModel> productModels) {
                 if (productModels != null) {
                     cartAdapter.setProductModels(productModels);
+                    counTotal(productModels);
                 }
             }
         });
@@ -107,5 +112,17 @@ public class CartFragment extends Fragment {
             }
         })
                 .attachToRecyclerView(recyclerView);
+    }
+
+    private void counTotal(List<ProductModel> productModels) {
+        double totalCounter = 0;
+
+        for (ProductModel productModel : productModels) {
+            totalCounter += productModel.getProductQuantity() * productModel.getProductPrice();
+        }
+
+        String total = "Rp " + totalCounter;
+
+        tvTotal.setText(total);
     }
 }
