@@ -83,7 +83,7 @@ public class ProductListFragment extends Fragment {
             public void onChanged(HashMap<Integer, Integer> positions) {
                 for (int position : positions.values()) {
                     if (recyclerView.findViewHolderForAdapterPosition(position) != null) {
-                        ImageButton btnAdd =Objects.requireNonNull(recyclerView.findViewHolderForAdapterPosition(position)).itemView.findViewById(R.id.btn_add);
+                        ImageButton btnAdd = Objects.requireNonNull(recyclerView.findViewHolderForAdapterPosition(position)).itemView.findViewById(R.id.btn_add);
                         btnAdd.setEnabled(false);
                         Glide.with(Objects.requireNonNull(recyclerView.findViewHolderForAdapterPosition(position)).itemView)
                                 .load(R.drawable.ic_add_shopping_cart_gray_24dp)

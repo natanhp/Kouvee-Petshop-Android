@@ -59,4 +59,13 @@ public class ProductTransactionViewModel extends AndroidViewModel {
     public LiveData<List<ProductModel>> getCart() {
         return cart;
     }
+
+    public void updateCartByPosition(int position, int quantity) {
+        List<ProductModel> cartTmp = new ArrayList<>();
+        if (cart.getValue() != null) {
+            cartTmp.addAll(cart.getValue());
+        }
+        cartTmp.get(position).setProductQuantity(quantity);
+        cart.postValue(cartTmp);
+    }
 }

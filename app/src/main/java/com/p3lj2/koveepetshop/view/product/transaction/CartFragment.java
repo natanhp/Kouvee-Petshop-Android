@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.adapter.CartAdapter;
 import com.p3lj2.koveepetshop.model.ProductModel;
 import com.p3lj2.koveepetshop.util.EventClickListener;
+import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.viewmodel.ProductTransactionViewModel;
 
 import java.util.List;
@@ -54,12 +56,7 @@ public class CartFragment extends Fragment {
         getCart();
     }
 
-    private EventClickListener eventClickListener = new EventClickListener() {
-        @Override
-        public void onEventClick(int position, @Nullable Integer viewId) {
-            Toast.makeText(getContext(), "Halo bro", Toast.LENGTH_SHORT).show();
-        }
-    };
+    private EventClickListener eventClickListener = (position, viewId) -> updateCart(position);
 
     private void getCart() {
         productTransactionViewModel.getCart().observe(getViewLifecycleOwner(), new Observer<List<ProductModel>>() {
@@ -70,5 +67,21 @@ public class CartFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void updateCart(int position) {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.product_quantity_input, requireView().findViewById(android.R.id.content), false);
+        EditText inputQty = view.findViewById(R.id.edt_product_quantity);
+        Util.confirmationDialog(getString(R.string.buy_product), "", getContext())
+                .setView(view)
+                .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                    if (inputQty.getText().toString().trim().isEmpty()) {
+                        Toast.makeText(getContext(), R.string.all_column_must_be_filled, Toast.LENGTH_SHORT).show();
+                    } else {
+                        productTransactionViewModel.updateCartByPosition(position, Integer.parseInt(inputQty.getText().toString().trim()));
+                    }
+                })
+                .setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.cancel())
+                .show();
     }
 }
