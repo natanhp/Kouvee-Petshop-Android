@@ -134,4 +134,5 @@
     <string name="checkout">Checkout</string>
     <string name="cart">Keranjang</string>
     <string name="ubah">Edit</string>
+    <string name="choose_customer">Pilih Customer</string>
 </resources>

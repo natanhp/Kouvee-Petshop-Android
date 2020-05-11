@@ -7,8 +7,12 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.p3lj2.koveepetshop.model.CustomerModel;
+import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.model.ProductModel;
 import com.p3lj2.koveepetshop.model.ProductResponseModel;
+import com.p3lj2.koveepetshop.repository.CustomerRepository;
+import com.p3lj2.koveepetshop.repository.EmployeeRepository;
 import com.p3lj2.koveepetshop.repository.ProductRepository;
 
 import java.util.ArrayList;
@@ -17,6 +21,8 @@ import java.util.List;
 
 public class ProductTransactionViewModel extends AndroidViewModel {
     private ProductRepository productRepository;
+    private CustomerRepository customerRepository;
+    private EmployeeRepository employeeRepository;
     private static MutableLiveData<HashMap<Integer, Integer>> viewPositions = new MutableLiveData<>();
     private static MutableLiveData<List<ProductModel>> cart = new MutableLiveData<>();
 
@@ -24,6 +30,8 @@ public class ProductTransactionViewModel extends AndroidViewModel {
         super(application);
 
         productRepository = new ProductRepository();
+        customerRepository = new CustomerRepository();
+        employeeRepository = new EmployeeRepository(application);
     }
 
     public LiveData<List<ProductResponseModel>> getAllProducts() {
@@ -86,5 +94,21 @@ public class ProductTransactionViewModel extends AndroidViewModel {
         }
         viewPositionsTmp.remove(id);
         viewPositions.setValue(viewPositionsTmp);
+    }
+
+    public LiveData<List<CustomerModel>> getAllCustomer(String bearerToken) {
+        return customerRepository.getAll(bearerToken);
+    }
+
+    public LiveData<Boolean> getIsLoadingCustomer() {
+        return customerRepository.getIsLoading();
+    }
+
+    public LiveData<EmployeeModel> getEmployee() {
+        return employeeRepository.getEmployee();
+    }
+
+    public LiveData<Boolean> getIsLoadingEmployee() {
+        return employeeRepository.getIsLoading();
     }
 }
