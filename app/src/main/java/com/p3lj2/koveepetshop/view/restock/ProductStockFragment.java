@@ -102,14 +102,12 @@ public class ProductStockFragment extends Fragment {
         });
     }
 
-    private EventClickListener eventClickListener = (position, viewId) -> {
-        restockDialog(position);
-    };
+    private EventClickListener eventClickListener = (position, viewId) -> restockDialog(position);
 
     private void restockDialog(int position) {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.restock_input, requireView().findViewById(android.R.id.content), false);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.product_quantity_input, requireView().findViewById(android.R.id.content), false);
         EditText inputRestock = view.findViewById(R.id.edt_product_quantity);
-        Util.confirmationDialog("Restock Produk", "", getContext())
+        Util.confirmationDialog(getResources().getString(R.string.product_restock), "", getContext())
                 .setView(view)
                 .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
                     if (inputRestock.getText().toString().trim().isEmpty()) {
