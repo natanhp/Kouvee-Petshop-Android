@@ -68,4 +68,23 @@ public class ProductTransactionViewModel extends AndroidViewModel {
         cartTmp.get(position).setProductQuantity(quantity);
         cart.postValue(cartTmp);
     }
+
+    public void deleteCartItemByPosition(int position) {
+        List<ProductModel> cartTmp = new ArrayList<>();
+        if (cart.getValue() != null) {
+            cartTmp.addAll(cart.getValue());
+        }
+        deleteViewPositionById(cartTmp.get(position).getId());
+        cartTmp.remove(position);
+        cart.postValue(cartTmp);
+    }
+
+    private void deleteViewPositionById(int id) {
+        HashMap<Integer, Integer> viewPositionsTmp = new HashMap<>();
+        if (viewPositions.getValue() != null) {
+            viewPositionsTmp.putAll(viewPositions.getValue());
+        }
+        viewPositionsTmp.remove(id);
+        viewPositions.setValue(viewPositionsTmp);
+    }
 }
