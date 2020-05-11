@@ -127,4 +127,6 @@
     <string name="product_stock_left">Tersisa</string>
     <string name="add">Tambah</string>
     <string name="product_transaction">Transaksi Produk</string>
+    <string name="buy_product">Beli Produk</string>
+    <string name="product_list">Daftar Produk</string>
 </resources>

@@ -133,7 +133,7 @@ public class ProductRestockDetailFragment extends Fragment {
     }
 
     private void restockDialog(int position) {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.restock_input, requireView().findViewById(android.R.id.content), false);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.product_quantity_input, requireView().findViewById(android.R.id.content), false);
         EditText inputRestock = view.findViewById(R.id.edt_product_quantity);
         Util.confirmationDialog(getString(R.string.product_restock), "", getContext())
                 .setView(view)
