@@ -129,4 +129,9 @@
     <string name="product_transaction">Transaksi Produk</string>
     <string name="buy_product">Beli Produk</string>
     <string name="product_list">Daftar Produk</string>
+    <string name="sub_total">Sub Total</string>
+    <string name="total">Total</string>
+    <string name="checkout">Checkout</string>
+    <string name="cart">Keranjang</string>
+    <string name="ubah">Edit</string>
 </resources>

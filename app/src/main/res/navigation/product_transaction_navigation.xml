@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_product_list" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.p3lj2.koveepetshop.view.product.transaction.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_cart"
+        android:name="com.p3lj2.koveepetshop.view.product.transaction.CartFragment"
+        android:label="@string/cart"
+        tools:layout="@layout/fragment_cart" />
 
     <fragment
         android:id="@+id/navigation_notifications"
