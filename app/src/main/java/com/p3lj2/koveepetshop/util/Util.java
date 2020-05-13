@@ -11,8 +11,12 @@ import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.model.ProductModel;
+import com.p3lj2.koveepetshop.model.ProductTransactionModel;
+import com.p3lj2.koveepetshop.model.ResponseSchema;
 import com.p3lj2.koveepetshop.model.SupplierModel;
 
 import org.apache.commons.collections4.BidiMap;
@@ -20,6 +24,7 @@ import org.apache.commons.collections4.BidiMap;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,6 +33,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
+
+import retrofit2.Response;
+
 
 public class Util {
 
@@ -76,7 +85,7 @@ public class Util {
         Locale localeIndonesia = new Locale("in", "ID");
         DateFormat outputDate = new SimpleDateFormat(newFormat, localeIndonesia);
 
-        return outputDate.format(inputDate);
+        return outputDate.format(Objects.requireNonNull(inputDate));
     }
 
     public static void createInvoicePdf(Context context, List<ProductModel> productModels, SupplierModel supplierModel, String poCode, String date) {
@@ -189,5 +198,13 @@ public class Util {
         }
 
         pdfDocument.close();
+    }
+
+    public static String retrofitErrorHandler(Response response) {
+        Gson gson = new Gson();
+        Type type = new TypeToken<ResponseSchema<ProductTransactionModel>>() {}.getType();
+        ResponseSchema<Object> errorResponse = gson.fromJson(Objects.requireNonNull(response.errorBody()).charStream(), type);
+
+        return errorResponse.getMessage();
     }
 }
