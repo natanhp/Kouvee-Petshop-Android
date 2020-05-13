@@ -16,10 +16,4 @@
         android:name="com.p3lj2.koveepetshop.view.product.transaction.CartFragment"
         android:label="@string/cart"
         tools:layout="@layout/fragment_cart" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.p3lj2.koveepetshop.view.product.transaction.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
 </navigation>
