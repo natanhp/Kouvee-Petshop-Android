@@ -11,9 +11,11 @@ import com.p3lj2.koveepetshop.model.CustomerModel;
 import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.model.ProductModel;
 import com.p3lj2.koveepetshop.model.ProductResponseModel;
+import com.p3lj2.koveepetshop.model.ProductTransactionModel;
 import com.p3lj2.koveepetshop.repository.CustomerRepository;
 import com.p3lj2.koveepetshop.repository.EmployeeRepository;
 import com.p3lj2.koveepetshop.repository.ProductRepository;
+import com.p3lj2.koveepetshop.repository.ProductTransactionRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +25,7 @@ public class ProductTransactionViewModel extends AndroidViewModel {
     private ProductRepository productRepository;
     private CustomerRepository customerRepository;
     private EmployeeRepository employeeRepository;
+    private ProductTransactionRepository productTransactionRepository;
     private static MutableLiveData<HashMap<Integer, Integer>> viewPositions = new MutableLiveData<>();
     private static MutableLiveData<List<ProductModel>> cart = new MutableLiveData<>();
 
@@ -32,6 +35,7 @@ public class ProductTransactionViewModel extends AndroidViewModel {
         productRepository = new ProductRepository();
         customerRepository = new CustomerRepository();
         employeeRepository = new EmployeeRepository(application);
+        productTransactionRepository = new ProductTransactionRepository();
     }
 
     public LiveData<List<ProductResponseModel>> getAllProducts() {
@@ -96,6 +100,11 @@ public class ProductTransactionViewModel extends AndroidViewModel {
         viewPositions.setValue(viewPositionsTmp);
     }
 
+    public void resetCart() {
+        viewPositions = new MutableLiveData<>();
+        cart = new MutableLiveData<>();
+    }
+
     public LiveData<List<CustomerModel>> getAllCustomer(String bearerToken) {
         return customerRepository.getAll(bearerToken);
     }
@@ -110,5 +119,17 @@ public class ProductTransactionViewModel extends AndroidViewModel {
 
     public LiveData<Boolean> getIsLoadingEmployee() {
         return employeeRepository.getIsLoading();
+    }
+
+    public void insert(String bearerToken, ProductTransactionModel productTransactionModel) {
+        productTransactionRepository.insert(bearerToken, productTransactionModel);
+    }
+
+    public LiveData<Boolean> getIsLoading() {
+        return productTransactionRepository.getIsLoading();
+    }
+
+    public LiveData<Object[]> getIsSuccess() {
+        return productTransactionRepository.getIsSuccess();
     }
 }
