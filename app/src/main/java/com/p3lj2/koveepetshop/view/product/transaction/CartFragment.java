@@ -27,6 +27,8 @@ import com.p3lj2.koveepetshop.adapter.CartAdapter;
 import com.p3lj2.koveepetshop.model.CustomerModel;
 import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.model.ProductModel;
+import com.p3lj2.koveepetshop.model.ProductTransactionDetailModel;
+import com.p3lj2.koveepetshop.model.ProductTransactionModel;
 import com.p3lj2.koveepetshop.util.EventClickListener;
 import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.viewmodel.ProductTransactionViewModel;
@@ -38,6 +40,7 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class CartFragment extends Fragment {
     @BindView(R.id.recycler_view)
@@ -57,6 +60,7 @@ public class CartFragment extends Fragment {
     private EmployeeModel employee;
     private List<CustomerModel> customerModels = new ArrayList<>();
     private HashMap<Integer, Integer> customerMap = new HashMap<>();
+    private double totalCounter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +72,7 @@ public class CartFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         ButterKnife.bind(this, view);
+        tvTotal.setText("Rp 0");
         productTransactionViewModel = new ViewModelProvider.AndroidViewModelFactory(requireActivity().getApplication()).create(ProductTransactionViewModel.class);
         loadingStateHandler();
         getEmployeeData();
@@ -100,7 +105,7 @@ public class CartFragment extends Fragment {
     private void updateCart(int position) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.product_quantity_input, requireView().findViewById(android.R.id.content), false);
         EditText inputQty = view.findViewById(R.id.edt_product_quantity);
-        Util.confirmationDialog(getString(R.string.buy_product), "", getContext())
+        Util.confirmationDialog(getString(R.string.edit_product), "", getContext())
                 .setView(view)
                 .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
                     if (inputQty.getText().toString().trim().isEmpty()) {
@@ -136,7 +141,7 @@ public class CartFragment extends Fragment {
     }
 
     private void counTotal(List<ProductModel> productModels) {
-        double totalCounter = 0;
+        totalCounter = 0;
 
         for (ProductModel productModel : productModels) {
             totalCounter += productModel.getProductQuantity() * productModel.getProductPrice();
@@ -155,6 +160,7 @@ public class CartFragment extends Fragment {
                     String[] customerNames = new String[customerModels.size() + 2];
                     customerNames[0] = getString(R.string.choose_customer);
                     customerNames[1] = "-";
+                    customerMap.put(1, -1);
                     for (int i = 2; i < customerNames.length; i++) {
                         customerMap.put(i, customerModels.get(i - 2).getId());
                         customerNames[i] = customerModels.get(i - 2).getName();
@@ -212,6 +218,7 @@ public class CartFragment extends Fragment {
     private void loadingStateHandler() {
         productTransactionViewModel.getIsLoadingEmployee().observe(getViewLifecycleOwner(), this::progressBarHandler);
         productTransactionViewModel.getIsLoadingCustomer().observe(getViewLifecycleOwner(), this::progressBarHandler);
+        productTransactionViewModel.getIsLoading().observe(getViewLifecycleOwner(), this::progressBarHandler);
     }
 
     private void progressBarHandler(boolean status) {
@@ -220,5 +227,56 @@ public class CartFragment extends Fragment {
         } else {
             progressBar.setVisibility(View.GONE);
         }
+    }
+
+    @OnClick(R.id.btn_checkout)
+    void btnClickCheckout(View view) {
+        if (spinnerCustomer == null || customerMap == null) {
+            return;
+        }
+
+        int spinnerPosition = spinnerCustomer.getSelectedItemPosition();
+        if (customerMap.get(spinnerPosition) == null) {
+            Toast.makeText(requireContext(), R.string.all_column_must_be_filled, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ProductTransactionModel productTransactionModel = new ProductTransactionModel();
+        productTransactionModel.setCreatedBy(employee.getId());
+        productTransactionModel.setTotal(totalCounter);
+        int id = customerMap.get(spinnerPosition);
+        if (id != -1) {
+            productTransactionModel.setCustomerId(id);
+        }
+
+        List<ProductModel> productModels = cartAdapter.getProductModels();
+        List<ProductTransactionDetailModel> productTransactionDetailModels = new ArrayList<>();
+        for (ProductModel productModel : productModels) {
+            ProductTransactionDetailModel productTransactionDetailModel = new ProductTransactionDetailModel();
+            productTransactionDetailModel.setCreatedBy(employee.getId());
+            productTransactionDetailModel.setItemQty(productModel.getProductQuantity());
+            productTransactionDetailModel.setProductId(productModel.getId());
+            productTransactionDetailModels.add(productTransactionDetailModel);
+        }
+
+        productTransactionModel.setProductTransactionDetails(productTransactionDetailModels);
+
+        productTransactionViewModel.insert(employee.getToken(), productTransactionModel);
+
+        productTransactionViewModel.getIsSuccess().observe(getViewLifecycleOwner(), new Observer<Object[]>() {
+            @Override
+            public void onChanged(Object[] objects) {
+                if (objects != null) {
+                    boolean status = (boolean) objects[0];
+                    if (status) {
+                        productTransactionViewModel.resetCart();
+                        cartAdapter.setProductModels(new ArrayList<>());
+                        tvTotal.setText("Rp 0");
+                        spinnerCustomer.setSelection(0);
+                    }
+                    Toast.makeText(getContext(), (String) objects[1], Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }
