@@ -11,6 +11,7 @@ import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ public class ProductListFragment extends Fragment {
 
     private ProductTransactionViewModel productTransactionViewModel;
     private ProductListAdapter productListAdapter;
+    private static int checkedButton = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -167,12 +169,18 @@ public class ProductListFragment extends Fragment {
     private void sortingDialog() {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.sorting_layout, requireView().findViewById(android.R.id.content), false);
         RadioGroup rgSort = view.findViewById(R.id.rg_sort);
-        final int[] checkedButton = {rgSort.getCheckedRadioButtonId()};
-        rgSort.setOnCheckedChangeListener((radioGroup, i) -> checkedButton[0] = i);
+        if (checkedButton == 0) {
+            checkedButton = R.id.rb_lower_price;
+        }
+
+        RadioButton radioButton = view.findViewById(checkedButton);
+        radioButton.setChecked(true);
+
+        rgSort.setOnCheckedChangeListener((radioGroup, i) -> checkedButton = i);
         Util.confirmationDialog(getString(R.string.sort_product), "", getContext())
                 .setView(view)
                 .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
-                    switch (checkedButton[0]) {
+                    switch (checkedButton) {
                         case R.id.rb_lower_price:
                             sortBy("asc_price");
                             break;

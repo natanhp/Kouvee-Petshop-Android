@@ -21,7 +21,6 @@
             android:id="@+id/rb_lower_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
             android:text="@string/lower_price" />
 
         <RadioButton
