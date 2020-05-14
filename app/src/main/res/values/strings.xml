@@ -139,4 +139,6 @@
     <string name="higher_price">Harga Tertinggi</string>
     <string name="lower_price">Harga Terendah</string>
     <string name="sort_product">Urutkan Produk</string>
+    <string name="least_stock">Stock Paling Sedikit</string>
+    <string name="more_stock">Stock Paling Banyak</string>
 </resources>

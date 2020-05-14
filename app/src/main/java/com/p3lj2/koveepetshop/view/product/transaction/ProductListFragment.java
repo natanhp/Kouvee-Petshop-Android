@@ -174,10 +174,16 @@ public class ProductListFragment extends Fragment {
                 .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
                     switch (checkedButton[0]) {
                         case R.id.rb_lower_price:
-                            sortByPrice("asc");
+                            sortBy("asc_price");
                             break;
                         case R.id.rb_higher_price:
-                            sortByPrice("dsc");
+                            sortBy("dsc_price");
+                            break;
+                        case R.id.rb_least_stock:
+                            sortBy("asc_stock");
+                            break;
+                        case R.id.rb_more_stock:
+                            sortBy("dsc_stock");
                             break;
                         default:
                             Toast.makeText(getContext(), getString(R.string.something_wrong_msg), Toast.LENGTH_SHORT).show();
@@ -187,17 +193,30 @@ public class ProductListFragment extends Fragment {
                 .show();
     }
 
-    private void sortByPrice(String order) {
+    private void sortBy(String order) {
         List<ProductResponseModel> productResponseModels = productListAdapter.getResponseModels();
 
         Collections.sort(productResponseModels, (productResponseModel, t1) -> {
             double priceLeft = productResponseModel.getProductModel().getProductPrice();
             double priceRight = t1.getProductModel().getProductPrice();
 
-            if (order.equals("asc")) {
+            if (order.equals("asc_price")) {
                 return Double.compare(priceLeft, priceRight);
-            } else if (order.equals("dsc")) {
+            } else if (order.equals("dsc_price")) {
                 return Double.compare(priceRight, priceLeft);
+            }
+
+            return 0;
+        });
+
+        Collections.sort(productResponseModels, (productResponseModel, t1) -> {
+            int stockLeft = productResponseModel.getProductModel().getProductQuantity();
+            int stockRight = t1.getProductModel().getProductQuantity();
+
+            if (order.equals("asc_stock")) {
+                return Integer.compare(stockLeft, stockRight);
+            } else if (order.equals("dsc_stock")) {
+                return Integer.compare(stockRight, stockLeft);
             }
 
             return 0;

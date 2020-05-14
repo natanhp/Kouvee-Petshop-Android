@@ -29,5 +29,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/higher_price" />
+
+        <RadioButton
+            android:id="@+id/rb_least_stock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/least_stock" />
+
+        <RadioButton
+            android:id="@+id/rb_more_stock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/more_stock" />
     </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>
