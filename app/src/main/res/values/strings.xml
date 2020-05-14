@@ -135,4 +135,8 @@
     <string name="cart">Keranjang</string>
     <string name="ubah">Edit</string>
     <string name="choose_customer">Pilih Customer</string>
+    <string name="sort">Urutkan</string>
+    <string name="higher_price">Harga Tertinggi</string>
+    <string name="lower_price">Harga Terendah</string>
+    <string name="sort_product">Urutkan Produk</string>
 </resources>

@@ -2,12 +2,16 @@ package com.p3lj2.koveepetshop.view.product.transaction;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,6 +31,7 @@ import com.p3lj2.koveepetshop.util.EventClickListener;
 import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.viewmodel.ProductTransactionViewModel;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -52,6 +57,8 @@ public class ProductListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        setHasOptionsMenu(true);
 
         ButterKnife.bind(this, view);
 
@@ -139,5 +146,63 @@ public class ProductListFragment extends Fragment {
         } else {
             progressBar.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        requireActivity().getMenuInflater().inflate(R.menu.product_list_menu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.sort) {
+            sortingDialog();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void sortingDialog() {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.sorting_layout, requireView().findViewById(android.R.id.content), false);
+        RadioGroup rgSort = view.findViewById(R.id.rg_sort);
+        final int[] checkedButton = {rgSort.getCheckedRadioButtonId()};
+        rgSort.setOnCheckedChangeListener((radioGroup, i) -> checkedButton[0] = i);
+        Util.confirmationDialog(getString(R.string.sort_product), "", getContext())
+                .setView(view)
+                .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                    switch (checkedButton[0]) {
+                        case R.id.rb_lower_price:
+                            sortByPrice("asc");
+                            break;
+                        case R.id.rb_higher_price:
+                            sortByPrice("dsc");
+                            break;
+                        default:
+                            Toast.makeText(getContext(), getString(R.string.something_wrong_msg), Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.cancel())
+                .show();
+    }
+
+    private void sortByPrice(String order) {
+        List<ProductResponseModel> productResponseModels = productListAdapter.getResponseModels();
+
+        Collections.sort(productResponseModels, (productResponseModel, t1) -> {
+            double priceLeft = productResponseModel.getProductModel().getProductPrice();
+            double priceRight = t1.getProductModel().getProductPrice();
+
+            if (order.equals("asc")) {
+                return Double.compare(priceLeft, priceRight);
+            } else if (order.equals("dsc")) {
+                return Double.compare(priceRight, priceLeft);
+            }
+
+            return 0;
+        });
+
+        productListAdapter.setProductResponseModels(productResponseModels);
     }
 }
