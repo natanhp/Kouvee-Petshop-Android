@@ -11,6 +11,7 @@ import com.p3lj2.koveepetshop.model.CustomerModel;
 import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.model.ProductModel;
 import com.p3lj2.koveepetshop.model.ProductResponseModel;
+import com.p3lj2.koveepetshop.model.ProductTransactionDetailModel;
 import com.p3lj2.koveepetshop.model.ProductTransactionModel;
 import com.p3lj2.koveepetshop.repository.CustomerRepository;
 import com.p3lj2.koveepetshop.repository.EmployeeRepository;
@@ -28,6 +29,7 @@ public class ProductTransactionViewModel extends AndroidViewModel {
     private ProductTransactionRepository productTransactionRepository;
     private static MutableLiveData<HashMap<Integer, Integer>> viewPositions = new MutableLiveData<>();
     private static MutableLiveData<List<ProductModel>> cart = new MutableLiveData<>();
+    private static MutableLiveData<List<ProductTransactionDetailModel>> productTransactionDetails = new MutableLiveData<>();
 
     public ProductTransactionViewModel(@NonNull Application application) {
         super(application);
@@ -105,6 +107,14 @@ public class ProductTransactionViewModel extends AndroidViewModel {
         cart = new MutableLiveData<>();
     }
 
+    public void setProductTransactionDetails(List<ProductTransactionDetailModel> productTransactionDetails) {
+        ProductTransactionViewModel.productTransactionDetails.setValue(productTransactionDetails);
+    }
+
+    public LiveData<List<ProductTransactionDetailModel>> getProductTransactionDetails() {
+        return productTransactionDetails;
+    }
+
     public LiveData<List<CustomerModel>> getAllCustomer(String bearerToken) {
         return customerRepository.getAll(bearerToken);
     }
@@ -123,6 +133,22 @@ public class ProductTransactionViewModel extends AndroidViewModel {
 
     public void insert(String bearerToken, ProductTransactionModel productTransactionModel) {
         productTransactionRepository.insert(bearerToken, productTransactionModel);
+    }
+
+    public LiveData<List<ProductTransactionModel>> getAll(String bearerToken) {
+        return productTransactionRepository.getAll(bearerToken);
+    }
+
+    public void updateDetailById(String bearerToken, ProductTransactionDetailModel productTransactionDetailModel) {
+        productTransactionRepository.updateDetailById(bearerToken, productTransactionDetailModel);
+    }
+
+    public void deleteDetailById(String bearerToken, int detailId, int cashierId) {
+        productTransactionRepository.deleteDetailById(bearerToken, detailId, cashierId);
+    }
+
+    public void deleteTransactionById(String bearerToken, String transactionId, int cashierId) {
+        productTransactionRepository.deleteTransactionById(bearerToken, transactionId, cashierId);
     }
 
     public LiveData<Boolean> getIsLoading() {
