@@ -18,6 +18,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.model.FCMModel;
+import com.p3lj2.koveepetshop.view.cashier.payment.PaymentActivity;
 import com.p3lj2.koveepetshop.viewmodel.EmployeeViewModel;
 
 import java.util.List;
@@ -81,6 +82,11 @@ public class LoginActivity extends AppCompatActivity {
                     } else if (employeeDataModel.getRole().equalsIgnoreCase("cs")) {
                         startActivity(new Intent(LoginActivity.this, CSMenuActivity.class));
                         finish();
+                    } else if (employeeDataModel.getRole().equalsIgnoreCase("kasir")) {
+                        startActivity(new Intent(LoginActivity.this, PaymentActivity.class));
+                        finish();
+                    } else {
+                        Toast.makeText(this, getString(R.string.something_wrong_msg), Toast.LENGTH_SHORT).show();
                     }
                 }
             });

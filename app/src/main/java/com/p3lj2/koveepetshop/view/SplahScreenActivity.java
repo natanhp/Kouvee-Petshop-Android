@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.p3lj2.koveepetshop.R;
+import com.p3lj2.koveepetshop.view.cashier.payment.PaymentActivity;
 import com.p3lj2.koveepetshop.viewmodel.EmployeeViewModel;
 
 import java.util.Objects;
@@ -51,11 +53,16 @@ public class SplahScreenActivity extends AppCompatActivity {
             } else {
                 if (employeeDataModel.getRole().equalsIgnoreCase("Owner")) {
                     startActivity(new Intent(SplahScreenActivity.this, OwnerMenuActivity.class));
+                    finish();
                 } else if (employeeDataModel.getRole().equalsIgnoreCase("cs")) {
                     startActivity(new Intent(SplahScreenActivity.this, CSMenuActivity.class));
+                    finish();
+                } else if (employeeDataModel.getRole().equalsIgnoreCase("kasir")) {
+                    startActivity(new Intent(SplahScreenActivity.this, PaymentActivity.class));
+                    finish();
+                } else {
+                    Toast.makeText(this, getString(R.string.something_wrong_msg), Toast.LENGTH_SHORT).show();
                 }
-
-                finish();
             }
         });
     }
