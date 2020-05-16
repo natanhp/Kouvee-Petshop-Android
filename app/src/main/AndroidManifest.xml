@@ -15,8 +15,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.cashier.payment.PaymentActivity"
+            android:label="@string/title_activity_payment"></activity>
+        <activity
             android:name=".view.product.transaction.ProductTransactionActivity"
-            android:label="@string/title_activity_product_transaction"></activity>
+            android:label="@string/title_activity_product_transaction" />
         <activity
             android:name=".view.restock.RestockActivity"
             android:label="@string/title_activity_restock" />

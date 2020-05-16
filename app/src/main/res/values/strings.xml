@@ -141,4 +141,14 @@
     <string name="sort_product">Urutkan Produk</string>
     <string name="least_stock">Stock Paling Sedikit</string>
     <string name="more_stock">Stock Paling Banyak</string>
+    <string name="title_activity_payment">PaymentActivity</string>
+    <string name="discount">Diskon</string>
+    <string name="exchange">Kembalian</string>
+    <string name="transaction_code">Kode Transaksi</string>
+    <string name="product_payment">Pembayaran Produk</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="transaction_deletion">Penghapusan Transaksi</string>
+    <string name="transaction_deletetion_confirmation">Apakah anda yakin akan menghapus transaksi?</string>
 </resources>
