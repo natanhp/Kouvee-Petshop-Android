@@ -30,5 +30,13 @@ public class ProductTransactionModel {
     private int isPaid;
 
     @Expose
-    private List<ProductTransactionDetailModel> productTransactionDetails;
+    private List<ProductTransactionDetailModel> productTransactionkDetails;
+
+    @Expose(serialize = false)
+    @SerializedName("cs_name")
+    private String csName;
+
+    @Expose(serialize = false)
+    @SerializedName("customer_name")
+    private String customerName;
 }
