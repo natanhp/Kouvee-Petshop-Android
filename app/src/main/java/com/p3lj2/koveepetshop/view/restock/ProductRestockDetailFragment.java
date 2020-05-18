@@ -261,7 +261,7 @@ public class ProductRestockDetailFragment extends Fragment {
                     @Override
                     public void onChanged(ProductRestockModel productRestockModel) {
                         if (productRestockModel != null) {
-                            Util.createInvoicePdf(requireContext(), productModels, supplierModels.get(spinnerPosition-1), productRestockModel.getId(), productRestockModel.getCreatedAt());
+                            Util.createRestockInvoicePfg(requireContext(), productModels, supplierModels.get(spinnerPosition-1), productRestockModel.getId(), productRestockModel.getCreatedAt());
                         }
                     }
                 };
