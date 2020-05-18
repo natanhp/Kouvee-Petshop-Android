@@ -28,4 +28,7 @@ public interface ProductTransactionEndpoint {
 
     @DELETE("producttransaction/kasir/deletetransactionbyid/{id}/{cashierId}")
     Call<ResponseSchema<ProductTransactionModel>> deleteTransactionById(@Header("Authorization") String bearerToken, @Path("id") String transactionId, @Path("cashierId") int cashierId);
+
+    @PUT("producttransaction/kasir/confirm")
+    Call<ResponseSchema<ProductTransactionModel>> confirm(@Header("Authorization") String bearerToken, @Body ProductTransactionModel productTransactionModel);
 }

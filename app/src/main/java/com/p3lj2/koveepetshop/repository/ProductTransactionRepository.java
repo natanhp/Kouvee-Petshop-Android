@@ -236,6 +236,47 @@ public class ProductTransactionRepository {
         });
     }
 
+    public void confirm(String bearerToken, ProductTransactionModel productTransactionModel) {
+        isLoading.setValue(true);
+        isSuccess = new MutableLiveData<>();
+        Object[] objects = new Object[2];
+        String somethingIsWrongMsg = "Terjadi Kesalahan";
+        productTransactionEndpoint.confirm("Bearer " + bearerToken, productTransactionModel).enqueue(new Callback<ResponseSchema<ProductTransactionModel>>() {
+            @Override
+            public void onResponse(@NotNull Call<ResponseSchema<ProductTransactionModel>> call, @NotNull Response<ResponseSchema<ProductTransactionModel>> response) {
+                if (response.code() == 200 && response.body() != null) {
+                    objects[0] = true;
+                    objects[1] = response.body().getMessage();
+                    Log.i(TAG, response.body().getMessage());
+                } else {
+                    objects[0] = false;
+                    objects[1] = somethingIsWrongMsg;
+                    Log.e(TAG, somethingIsWrongMsg);
+                }
+
+                if (response.code() == 400 && response.errorBody() != null) {
+                    objects[0] = false;
+                    String errorMsg = Util.retrofitErrorHandler(response);
+                    objects[1] = errorMsg;
+
+                    Log.e(TAG, errorMsg);
+                }
+
+                isLoading.postValue(false);
+                isSuccess.postValue(objects);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ResponseSchema<ProductTransactionModel>> call, @NotNull Throwable t) {
+                objects[0] = false;
+                objects[1] = somethingIsWrongMsg;
+                Log.v(TAG, Objects.requireNonNull(t.getMessage()));
+                isLoading.postValue(false);
+                isSuccess.postValue(objects);
+            }
+        });
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return isLoading;
     }

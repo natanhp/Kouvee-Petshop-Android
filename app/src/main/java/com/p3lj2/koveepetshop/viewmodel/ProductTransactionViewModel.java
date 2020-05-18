@@ -30,6 +30,7 @@ public class ProductTransactionViewModel extends AndroidViewModel {
     private static MutableLiveData<HashMap<Integer, Integer>> viewPositions = new MutableLiveData<>();
     private static MutableLiveData<List<ProductModel>> cart = new MutableLiveData<>();
     private static MutableLiveData<List<ProductTransactionDetailModel>> productTransactionDetails = new MutableLiveData<>();
+    private static MutableLiveData<String> strTotal = new MutableLiveData<>();
 
     public ProductTransactionViewModel(@NonNull Application application) {
         super(application);
@@ -107,6 +108,14 @@ public class ProductTransactionViewModel extends AndroidViewModel {
         cart = new MutableLiveData<>();
     }
 
+    public void setStrTotal(String total) {
+        strTotal.setValue(total);
+    }
+
+    public LiveData<String> getStrTotal() {
+        return strTotal;
+    }
+
     public void setProductTransactionDetails(List<ProductTransactionDetailModel> productTransactionDetails) {
         ProductTransactionViewModel.productTransactionDetails.setValue(productTransactionDetails);
     }
@@ -149,6 +158,10 @@ public class ProductTransactionViewModel extends AndroidViewModel {
 
     public void deleteTransactionById(String bearerToken, String transactionId, int cashierId) {
         productTransactionRepository.deleteTransactionById(bearerToken, transactionId, cashierId);
+    }
+
+    public void confirm(String bearerToken, ProductTransactionModel productTransactionModel) {
+        productTransactionRepository.confirm(bearerToken, productTransactionModel);
     }
 
     public LiveData<Boolean> getIsLoading() {
