@@ -10,7 +10,6 @@
         android:id="@+id/recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_total"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,21 +20,19 @@
         android:id="@+id/textView33"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:text="@string/total"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_large"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView36"
-        app:layout_constraintEnd_toStartOf="@+id/tv_total"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView39"
+        app:layout_constraintStart_toStartOf="@+id/textView39"
         app:layout_constraintTop_toBottomOf="@+id/recycler_view" />
 
     <TextView
         android:id="@+id/tv_total"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_large"
@@ -43,6 +40,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView33"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView33"
+        app:layout_constraintStart_toStartOf="@+id/tv_change"
         app:layout_constraintTop_toTopOf="@+id/textView33"
         tools:text="Total" />
 
@@ -50,50 +48,50 @@
         android:id="@+id/textView36"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/discount"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_large"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView38"
-        app:layout_constraintEnd_toStartOf="@+id/tv_discount"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_total" />
+        app:layout_constraintBottom_toTopOf="@+id/edt_payment"
+        app:layout_constraintEnd_toEndOf="@+id/textView39"
+        app:layout_constraintStart_toStartOf="@+id/textView39"
+        app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
-    <TextView
-        android:id="@+id/tv_discount"
+    <EditText
+        android:id="@+id/edt_discount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:hint="@string/discount"
+        android:inputType="number"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_large"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/textView36"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView36"
+        app:layout_constraintStart_toEndOf="@+id/textView35"
         app:layout_constraintTop_toTopOf="@+id/textView36"
-        tools:text="@string/discount" />
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/textView38"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/exchange"
+        android:text="@string/change"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_large"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btn_process"
-        app:layout_constraintEnd_toStartOf="@+id/tv_exchange"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_discount" />
+        app:layout_constraintEnd_toEndOf="@+id/textView39"
+        app:layout_constraintStart_toStartOf="@+id/textView39"
+        app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
     <TextView
-        android:id="@+id/tv_exchange"
+        android:id="@+id/tv_change"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -105,7 +103,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView38"
         app:layout_constraintTop_toTopOf="@+id/textView38"
-        tools:text="@string/exchange" />
+        tools:text="@string/change" />
 
     <Button
         android:id="@+id/btn_process"
@@ -118,16 +116,77 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_exchange" />
+        app:layout_constraintTop_toBottomOf="@+id/textView38" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/idr"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_large"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView36"
+        app:layout_constraintEnd_toStartOf="@+id/edt_discount"
+        app:layout_constraintStart_toStartOf="@+id/tv_change"
+        app:layout_constraintTop_toTopOf="@+id/textView36" />
+
+    <TextView
+        android:id="@+id/textView39"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/payment"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_large"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/tv_change"
+        app:layout_constraintEnd_toStartOf="@+id/textView40"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView36" />
+
+    <EditText
+        android:id="@+id/edt_payment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="@string/payment"
+        android:inputType="number"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_large"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView39"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView40"
+        app:layout_constraintTop_toTopOf="@+id/textView39"
+        android:importantForAutofill="no" />
+
+    <TextView
+        android:id="@+id/textView40"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/idr"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_large"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView39"
+        app:layout_constraintEnd_toStartOf="@+id/edt_payment"
+        app:layout_constraintStart_toStartOf="@+id/tv_change"
+        app:layout_constraintTop_toTopOf="@+id/textView39" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

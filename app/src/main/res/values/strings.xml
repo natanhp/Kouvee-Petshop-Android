@@ -143,7 +143,7 @@
     <string name="more_stock">Stock Paling Banyak</string>
     <string name="title_activity_payment">PaymentActivity</string>
     <string name="discount">Diskon</string>
-    <string name="exchange">Kembalian</string>
+    <string name="change">Kembalian</string>
     <string name="transaction_code">Kode Transaksi</string>
     <string name="product_payment">Pembayaran Produk</string>
 
@@ -151,4 +151,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="transaction_deletion">Penghapusan Transaksi</string>
     <string name="transaction_deletetion_confirmation">Apakah anda yakin akan menghapus transaksi?</string>
+    <string name="member_discount">Diskon Member</string>
+    <string name="idr">Rp</string>
+    <string name="payment">Pembayaran</string>
+    <string name="price">Harga</string>
+    <string name="payment_not_enough">Pembayaran kurang</string>
 </resources>

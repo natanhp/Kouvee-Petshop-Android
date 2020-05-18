@@ -1,6 +1,9 @@
 package com.p3lj2.koveepetshop.view.cashier.payment;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,34 +27,45 @@ import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.adapter.ProductTransactionDetailAdapter;
 import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.model.ProductTransactionDetailModel;
+import com.p3lj2.koveepetshop.model.ProductTransactionModel;
 import com.p3lj2.koveepetshop.util.EventClickListener;
 import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.viewmodel.ProductTransactionViewModel;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
+import butterknife.BindViews;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ProductPaymentFragment extends Fragment {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
-    @BindView(R.id.tv_total)
-    TextView tvTotal;
+    @BindViews({R.id.tv_total, R.id.tv_change})
+    List<TextView> textViews;
+
+    @BindViews({R.id.edt_discount, R.id.edt_payment})
+    List<EditText> editTexts;
 
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
     private ProductTransactionDetailAdapter productTransactionDetailAdapter;
     private ProductTransactionViewModel productTransactionViewModel;
-    private int total;
-    private Boolean isSuccess;
+    private static double total;
+    private static double change;
+    private static double discount = 0;
+    private static Boolean isSuccess;
     private EmployeeModel employee;
+    private ProductTransactionModel productTransactionModel;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return LayoutInflater.from(getContext()).inflate(R.layout.fragment_product_payment, container, false);
     }
@@ -59,16 +75,19 @@ public class ProductPaymentFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         ButterKnife.bind(this, view);
+
         if (getArguments() != null) {
-            String title = ProductPaymentFragmentArgs.fromBundle(getArguments()).getProductTransactionId();
-            Objects.requireNonNull(((PaymentActivity) requireActivity()).getSupportActionBar()).setTitle(title);
+            productTransactionModel = ProductPaymentFragmentArgs.fromBundle(getArguments()).getProductTransaction();
+            Objects.requireNonNull(((PaymentActivity) requireActivity()).getSupportActionBar()).setTitle(productTransactionModel.getId());
         }
 
         productTransactionViewModel = new ViewModelProvider.AndroidViewModelFactory(requireActivity().getApplication()).create(ProductTransactionViewModel.class);
+        isSuccessHandler();
         loadingStateHandler();
         getEmployeeData();
         initRecyclerView();
         deleteOnSwipe();
+        hanclerPayment();
     }
 
     private void initRecyclerView() {
@@ -79,12 +98,7 @@ public class ProductPaymentFragment extends Fragment {
         getProductTransactionDetail();
     }
 
-    private EventClickListener eventClickListener = new EventClickListener() {
-        @Override
-        public void onEventClick(int position, @Nullable Integer viewId) {
-            updateCart(position);
-        }
-    };
+    private EventClickListener eventClickListener = (position, viewId) -> updateCart(position);
 
     private void updateCart(int position) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.product_quantity_input, requireView().findViewById(android.R.id.content), false);
@@ -147,7 +161,7 @@ public class ProductPaymentFragment extends Fragment {
                 }
 
                 String totalString = "Rp " + total;
-                tvTotal.setText(totalString);
+                textViews.get(0).setText(totalString);
                 productTransactionDetailAdapter.setProductTransactionDetailModels(productTransactionDetailModels);
             }
         });
@@ -185,5 +199,98 @@ public class ProductPaymentFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void hanclerPayment() {
+        if (productTransactionModel.getCustomer().getName().equalsIgnoreCase("-")) {
+            editTexts.get(0).setEnabled(false);
+            discount = 0;
+        }
+
+        editTexts.get(0).addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String paymentStr = editTexts.get(1).getText().toString().trim();
+                String discountStr = editable.toString().trim();
+                if (!paymentStr.isEmpty() && !discountStr.isEmpty()) {
+                    double payment = Double.parseDouble(paymentStr);
+                    discount = Double.parseDouble(discountStr);
+                    double tmpTotal = total;
+                    change = payment + discount - tmpTotal;
+
+                    String totalStr = "Rp " + change;
+                    productTransactionViewModel.setStrTotal(totalStr);
+                }
+            }
+        });
+
+        editTexts.get(1).addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String paymentStr = editable.toString().trim();
+                String discountStr = editTexts.get(0).getText().toString().trim();
+                if (!paymentStr.isEmpty()) {
+                    double payment = Double.parseDouble(paymentStr);
+                    if (!discountStr.isEmpty()){
+                        discount = Double.parseDouble(discountStr);
+                    }
+                    double tmpTotal = total;
+                    change = payment + discount - tmpTotal;
+                    String totalStr = "Rp " + change;
+                    productTransactionViewModel.setStrTotal(totalStr);
+                }
+            }
+        });
+
+        productTransactionViewModel.getStrTotal().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                EditText editText = editTexts.get(1);
+                textViews.get(1).setText(s);
+                editText.setError(null);
+                if (change < 0)  {
+                    editText.setError(getString(R.string.payment_not_enough));
+                }
+            }
+        });
+    }
+
+    @OnClick(R.id.btn_process)
+    void onClickProcess(View view) {
+        if (change >= 0) {
+            productTransactionViewModel.confirm(employee.getToken(), productTransactionModel);
+            boolean checkSuccess = isSuccess != null ? isSuccess : false;
+            if (checkSuccess) {
+                Util.createProductTransactionInvoice(requireContext(), productTransactionModel, employee, total, discount);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        NavDirections navDirections = ProductPaymentFragmentDirections.actionNavigationProductPaymentToNavigationProductTransactionList();
+                        Navigation.findNavController(requireView()).navigate(navDirections);
+                    }
+                }, 3500);
+            }
+        }
     }
 }
