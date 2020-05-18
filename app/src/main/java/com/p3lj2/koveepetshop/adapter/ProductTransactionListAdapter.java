@@ -59,7 +59,7 @@ public class ProductTransactionListAdapter extends RecyclerView.Adapter<ProductT
 
         public void viewBinder(ProductTransactionModel productTransactionModel) {
             textViews.get(0).setText(productTransactionModel.getId());
-            textViews.get(1).setText(productTransactionModel.getCustomerName());
+            textViews.get(1).setText(productTransactionModel.getCustomer().getName());
         }
 
         @Override
