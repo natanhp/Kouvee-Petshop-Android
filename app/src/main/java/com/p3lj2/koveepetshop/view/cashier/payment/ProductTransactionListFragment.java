@@ -75,7 +75,7 @@ public class ProductTransactionListFragment extends Fragment {
             ProductTransactionModel productTransactionModel = productTransactionListAdapter.getProductTransactionModels().get(position);
             List<ProductTransactionDetailModel> productTransactionDetailModels = productTransactionModel.getProductTransactionkDetails();
             productTransactionViewModel.setProductTransactionDetails(productTransactionDetailModels);
-            NavDirections directions = ProductTransactionListFragmentDirections.actionNavigationProductTransactionListToNavigationProductPayment(productTransactionModel.getId());
+            NavDirections directions = ProductTransactionListFragmentDirections.actionNavigationProductTransactionListToNavigationProductPayment(productTransactionModel);
             Navigation.findNavController(requireView()).navigate(directions);
         }
     };
