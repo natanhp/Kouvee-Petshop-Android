@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         ButterKnife.bind(this);
 
@@ -150,5 +151,10 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.btn_service_list)
     public void onClickServiceList(View view) {
         startActivity(new Intent(LoginActivity.this, ServiceListActivity.class));
+    }
+
+    @OnClick(R.id.btn_about_us)
+    public void onClickAboutUs(View view) {
+        startActivity(new Intent(LoginActivity.this, AboutUsActivity.class));
     }
 }
