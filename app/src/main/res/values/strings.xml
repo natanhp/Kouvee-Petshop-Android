@@ -156,4 +156,5 @@
     <string name="payment">Pembayaran</string>
     <string name="price">Harga</string>
     <string name="payment_not_enough">Pembayaran kurang</string>
+    <string name="service_transaction">Transaksi Service</string>
 </resources>
