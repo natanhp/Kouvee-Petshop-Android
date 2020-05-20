@@ -26,7 +26,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="0dp"
-        android:layout_height="443dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
@@ -98,7 +98,6 @@
             android:layout_marginTop="8dp"
             android:text="@string/pet"
             android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@+id/btn_logout"
             app:layout_constraintEnd_toEndOf="@+id/btn_pet"
             app:layout_constraintStart_toStartOf="@+id/btn_pet"
             app:layout_constraintTop_toBottomOf="@+id/btn_pet" />
@@ -130,26 +129,25 @@
             android:id="@+id/btn_logout"
             android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
             android:contentDescription="@string/logout"
             android:src="@drawable/logout"
-            app:layout_constraintBottom_toTopOf="@+id/textView29"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_service_transaction"
             app:layout_constraintEnd_toEndOf="@+id/btn_product_transaction"
-            app:layout_constraintStart_toStartOf="@+id/btn_pet"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintStart_toEndOf="@+id/btn_service_transaction"
+            app:layout_constraintTop_toTopOf="@+id/btn_service_transaction" />
 
         <TextView
             android:id="@+id/textView29"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:text="@string/logout"
             android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/textView41"
             app:layout_constraintEnd_toEndOf="@+id/btn_logout"
             app:layout_constraintStart_toStartOf="@+id/btn_logout"
-            app:layout_constraintTop_toBottomOf="@+id/btn_logout" />
+            app:layout_constraintTop_toTopOf="@+id/textView41"
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageButton
             android:id="@+id/btn_product_transaction"
@@ -158,11 +156,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/product_transaction"
+            android:contentDescription="@string/product_transaction"
             app:layout_constraintBottom_toBottomOf="@+id/btn_customer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btn_customer"
-            app:layout_constraintTop_toTopOf="@+id/btn_customer"
-            android:contentDescription="@string/product_transaction" />
+            app:layout_constraintTop_toTopOf="@+id/btn_customer" />
 
         <TextView
             android:id="@+id/textView25"
@@ -174,6 +172,31 @@
             app:layout_constraintEnd_toEndOf="@+id/btn_product_transaction"
             app:layout_constraintStart_toStartOf="@+id/btn_product_transaction"
             app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+        <ImageButton
+            android:id="@+id/btn_service_transaction"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/service_detail"
+            app:layout_constraintBottom_toTopOf="@+id/textView41"
+            app:layout_constraintEnd_toStartOf="@+id/btn_logout"
+            app:layout_constraintStart_toStartOf="@+id/btn_pet"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            android:contentDescription="@string/service_transaction" />
+
+        <TextView
+            android:id="@+id/textView41"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/service_transaction"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/btn_service_transaction"
+            app:layout_constraintStart_toStartOf="@+id/btn_service_transaction"
+            app:layout_constraintTop_toBottomOf="@+id/btn_service_transaction" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.view.product.transaction.ProductTransactionActivity;
+import com.p3lj2.koveepetshop.view.service.transaction.ServiceListActivity;
 import com.p3lj2.koveepetshop.viewmodel.EmployeeViewModel;
 
 import butterknife.ButterKnife;
@@ -41,6 +42,11 @@ public class CSMenuActivity extends AppCompatActivity {
     @OnClick(R.id.btn_product_transaction)
     public void onClickProductTransaction(View view) {
         startActivity(new Intent(this, ProductTransactionActivity.class));
+    }
+
+    @OnClick(R.id.btn_service_transaction)
+    public void onClickServiceTransaction(View view) {
+        startActivity(new Intent(this, ServiceListActivity.class));
     }
 
     @OnClick(R.id.btn_logout)
