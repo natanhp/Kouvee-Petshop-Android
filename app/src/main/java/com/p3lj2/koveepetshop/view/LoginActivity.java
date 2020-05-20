@@ -19,6 +19,7 @@ import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.model.FCMModel;
 import com.p3lj2.koveepetshop.view.cashier.payment.PaymentActivity;
+import com.p3lj2.koveepetshop.view.service.transaction.ServiceListActivity;
 import com.p3lj2.koveepetshop.viewmodel.EmployeeViewModel;
 
 import java.util.List;
@@ -138,5 +139,15 @@ public class LoginActivity extends AppCompatActivity {
                 notificationManager.createNotificationChannel(channel);
             }
         }
+    }
+
+    @OnClick(R.id.btn_product_list)
+    public void onClickProductList(View view) {
+//        TODO = Create a product list activity
+    }
+
+    @OnClick(R.id.btn_service_list)
+    public void onClickServiceList(View view) {
+        startActivity(new Intent(LoginActivity.this, ServiceListActivity.class));
     }
 }

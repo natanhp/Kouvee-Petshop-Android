@@ -157,4 +157,6 @@
     <string name="price">Harga</string>
     <string name="payment_not_enough">Pembayaran kurang</string>
     <string name="service_transaction">Transaksi Service</string>
+    <string name="guest_question_mark">Tamu?</string>
+    <string name="service_list">Daftar Layanan</string>
 </resources>
