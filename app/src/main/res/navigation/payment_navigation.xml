@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_product_transaction_list">
+
+    <fragment
+        android:id="@+id/navigation_product_transaction_list"
+        android:name="com.p3lj2.koveepetshop.view.cashier.payment.ProductTransactionListFragment"
+        android:label="@string/product_transaction"
+        tools:layout="@layout/fragment_product_transaction_list" >
+        <action
+            android:id="@+id/action_navigation_product_transaction_list_to_navigation_product_payment"
+            app:destination="@id/navigation_product_payment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_product_payment"
+        android:name="com.p3lj2.koveepetshop.view.cashier.payment.ProductPaymentFragment"
+        android:label="@string/product_payment"
+        tools:layout="@layout/fragment_product_payment">
+        <argument
+            android:name="product_transaction"
+            app:argType="com.p3lj2.koveepetshop.model.ProductTransactionModel" />
+        <action
+            android:id="@+id/action_navigation_product_payment_to_navigation_product_transaction_list"
+            app:destination="@id/navigation_product_transaction_list" />
+    </fragment>
+
+</navigation>
