@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.p3lj2.koveepetshop.R;
-import com.p3lj2.koveepetshop.model.ServiceDetailComplete;
+import com.p3lj2.koveepetshop.model.ServiceDetailModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ import lombok.Getter;
 
 public class ServiceListAdapter extends RecyclerView.Adapter<ServiceListAdapter.ViewHolder> {
     @Getter
-    private List<ServiceDetailComplete> serviceDetailCompletes = new ArrayList<>();
+    private List<ServiceDetailModel> serviceDetailModels = new ArrayList<>();
 
     @NonNull
     @Override
@@ -30,12 +30,12 @@ public class ServiceListAdapter extends RecyclerView.Adapter<ServiceListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ServiceListAdapter.ViewHolder holder, int position) {
-        holder.viewBinder(serviceDetailCompletes.get(position));
+        holder.viewBinder(serviceDetailModels.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return serviceDetailCompletes.size();
+        return serviceDetailModels.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -48,15 +48,15 @@ public class ServiceListAdapter extends RecyclerView.Adapter<ServiceListAdapter.
             ButterKnife.bind(this, itemView);
         }
 
-        public void viewBinder(ServiceDetailComplete serviceDetailComplete) {
-            textViews.get(0).setText(serviceDetailComplete.getServiceCompleteName());
-            String strPrice = "Rp " + serviceDetailComplete.getServiceDetailModel().getPrice();
+        public void viewBinder(ServiceDetailModel serviceDetailModel) {
+            textViews.get(0).setText(serviceDetailModel.getCompleteName());
+            String strPrice = "Rp " + serviceDetailModel.getPrice();
             textViews.get(1).setText(strPrice);
         }
     }
 
-    public void setServiceDetailCompletes(List<ServiceDetailComplete> serviceDetailCompletes) {
-        this.serviceDetailCompletes = serviceDetailCompletes;
+    public void setServiceDetailCompletes(List<ServiceDetailModel> serviceDetailModels) {
+        this.serviceDetailModels = serviceDetailModels;
         notifyDataSetChanged();
     }
 }

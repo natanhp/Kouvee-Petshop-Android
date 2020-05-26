@@ -161,4 +161,6 @@
     <string name="service_list">Daftar Layanan</string>
     <string name="about_us">Tentang Kami</string>
     <string name="kouvee_pet_shop_desc">Kouvee Pet Shop merupakan sebuah toko hewan yang sudah berdiri sejak tahun 2018 menyediakan produk dan jasa layanan yang berada di Kota Yogyakarta. Kouvee Pet Shop menyediakan berbagai macam produk untuk hewan kesayangan anda seperti makanan, aksesoris, perlengkapandan lain-lain sesuai kebutuhan hewan kesayangan anda. Selain menjual berbagai macam produk, Kouvee Pet Shop juga menyediakan jasa layanan seperti grooming dan penitipan hewan. Kouvee Pet Shop bekerja sama dengan beberapa supplier dalam penyediaan produk yang dijual.</string>
+    <string name="title_activity_service_transaction">ServiceTransactionActivity</string>
+    <string name="choose_pet">Pilih Peliharaan</string>
 </resources>

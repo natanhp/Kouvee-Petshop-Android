@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_service_list">
+
+    <fragment
+        android:id="@+id/navigation_service_list"
+        android:name="com.p3lj2.koveepetshop.view.service.transaction.ServiceListFragment"
+        android:label="@string/service_list"
+        tools:layout="@layout/fragment_service_list" />
+
+    <fragment
+        android:id="@+id/navigation_service_cart"
+        android:name="com.p3lj2.koveepetshop.view.service.transaction.ServiceCartFragment"
+        android:label="@string/cart"
+        tools:layout="@layout/fragment_service_cart" />
+</navigation>

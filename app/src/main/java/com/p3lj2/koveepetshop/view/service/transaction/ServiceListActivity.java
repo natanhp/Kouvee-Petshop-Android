@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.p3lj2.koveepetshop.R;
-import com.p3lj2.koveepetshop.adapter.ServiceListAdapter;
+import com.p3lj2.koveepetshop.adapter.ServiceListOnlyAdapter;
 import com.p3lj2.koveepetshop.model.ServiceDetailComplete;
 import com.p3lj2.koveepetshop.viewmodel.ServiceDetailViewModel;
 
@@ -27,7 +27,7 @@ public class ServiceListActivity extends AppCompatActivity {
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
-    private ServiceListAdapter serviceListAdapter;
+    private ServiceListOnlyAdapter serviceListAdapter;
     private ServiceDetailViewModel serviceDetailViewModel;
 
     @Override
@@ -43,7 +43,7 @@ public class ServiceListActivity extends AppCompatActivity {
     }
 
     private void initRecyclerView() {
-        serviceListAdapter = new ServiceListAdapter();
+        serviceListAdapter = new ServiceListOnlyAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.hasFixedSize();
         recyclerView.setAdapter(serviceListAdapter);

@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -34,6 +36,9 @@ public class CustomerModel implements Parcelable {
     @Expose
     private int deletedBy;
 
+    @Expose(serialize = false)
+    private List<PetModel> pets;
+
     public CustomerModel() {
     }
 
@@ -52,6 +57,7 @@ public class CustomerModel implements Parcelable {
         dest.writeInt(this.createdBy);
         dest.writeInt(this.updatedBy);
         dest.writeInt(this.deletedBy);
+        dest.writeTypedList(this.pets);
     }
 
     protected CustomerModel(Parcel in) {
@@ -63,9 +69,10 @@ public class CustomerModel implements Parcelable {
         this.createdBy = in.readInt();
         this.updatedBy = in.readInt();
         this.deletedBy = in.readInt();
+        this.pets = in.createTypedArrayList(PetModel.CREATOR);
     }
 
-    public static final Parcelable.Creator<CustomerModel> CREATOR = new Parcelable.Creator<CustomerModel>() {
+    public static final Creator<CustomerModel> CREATOR = new Creator<CustomerModel>() {
         @Override
         public CustomerModel createFromParcel(Parcel source) {
             return new CustomerModel(source);

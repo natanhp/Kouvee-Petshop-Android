@@ -4,10 +4,13 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.p3lj2.koveepetshop.endpoint.ServiceDetailEndpoint;
+import com.p3lj2.koveepetshop.model.ResponseSchema;
 import com.p3lj2.koveepetshop.model.ServiceDetailComplete;
 import com.p3lj2.koveepetshop.model.ServiceDetailModel;
 import com.p3lj2.koveepetshop.model.ServiceDetailSchema;
+import com.p3lj2.koveepetshop.model.ServiceTransactionModel;
 import com.p3lj2.koveepetshop.util.RetrofitInstance;
+import com.p3lj2.koveepetshop.util.Util;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -21,6 +24,7 @@ public class ServiceDetailRepository {
     private ServiceDetailEndpoint serviceDetailEndpoint;
     private static MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     private static MutableLiveData<List<ServiceDetailComplete>> serviceDetailCompletes = new MutableLiveData<>();
+    private static MutableLiveData<Object[]> isSuccess = new MutableLiveData<>();
 
     public ServiceDetailRepository() {
         RetrofitInstance retrofitInstance = RetrofitInstance.getRetrofitInstance();
@@ -92,7 +96,46 @@ public class ServiceDetailRepository {
         });
     }
 
+    public void insertTransaction(String bearerToken, ServiceTransactionModel serviceTransactionModel) {
+        isLoading.setValue(true);
+        isSuccess = new MutableLiveData<>();
+        Object[] objects = new Object[2];
+        serviceDetailEndpoint.insertTransaction("Bearer " + bearerToken, serviceTransactionModel).enqueue(new Callback<ResponseSchema<ServiceTransactionModel>>() {
+            @Override
+            public void onResponse(@NotNull Call<ResponseSchema<ServiceTransactionModel>> call, @NotNull Response<ResponseSchema<ServiceTransactionModel>> response) {
+                if (response.code() == 200 && response.body() != null) {
+                    objects[0] = true;
+                    objects[1] = response.body().getMessage();
+                } else {
+                    objects[0] = false;
+                    objects[1] = "Transaksi gagal";
+                }
+
+                if (response.code() == 400 && response.errorBody() != null) {
+                    objects[0] = false;
+                    objects[1] = Util.retrofitErrorHandler(response);
+                }
+
+                isSuccess.postValue(objects);
+                isLoading.postValue(false);
+            }
+
+            @Override
+            public void onFailure(@NotNull Call<ResponseSchema<ServiceTransactionModel>> call, @NotNull Throwable t) {
+                objects[0] = false;
+                objects[1] = "Transaksi gagal";
+
+                isLoading.postValue(false);
+                isSuccess.postValue(objects);
+            }
+        });
+    }
+
     public LiveData<Boolean> getIsLoading() {
         return isLoading;
+    }
+
+    public LiveData<Object[]> getIsSuccess() {
+        return isSuccess;
     }
 }

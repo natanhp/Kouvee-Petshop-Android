@@ -1,7 +1,9 @@
 package com.p3lj2.koveepetshop.endpoint;
 
+import com.p3lj2.koveepetshop.model.ResponseSchema;
 import com.p3lj2.koveepetshop.model.ServiceDetailModel;
 import com.p3lj2.koveepetshop.model.ServiceDetailSchema;
+import com.p3lj2.koveepetshop.model.ServiceTransactionModel;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -24,4 +26,7 @@ public interface ServiceDetailEndpoint {
 
     @DELETE("servicedetails/delete/{id}")
     Call<ServiceDetailSchema> delete(@Header("Authorization") String bearerToken, @Path("id") int serviceDetailId);
+
+    @POST("servicetransaction/cs/insert")
+    Call<ResponseSchema<ServiceTransactionModel>> insertTransaction(@Header("Authorization") String bearerToken, @Body ServiceTransactionModel serviceTransactionModel);
 }

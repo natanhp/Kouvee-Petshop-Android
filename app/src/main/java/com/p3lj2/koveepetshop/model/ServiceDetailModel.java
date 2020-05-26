@@ -34,6 +34,10 @@ public class ServiceDetailModel implements Parcelable {
     @SerializedName("Services_id")
     private int serviceId;
 
+    @Expose(serialize = false)
+    @SerializedName("complete_name")
+    private String completeName;
+
     public ServiceDetailModel() {
     }
 
@@ -51,6 +55,7 @@ public class ServiceDetailModel implements Parcelable {
         dest.writeInt(this.petSizeId);
         dest.writeInt(this.petTypeId);
         dest.writeInt(this.serviceId);
+        dest.writeString(this.completeName);
     }
 
     protected ServiceDetailModel(Parcel in) {
@@ -61,9 +66,10 @@ public class ServiceDetailModel implements Parcelable {
         this.petSizeId = in.readInt();
         this.petTypeId = in.readInt();
         this.serviceId = in.readInt();
+        this.completeName = in.readString();
     }
 
-    public static final Parcelable.Creator<ServiceDetailModel> CREATOR = new Parcelable.Creator<ServiceDetailModel>() {
+    public static final Creator<ServiceDetailModel> CREATOR = new Creator<ServiceDetailModel>() {
         @Override
         public ServiceDetailModel createFromParcel(Parcel source) {
             return new ServiceDetailModel(source);

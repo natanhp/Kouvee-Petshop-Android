@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.util.Util;
 import com.p3lj2.koveepetshop.view.product.transaction.ProductTransactionActivity;
-import com.p3lj2.koveepetshop.view.service.transaction.ServiceListActivity;
+import com.p3lj2.koveepetshop.view.service.transaction.ServiceTransactionActivity;
 import com.p3lj2.koveepetshop.viewmodel.EmployeeViewModel;
 
 import butterknife.ButterKnife;
@@ -46,12 +46,12 @@ public class CSMenuActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_service_transaction)
     public void onClickServiceTransaction(View view) {
-        startActivity(new Intent(this, ServiceListActivity.class));
+        startActivity(new Intent(this, ServiceTransactionActivity.class));
     }
 
     @OnClick(R.id.btn_logout)
     public void logoutOnClick(View view) {
-        Util.confirmationDialog(getString(R.string.logout), getString(R.string.logout_confirmation),this)
+        Util.confirmationDialog(getString(R.string.logout), getString(R.string.logout_confirmation), this)
                 .setPositiveButton(getString(R.string.yes), (dialogInterface, i) -> employeeViewModel.getEmployee().observe(this, employeeDataModel -> {
                     employeeViewModel.delete(employeeDataModel);
                     startActivity(new Intent(CSMenuActivity.this, LoginActivity.class));
