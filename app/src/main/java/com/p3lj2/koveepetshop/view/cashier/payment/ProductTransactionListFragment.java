@@ -73,7 +73,7 @@ public class ProductTransactionListFragment extends Fragment {
         @Override
         public void onEventClick(int position, @Nullable Integer viewId) {
             ProductTransactionModel productTransactionModel = productTransactionListAdapter.getProductTransactionModels().get(position);
-            List<ProductTransactionDetailModel> productTransactionDetailModels = productTransactionModel.getProductTransactionkDetails();
+            List<ProductTransactionDetailModel> productTransactionDetailModels = productTransactionModel.getProductTransactionDetails();
             productTransactionViewModel.setProductTransactionDetails(productTransactionDetailModels);
             NavDirections directions = ProductTransactionListFragmentDirections.actionNavigationProductTransactionListToNavigationProductPayment(productTransactionModel);
             Navigation.findNavController(requireView()).navigate(directions);

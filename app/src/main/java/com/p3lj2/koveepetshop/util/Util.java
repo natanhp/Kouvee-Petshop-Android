@@ -246,7 +246,7 @@ public class Util {
         List<ProductTransactionDetailModel> productTransactionDetailModels = new ArrayList<>();
         ProductTransactionDetailModel productTransactionDetailModel = new ProductTransactionDetailModel();
         productTransactionDetailModels.add(productTransactionDetailModel);
-        productTransactionDetailModels.addAll(productTransactionModel.getProductTransactionkDetails());
+        productTransactionDetailModels.addAll(productTransactionModel.getProductTransactionDetails());
         y += productImgResized.getHeight() + 10;
         for (int i = 0; i < productTransactionDetailModels.size(); i++) {
             canvas.drawLine(xTransactionCode, y, canvas.getWidth() - xTransactionCode, y, paint);

@@ -33,7 +33,7 @@ public class ProductTransactionModel implements Parcelable {
     private int isPaid;
 
     @Expose
-    private List<ProductTransactionDetailModel> productTransactionkDetails;
+    private List<ProductTransactionDetailModel> productTransactionDetails;
 
     @Expose(serialize = false)
     @SerializedName("cs_name")
@@ -61,7 +61,7 @@ public class ProductTransactionModel implements Parcelable {
         dest.writeInt(this.updatedBy);
         dest.writeValue(this.customerId);
         dest.writeInt(this.isPaid);
-        dest.writeTypedList(this.productTransactionkDetails);
+        dest.writeTypedList(this.productTransactionDetails);
         dest.writeString(this.csName);
         dest.writeParcelable(this.customer, flags);
         dest.writeString(this.createdAt);
@@ -74,7 +74,7 @@ public class ProductTransactionModel implements Parcelable {
         this.updatedBy = in.readInt();
         this.customerId = (Integer) in.readValue(Integer.class.getClassLoader());
         this.isPaid = in.readInt();
-        this.productTransactionkDetails = in.createTypedArrayList(ProductTransactionDetailModel.CREATOR);
+        this.productTransactionDetails = in.createTypedArrayList(ProductTransactionDetailModel.CREATOR);
         this.csName = in.readString();
         this.customer = in.readParcelable(CustomerModel.class.getClassLoader());
         this.createdAt = in.readString();

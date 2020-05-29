@@ -259,7 +259,7 @@ public class CartFragment extends Fragment {
             productTransactionDetailModels.add(productTransactionDetailModel);
         }
 
-        productTransactionModel.setProductTransactionkDetails(productTransactionDetailModels);
+        productTransactionModel.setProductTransactionDetails(productTransactionDetailModels);
 
         productTransactionViewModel.insert(employee.getToken(), productTransactionModel);
 
