@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/log_navigation"
+    app:startDestination="@id/logFragment">
+
+    <fragment
+        android:id="@+id/logFragment"
+        android:name="com.p3lj2.koveepetshop.view.log.LogFragment"
+        android:label="LogFragment"
+        tools:layout="@layout/log_fragment">
+        <action
+            android:id="@+id/action_logFragment_to_productLogFragment"
+            app:destination="@id/productLogFragment" />
+        <action
+            android:id="@+id/action_logFragment_to_supplierLogFragment"
+            app:destination="@id/supplierLogFragment" />
+        <action
+            android:id="@+id/action_logFragment_to_employeeLogFragment"
+            app:destination="@id/employeeLogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productLogFragment"
+        android:name="com.p3lj2.koveepetshop.view.log.ProductLogFragment"
+        android:label="Log Produk"
+        tools:layout="@layout/fragment_product_log" />
+    <fragment
+        android:id="@+id/supplierLogFragment"
+        android:name="com.p3lj2.koveepetshop.view.log.SupplierLogFragment"
+        android:label="Log Supplier"
+        tools:layout="@layout/fragment_supplier_log" />
+    <fragment
+        android:id="@+id/employeeLogFragment"
+        android:name="com.p3lj2.koveepetshop.view.log.EmployeeLogFragment"
+        android:label="Log Pegawai"
+        tools:layout="@layout/fragment_employee_log" />
+</navigation>

@@ -13,6 +13,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.util.Util;
+import com.p3lj2.koveepetshop.view.log.LogActivity;
 import com.p3lj2.koveepetshop.view.restock.RestockActivity;
 import com.p3lj2.koveepetshop.viewmodel.EmployeeViewModel;
 
@@ -82,6 +83,11 @@ public class OwnerMenuActivity extends AppCompatActivity {
     @OnClick(R.id.btn_service_detail)
     public void serviceDetailOnClick(View view) {
         startActivity(new Intent(this, ServiceDetailActivity.class));
+    }
+
+    @OnClick(R.id.btn_log)
+    public void logOnClick(View view) {
+        startActivity(new Intent(this, LogActivity.class));
     }
 
     @OnClick(R.id.btn_logout)

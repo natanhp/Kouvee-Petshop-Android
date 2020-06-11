@@ -123,4 +123,45 @@
     <string name="max_10_chars">Maksimal 10 karakter</string>
     <string name="number_only_product_qty">Jumlah produk hanya boleh angka</string>
     <string name="phone_number_max">Nomor telepon maksimal 15 karakter</string>
+    <string name="title_activity_product_transaction">ProductTransactionActivity</string>
+    <string name="product_stock_left">Tersisa</string>
+    <string name="add">Tambah</string>
+    <string name="product_transaction">Transaksi Produk</string>
+    <string name="buy_product">Beli Produk</string>
+    <string name="product_list">Daftar Produk</string>
+    <string name="sub_total">Sub Total</string>
+    <string name="total">Total</string>
+    <string name="checkout">Checkout</string>
+    <string name="cart">Keranjang</string>
+    <string name="ubah">Edit</string>
+    <string name="choose_customer">Pilih Customer</string>
+    <string name="sort">Urutkan</string>
+    <string name="higher_price">Harga Tertinggi</string>
+    <string name="lower_price">Harga Terendah</string>
+    <string name="sort_product">Urutkan Produk</string>
+    <string name="least_stock">Stock Paling Sedikit</string>
+    <string name="more_stock">Stock Paling Banyak</string>
+    <string name="title_activity_payment">PaymentActivity</string>
+    <string name="discount">Diskon</string>
+    <string name="change">Kembalian</string>
+    <string name="transaction_code">Kode Transaksi</string>
+    <string name="product_payment">Pembayaran Produk</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="transaction_deletion">Penghapusan Transaksi</string>
+    <string name="transaction_deletetion_confirmation">Apakah anda yakin akan menghapus transaksi?</string>
+    <string name="member_discount">Diskon Member</string>
+    <string name="idr">Rp</string>
+    <string name="payment">Pembayaran</string>
+    <string name="price">Harga</string>
+    <string name="payment_not_enough">Pembayaran kurang</string>
+    <string name="service_transaction">Transaksi Service</string>
+    <string name="guest_question_mark">Tamu?</string>
+    <string name="service_list">Daftar Layanan</string>
+    <string name="about_us">Tentang Kami</string>
+    <string name="kouvee_pet_shop_desc">Kouvee Pet Shop merupakan sebuah toko hewan yang sudah berdiri sejak tahun 2018 menyediakan produk dan jasa layanan yang berada di Kota Yogyakarta. Kouvee Pet Shop menyediakan berbagai macam produk untuk hewan kesayangan anda seperti makanan, aksesoris, perlengkapandan lain-lain sesuai kebutuhan hewan kesayangan anda. Selain menjual berbagai macam produk, Kouvee Pet Shop juga menyediakan jasa layanan seperti grooming dan penitipan hewan. Kouvee Pet Shop bekerja sama dengan beberapa supplier dalam penyediaan produk yang dijual.</string>
+    <string name="title_activity_service_transaction">ServiceTransactionActivity</string>
+    <string name="choose_pet">Pilih Peliharaan</string>
+    <string name="name">Nama</string>
 </resources>

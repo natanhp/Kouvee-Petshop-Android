@@ -10,11 +10,13 @@
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="0dp"
-        android:layout_height="201dp"
+        android:layout_height="0dp"
         android:background="@color/brown"
-        android:contentDescription="Kovee Pet Shop Logo"
+        android:contentDescription="@string/kouvee_pet_shop_logo"
         android:src="@drawable/kouve_mobile"
+        app:layout_constraintBottom_toTopOf="@+id/edt_username"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,6 +30,7 @@
         android:ems="10"
         android:hint="@string/username"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/edt_password"
         app:layout_constraintEnd_toEndOf="@+id/image_view"
         app:layout_constraintStart_toStartOf="@+id/image_view"
         app:layout_constraintTop_toBottomOf="@+id/image_view" />
@@ -39,7 +42,9 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/password"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/btn_login"
         app:layout_constraintEnd_toEndOf="@+id/edt_username"
         app:layout_constraintStart_toStartOf="@+id/edt_username"
         app:layout_constraintTop_toBottomOf="@+id/edt_username" />
@@ -48,15 +53,14 @@
         android:id="@+id/btn_login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/login"
         android:background="@color/olive_green"
+        android:text="@string/login"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView42"
         app:layout_constraintEnd_toEndOf="@+id/edt_password"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/edt_password"
-        app:layout_constraintTop_toBottomOf="@+id/edt_password"
-        app:layout_constraintVertical_bias="0.185" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_password" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -68,4 +72,52 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/guest_question_mark"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/btn_product_list"
+        app:layout_constraintEnd_toEndOf="@+id/btn_login"
+        app:layout_constraintStart_toStartOf="@+id/btn_login"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+    <Button
+        android:id="@+id/btn_product_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/product_list"
+        app:layout_constraintBottom_toTopOf="@+id/btn_service_list"
+        app:layout_constraintEnd_toEndOf="@+id/textView42"
+        app:layout_constraintStart_toStartOf="@+id/textView42"
+        app:layout_constraintTop_toBottomOf="@+id/textView42" />
+
+    <Button
+        android:id="@+id/btn_service_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/service_list"
+        app:layout_constraintBottom_toTopOf="@+id/btn_about_us"
+        app:layout_constraintEnd_toEndOf="@+id/btn_product_list"
+        app:layout_constraintStart_toStartOf="@+id/btn_product_list"
+        app:layout_constraintTop_toBottomOf="@+id/btn_product_list" />
+
+    <Button
+        android:id="@+id/btn_about_us"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="142dp"
+        android:text="@string/about_us"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_service_list" />
 </androidx.constraintlayout.widget.ConstraintLayout>

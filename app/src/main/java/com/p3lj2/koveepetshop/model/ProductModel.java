@@ -33,8 +33,27 @@ public class ProductModel implements Parcelable {
     @Expose
     private int minimumQty;
 
+    @Expose(serialize = false)
+    private EmployeeModel creator;
+
+    @Expose(serialize = false)
+    private EmployeeModel updater;
+
+    @Expose(serialize = false)
+    private EmployeeModel deletor;
+
+    @Expose(serialize = false)
+    private String createdAt;
+
+    @Expose(serialize = false)
+    private String updatedAt;
+
+    @Expose(serialize = false)
+    private String deletedAt;
+
     public ProductModel() {
     }
+
 
     @Override
     public int describeContents() {
@@ -51,6 +70,12 @@ public class ProductModel implements Parcelable {
         dest.writeInt(this.createdBy);
         dest.writeInt(this.updatedBy);
         dest.writeInt(this.minimumQty);
+        dest.writeParcelable(this.creator, flags);
+        dest.writeParcelable(this.updater, flags);
+        dest.writeParcelable(this.deletor, flags);
+        dest.writeString(this.createdAt);
+        dest.writeString(this.updatedAt);
+        dest.writeString(this.deletedAt);
     }
 
     protected ProductModel(Parcel in) {
@@ -62,9 +87,15 @@ public class ProductModel implements Parcelable {
         this.createdBy = in.readInt();
         this.updatedBy = in.readInt();
         this.minimumQty = in.readInt();
+        this.creator = in.readParcelable(EmployeeModel.class.getClassLoader());
+        this.updater = in.readParcelable(EmployeeModel.class.getClassLoader());
+        this.deletor = in.readParcelable(EmployeeModel.class.getClassLoader());
+        this.createdAt = in.readString();
+        this.updatedAt = in.readString();
+        this.deletedAt = in.readString();
     }
 
-    public static final Parcelable.Creator<ProductModel> CREATOR = new Parcelable.Creator<ProductModel>() {
+    public static final Creator<ProductModel> CREATOR = new Creator<ProductModel>() {
         @Override
         public ProductModel createFromParcel(Parcel source) {
             return new ProductModel(source);

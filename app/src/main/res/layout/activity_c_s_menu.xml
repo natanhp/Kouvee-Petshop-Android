@@ -12,40 +12,41 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="4dp"
         android:background="#70843d"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:text="@string/home"
         android:textColor="#fefefe"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="#8b8979"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.061">
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:contentDescription="@string/legt_paw"
             android:src="@drawable/paw_left"
+            app:layout_constraintBottom_toTopOf="@+id/btn_pet"
             app:layout_constraintEnd_toStartOf="@+id/textView2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -54,93 +55,148 @@
             android:id="@+id/textView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="8dp"
             android:text="@string/cs_menu"
+            android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toStartOf="@+id/imageView2"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="@+id/imageView" />
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:contentDescription="@string/right_paw"
             android:src="@drawable/paw_right"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView2"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/imageView" />
 
         <ImageButton
             android:id="@+id/btn_pet"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/pets"
             android:contentDescription="@string/product"
+            app:layout_constraintBottom_toTopOf="@+id/textView3"
             app:layout_constraintEnd_toStartOf="@+id/btn_customer"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/pet"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="@+id/btn_pet"
             app:layout_constraintStart_toStartOf="@+id/btn_pet"
             app:layout_constraintTop_toBottomOf="@+id/btn_pet" />
 
         <ImageView
             android:id="@+id/btn_customer"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginStart="8dp"
             android:contentDescription="@string/pet_type"
             android:src="@drawable/customer"
             app:layout_constraintBottom_toBottomOf="@+id/btn_pet"
-            app:layout_constraintEnd_toStartOf="@+id/btn_logout"
+            app:layout_constraintEnd_toStartOf="@+id/btn_product_transaction"
             app:layout_constraintStart_toEndOf="@+id/btn_pet"
-            app:layout_constraintTop_toTopOf="@+id/btn_pet"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="@+id/btn_pet" />
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="@string/customer"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/textView3"
             app:layout_constraintEnd_toEndOf="@+id/btn_customer"
             app:layout_constraintStart_toStartOf="@+id/btn_customer"
-            app:layout_constraintTop_toBottomOf="@+id/btn_customer" />
+            app:layout_constraintTop_toTopOf="@+id/textView3" />
 
         <ImageView
             android:id="@+id/btn_logout"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="100dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:contentDescription="@string/logout"
             android:src="@drawable/logout"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_service_transaction"
+            app:layout_constraintEnd_toEndOf="@+id/btn_product_transaction"
+            app:layout_constraintStart_toEndOf="@+id/btn_service_transaction"
+            app:layout_constraintTop_toTopOf="@+id/btn_service_transaction" />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/logout"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/textView41"
+            app:layout_constraintEnd_toEndOf="@+id/btn_logout"
+            app:layout_constraintStart_toStartOf="@+id/btn_logout"
+            app:layout_constraintTop_toTopOf="@+id/textView41"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageButton
+            android:id="@+id/btn_product_transaction"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/product_transaction"
+            android:contentDescription="@string/product_transaction"
             app:layout_constraintBottom_toBottomOf="@+id/btn_customer"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btn_customer"
             app:layout_constraintTop_toTopOf="@+id/btn_customer" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/textView25"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/product_transaction"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/textView4"
+            app:layout_constraintEnd_toEndOf="@+id/btn_product_transaction"
+            app:layout_constraintStart_toStartOf="@+id/btn_product_transaction"
+            app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+        <ImageButton
+            android:id="@+id/btn_service_transaction"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/service_detail"
+            app:layout_constraintBottom_toTopOf="@+id/textView41"
+            app:layout_constraintEnd_toStartOf="@+id/btn_logout"
+            app:layout_constraintStart_toStartOf="@+id/btn_pet"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            android:contentDescription="@string/service_transaction" />
+
+        <TextView
+            android:id="@+id/textView41"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/logout"
-            app:layout_constraintEnd_toEndOf="@+id/btn_logout"
-            app:layout_constraintStart_toStartOf="@+id/btn_logout"
-            app:layout_constraintTop_toBottomOf="@+id/btn_logout" />
+            android:layout_marginBottom="8dp"
+            android:text="@string/service_transaction"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/btn_service_transaction"
+            app:layout_constraintStart_toStartOf="@+id/btn_service_transaction"
+            app:layout_constraintTop_toBottomOf="@+id/btn_service_transaction" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -14,6 +14,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".view.log.LogActivity"></activity>
+        <activity
+            android:name=".view.service.transaction.ServiceTransactionActivity"
+            android:label="@string/title_activity_service_transaction" />
+        <activity android:name=".view.AboutUsActivity" />
+        <activity android:name=".view.product.guest.ProductListActivity" />
+        <activity
+            android:name=".view.cashier.payment.PaymentActivity"
+            android:label="@string/title_activity_payment" />
+        <activity
+            android:name=".view.product.transaction.ProductTransactionActivity"
+            android:label="@string/title_activity_product_transaction" />
         <activity
             android:name=".view.restock.RestockActivity"
             android:label="@string/title_activity_restock" />
@@ -43,6 +55,7 @@
         <activity android:name=".view.OwnerMenuActivity" />
         <activity android:name=".view.InsertProductActivity" />
         <activity android:name=".view.UpdateProductActivity" />
+        <activity android:name=".view.service.transaction.ServiceListActivity" />
         <activity android:name=".view.SplahScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

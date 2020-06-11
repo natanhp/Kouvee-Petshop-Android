@@ -74,12 +74,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             productAttribute.get(0).setText(productResponseModel.getProductModel().getProductName());
             productAttribute.get(1).setText(String.valueOf(productResponseModel.getProductModel().getProductPrice()));
             productAttribute.get(2).setText(quantity);
-            productAttribute.get(3).setOnClickListener(this);
+            TextView btn = productAttribute.get(3);
+            if (eventClickListener == null) {
+                btn.setVisibility(View.GONE);
+            } else {
+                btn.setOnClickListener(this);
+            }
         }
 
         @Override
         public void onClick(View view) {
-            eventClickListener.onEventClick(getAdapterPosition(), view.getId());
+            if (eventClickListener != null) {
+                eventClickListener.onEventClick(getAdapterPosition(), view.getId());
+            }
         }
     }
 

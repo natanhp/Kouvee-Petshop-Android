@@ -8,5 +8,9 @@ com.p3lj2.koveepetshop.repository
 com.p3lj2.koveepetshop.service
 com.p3lj2.koveepetshop.util
 com.p3lj2.koveepetshop.view
+com.p3lj2.koveepetshop.view.cashier.payment
+com.p3lj2.koveepetshop.view.product.guest
+com.p3lj2.koveepetshop.view.product.transaction
 com.p3lj2.koveepetshop.view.restock
+com.p3lj2.koveepetshop.view.service.transaction
 com.p3lj2.koveepetshop.viewmodel

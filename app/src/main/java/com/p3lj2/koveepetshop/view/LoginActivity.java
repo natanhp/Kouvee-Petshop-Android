@@ -18,6 +18,9 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.p3lj2.koveepetshop.R;
 import com.p3lj2.koveepetshop.model.EmployeeModel;
 import com.p3lj2.koveepetshop.model.FCMModel;
+import com.p3lj2.koveepetshop.view.cashier.payment.PaymentActivity;
+import com.p3lj2.koveepetshop.view.product.guest.ProductListActivity;
+import com.p3lj2.koveepetshop.view.service.transaction.ServiceListActivity;
 import com.p3lj2.koveepetshop.viewmodel.EmployeeViewModel;
 
 import java.util.List;
@@ -45,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         ButterKnife.bind(this);
 
@@ -81,6 +85,11 @@ public class LoginActivity extends AppCompatActivity {
                     } else if (employeeDataModel.getRole().equalsIgnoreCase("cs")) {
                         startActivity(new Intent(LoginActivity.this, CSMenuActivity.class));
                         finish();
+                    } else if (employeeDataModel.getRole().equalsIgnoreCase("kasir")) {
+                        startActivity(new Intent(LoginActivity.this, PaymentActivity.class));
+                        finish();
+                    } else {
+                        Toast.makeText(this, getString(R.string.something_wrong_msg), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -132,5 +141,20 @@ public class LoginActivity extends AppCompatActivity {
                 notificationManager.createNotificationChannel(channel);
             }
         }
+    }
+
+    @OnClick(R.id.btn_product_list)
+    public void onClickProductList(View view) {
+        startActivity(new Intent(LoginActivity.this, ProductListActivity.class));
+    }
+
+    @OnClick(R.id.btn_service_list)
+    public void onClickServiceList(View view) {
+        startActivity(new Intent(LoginActivity.this, ServiceListActivity.class));
+    }
+
+    @OnClick(R.id.btn_about_us)
+    public void onClickAboutUs(View view) {
+        startActivity(new Intent(LoginActivity.this, AboutUsActivity.class));
     }
 }
