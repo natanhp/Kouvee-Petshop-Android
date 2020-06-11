@@ -78,6 +78,10 @@ public class Util {
     }
 
     public static String dateFormater(String oldFormat, String newFormat, String date) {
+        if (date == null || date.isEmpty()) {
+            return "";
+        }
+
         Date inputDate = new Date();
         try {
             inputDate = new SimpleDateFormat(oldFormat).parse(date);

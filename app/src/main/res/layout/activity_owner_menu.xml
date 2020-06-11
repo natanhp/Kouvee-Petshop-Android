@@ -35,7 +35,7 @@
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.0">
@@ -225,11 +225,13 @@
             android:id="@+id/btn_logout"
             android:layout_width="0dp"
             android:layout_height="100dp"
+            android:layout_marginTop="5dp"
             android:src="@drawable/logout"
             app:layout_constraintBottom_toBottomOf="@+id/btn_restock"
-            app:layout_constraintEnd_toEndOf="@+id/btn_service_detail"
-            app:layout_constraintStart_toEndOf="@+id/btn_restock"
-            app:layout_constraintTop_toTopOf="@+id/btn_restock" />
+            app:layout_constraintEnd_toEndOf="@+id/btn_supplier"
+            app:layout_constraintStart_toStartOf="@+id/btn_supplier"
+            app:layout_constraintTop_toTopOf="@+id/btn_restock"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/textView23"
@@ -246,11 +248,12 @@
             android:id="@+id/btn_restock"
             android:layout_width="0dp"
             android:layout_height="100dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
             android:src="@drawable/product_restock"
             app:layout_constraintBottom_toTopOf="@+id/textView22"
-            app:layout_constraintEnd_toStartOf="@+id/btn_logout"
+            app:layout_constraintDimensionRatio="w,1:1"
+            app:layout_constraintEnd_toEndOf="@+id/btn_pet_size"
             app:layout_constraintStart_toStartOf="@+id/btn_pet_size"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
@@ -266,6 +269,27 @@
             app:layout_constraintEnd_toEndOf="@+id/btn_restock"
             app:layout_constraintStart_toStartOf="@+id/btn_restock"
             app:layout_constraintTop_toBottomOf="@+id/btn_restock" />
+
+        <ImageButton
+            android:id="@+id/btn_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_event_note_black_24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_logout"
+            app:layout_constraintEnd_toEndOf="@+id/btn_service_detail"
+            app:layout_constraintStart_toStartOf="@+id/btn_service_detail"
+            app:layout_constraintTop_toTopOf="@+id/btn_logout" />
+
+        <TextView
+            android:id="@+id/textView47"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Log"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/textView23"
+            app:layout_constraintEnd_toEndOf="@+id/btn_log"
+            app:layout_constraintStart_toStartOf="@+id/btn_log"
+            app:layout_constraintTop_toTopOf="@+id/textView23" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

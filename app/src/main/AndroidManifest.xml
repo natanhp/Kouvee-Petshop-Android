@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".view.log.LogActivity"></activity>
         <activity
             android:name=".view.service.transaction.ServiceTransactionActivity"
             android:label="@string/title_activity_service_transaction" />

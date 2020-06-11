@@ -31,7 +31,26 @@ public class SupplierModel implements Parcelable {
     @Expose
     private int deletedBy;
 
+    @Expose(serialize = false)
+    private EmployeeModel creator;
 
+    @Expose(serialize = false)
+    private EmployeeModel updater;
+
+    @Expose(serialize = false)
+    private EmployeeModel deletor;
+
+    @Expose(serialize = false)
+    private String createdAt;
+
+    @Expose(serialize = false)
+    private String updatedAt;
+
+    @Expose(serialize = false)
+    private String deletedAt;
+
+    public SupplierModel() {
+    }
 
     @Override
     public int describeContents() {
@@ -47,9 +66,12 @@ public class SupplierModel implements Parcelable {
         dest.writeInt(this.createdBy);
         dest.writeInt(this.updatedBy);
         dest.writeInt(this.deletedBy);
-    }
-
-    public SupplierModel() {
+        dest.writeParcelable(this.creator, flags);
+        dest.writeParcelable(this.updater, flags);
+        dest.writeParcelable(this.deletor, flags);
+        dest.writeString(this.createdAt);
+        dest.writeString(this.updatedAt);
+        dest.writeString(this.deletedAt);
     }
 
     protected SupplierModel(Parcel in) {
@@ -60,9 +82,15 @@ public class SupplierModel implements Parcelable {
         this.createdBy = in.readInt();
         this.updatedBy = in.readInt();
         this.deletedBy = in.readInt();
+        this.creator = in.readParcelable(EmployeeModel.class.getClassLoader());
+        this.updater = in.readParcelable(EmployeeModel.class.getClassLoader());
+        this.deletor = in.readParcelable(EmployeeModel.class.getClassLoader());
+        this.createdAt = in.readString();
+        this.updatedAt = in.readString();
+        this.deletedAt = in.readString();
     }
 
-    public static final Parcelable.Creator<SupplierModel> CREATOR = new Parcelable.Creator<SupplierModel>() {
+    public static final Creator<SupplierModel> CREATOR = new Creator<SupplierModel>() {
         @Override
         public SupplierModel createFromParcel(Parcel source) {
             return new SupplierModel(source);
