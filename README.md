@@ -9,8 +9,7 @@ This is the android version of Pengembangan Projek Perangkat Lunak's final submi
 1. Lombok
 
 ### Accessing Documentation
-[https://natanhp.github.io/Kouve-Petshop-Android-Doc/](https://natanhp.github.io/Kouve-Petshop-Android-Doc/)
-Or you can open `Docs/index.html` in your web browser
+[https://natanhp.github.io/Kouve-Petshop-Android-Doc/](https://natanhp.github.io/Kouve-Petshop-Android-Doc/) or you can open `Docs/index.html` in your web browser
 
 ## Contributors
 1. [Natan Hari Pamungkas](https://github.com/natanhp)
