@@ -1,5 +1,7 @@
 # Kouvee Pet Shop Android App
-<img src="screenshot/Screenshot.png" width="500">
+<p align="center">
+<img src="screenshot/Screenshot.png" width="350">
+</p>
 This is the android version of Pengembangan Projek Perangkat Lunak's final submission. The person in charge in this repository is [Natan Hari Pamungkas](https://github.com/natanhp).
 
 ## Developer Guide
